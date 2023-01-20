@@ -1,18 +1,22 @@
-import * as sinon from 'sinon';
-import * as chai from 'chai';
+// import * as sinon from 'sinon';
+const sinon = require('sinon');
+// import * as chai from 'chai';
+const chai = require('chai')
 
-import App from '../../api/app';
-import JwtValidation from '../utils/JwtValidation';
+// import App from '../../api/app';
+const app = require('../../api/app');
+// import JwtValidation from '../utils/JwtValidation';
+const jwtValidation = require('../../utils/jwt.util');
 
 // import { Response } from 'superagent';
 
-import { User } from '../../database/models';
-import { login, token, user } from '../mocks/user.mock';
+// import { User } from '../../database/models';
+const { User } = require('../../database/models');
+
+const { login, token, user } = require('../mocks/user.mock');
 
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
-
-const { app } = new App();
 
 const { expect } = chai;
 
@@ -20,13 +24,13 @@ describe('Testando rota /login', () => {
   let chaiHttpResponse;
 
   before(async () => {
-    sinon.stub(User, "findOne").resolves(user)
-    sinon.stub(JwtValidation, "createToken").resolves(token);
+    sinon.stub(User, "findOne").resolves(user);
+    sinon.stub(jwtValidation, "createToken").resolves(token);
   });
   
   after(()=>{
     (User.findOne).restore();
-    (JwtValidation.createToken).restore();
+    (jwtValidation.createToken).restore();
   })
   
   it('é possível efetuar login corretamente', async () => {
