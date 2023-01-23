@@ -30,6 +30,6 @@ describe('Testa rota GET /customer/products', () => {
       .send({ headers: { authorization: tokenCustomer } });
 
     expect(chaiHttpResponse.status).to.be.equal(200);
-    expect(chaiHttpResponse.body).to.be.equal(allProducts);
+    expect(chaiHttpResponse.body).to.be.deep.equal(allProducts);
   })
 })
