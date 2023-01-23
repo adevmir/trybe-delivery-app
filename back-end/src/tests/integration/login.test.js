@@ -11,7 +11,7 @@ const jwtValidation = require('../../utils/jwt.util');
 // import { Response } from 'superagent';
 
 // import { User } from '../../database/models';
-const { User } = require('../../database/models');
+const { users } = require('../../database/models');
 
 const { login, token, user } = require('../mocks/user.mock');
 
@@ -24,12 +24,12 @@ describe('Testando rota /login', () => {
   let chaiHttpResponse;
 
   before(async () => {
-    sinon.stub(User, "findOne").resolves(user);
+    sinon.stub(users, "findOne").resolves(user);
     sinon.stub(jwtValidation, "createToken").resolves(token);
   });
   
   after(()=>{
-    (User.findOne).restore();
+    (users.findOne).restore();
     (jwtValidation.createToken).restore();
   })
   
