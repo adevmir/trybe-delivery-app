@@ -1,4 +1,6 @@
+const mapError = require("../utils/mapError");
+
 module.exports = (error, _req, res, _next) => {
-  const { message } = error;
-  return res.status(500).json({ message });
+  const [status, message] = mapError(error);
+  return res.status(status).json({ message });
 }

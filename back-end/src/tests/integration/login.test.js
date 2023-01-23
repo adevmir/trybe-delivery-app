@@ -75,7 +75,7 @@ describe('Testando rota /login', () => {
   
   it('não é possível fazer login com um email inválido',async () => {
     (users.findOne).restore();
-    sinon.stub(users, "findOne").resolves({});
+    sinon.stub(users, "findOne").resolves(null);
     chaiHttpResponse = await chai
       .request(app)
       .post('/login')
