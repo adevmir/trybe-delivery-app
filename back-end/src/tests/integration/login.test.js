@@ -1,16 +1,9 @@
-// import * as sinon from 'sinon';
 const sinon = require('sinon');
-// import * as chai from 'chai';
 const chai = require('chai')
 
-// import App from '../../api/app';
 const app = require('../../api/app');
-// import JwtValidation from '../utils/JwtValidation';
 const { jwtUtil } = require('../../utils');
 
-// import { Response } from 'superagent';
-
-// import { User } from '../../database/models';
 const { users } = require('../../database/models');
 
 const { login, token, user } = require('../mocks/user.mock');
