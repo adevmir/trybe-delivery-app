@@ -6,7 +6,7 @@ const chai = require('chai')
 // import App from '../../api/app';
 const app = require('../../api/app');
 // import JwtValidation from '../utils/JwtValidation';
-const jwtValidation = require('../../utils/jwt.util');
+const { jwtUtil } = require('../../utils');
 
 // import { Response } from 'superagent';
 
@@ -24,13 +24,13 @@ describe('Testando rota /login', () => {
   let chaiHttpResponse;
 
   before(async () => {
-    sinon.stub(users, "findOne").resolves(user);
-    sinon.stub(jwtValidation, "createToken").resolves(token);
+    sinon.stub(users, "findOne").resolves({ dataValues: user });
+    sinon.stub(jwtUtil, "createToken").resolves(token);
   });
   
   after(()=>{
     (users.findOne).restore();
-    (jwtValidation.createToken).restore();
+    (jwtUtil.createToken).restore();
   })
   
   it('é possível efetuar login corretamente', async () => {
