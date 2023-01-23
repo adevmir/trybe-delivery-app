@@ -65,15 +65,17 @@ describe('Testando rota /login', () => {
 
   it('não é possível fazer login com uma senha inválida',async () => {
     chaiHttpResponse = await chai
-      .request(app)
-      .post('/login')
-      .send({ email: login.email, password: 'senhainvalida' });
-
+    .request(app)
+    .post('/login')
+    .send({ email: login.email, password: 'senhainvalida' });
+    
     expect(chaiHttpResponse.status).to.be.equal(401);
     expect(chaiHttpResponse.body.message).to.be.equal('Incorrect email or password');
   });
-
+  
   it('não é possível fazer login com um email inválido',async () => {
+    (users.findOne).restore();
+    sinon.stub(users, "findOne").resolves({});
     chaiHttpResponse = await chai
       .request(app)
       .post('/login')
