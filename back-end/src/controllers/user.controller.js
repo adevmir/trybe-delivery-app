@@ -1,4 +1,4 @@
-const { userService } = require("../services");
+const { userService } = require('../services');
 
 const login = async (req, res, next) => {
   try {
@@ -8,6 +8,6 @@ const login = async (req, res, next) => {
   } catch (error) {
     next(error);    
   }
-}
+};
 
 module.exports = { login };
