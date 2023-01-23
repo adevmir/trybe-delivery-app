@@ -31,9 +31,16 @@ describe('Testando rota /login', () => {
        .request(app)
        .post('/login')
        .send(login);
-    
+
+    const expected = {
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      token: tokenAdmin,
+    }
+
     expect(chaiHttpResponse.status).to.be.equal(200);
-    expect(chaiHttpResponse.body.token).to.be.equal(tokenAdmin);
+    expect(chaiHttpResponse.body).to.be.deep.equal(expected);
   });
 
   it('não é possível fazer login sem email', async () => {
