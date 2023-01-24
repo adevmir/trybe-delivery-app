@@ -15,7 +15,7 @@ const login = async (data) => {
   if (!validLogin) httpException(401, 'Incorrect email or password');
   const { id, name, email, role } = user.dataValues;
   const token = jwtUtil.createToken({ id, name, email, role });
-  return token;
+  return { name, email, role, token };
 };
 
 // const validateNewUser = (data) => {
