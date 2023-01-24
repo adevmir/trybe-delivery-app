@@ -33,17 +33,17 @@ const createUser = async (data) => {
 
   // const validateUser = validateNewUser(data)
   // if (!validateUser) httpException(401, 'Invalid user format');
-  const md5Password = md5(data.password)
+  const md5Password = md5(data.password);
 
   const newUser = await users.create({
     name: data.name,
     email: data.email,
     password: md5Password,
-    role: 'customer'
+    role: 'customer',
   });
 
   return newUser;
-}
+};
 
 module.exports = {
   login,
