@@ -13,4 +13,18 @@ const login = {
 
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
 
-module.exports = { user, login, token }
+const regCustomer = {
+  id: 5,
+  name: "Cliente ub eats",
+  email: "ubeats@email.com",
+  password: "3806a526e2c7af2ec712718c3de4d4a5",
+  role: "customer",
+}
+
+const newCustomer = {
+  name: "Cliente ub eats",
+  email: "ubeats@email.com",
+  password: "novasenha"
+}
+
+module.exports = { user, login, token, regCustomer, newCustomer }

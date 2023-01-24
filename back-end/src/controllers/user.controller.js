@@ -10,4 +10,17 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = { login };
+const registerUser = async (req, res, next) => {
+  try {
+    const data = req.body;
+    const newUser = await userService.createUser(data);
+    return res.status(201).json({ message: 'Created' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  login,
+  registerUser,
+};
