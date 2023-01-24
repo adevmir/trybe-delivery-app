@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 
-export default function ProductDetails() {
+export default function OrderDetails() {
   const { id } = useParams();
   return (
     <div>
-      Product details page - product id:
+      Order details page - order id:
       {' '}
       {id}
     </div>
