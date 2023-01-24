@@ -1,22 +1,11 @@
 import { useMemo } from 'react';
+import useCheckout from '../hooks/useCheckout';
 
 export default function CheckoutTable() {
-  const orders = [
-    {
-      description: 'Cerveja',
-      qty: 1,
-      unitPrice: 2,
-    },
-    {
-      description: 'Refrigerante',
-      qty: 2,
-      unitPrice: 3,
-    },
-  ];
+  const { orders, handleItemRemoval } = useCheckout();
 
-  const totalPrice = useMemo(
-    () => orders.reduce((acc, el) => acc + (el.unitPrice * el.qty), 0),
-  );
+  const totalPrice = useMemo(() => orders
+    ?.reduce((acc, el) => acc + (el.unitPrice * el.qty), 0), [orders]);
 
   const tdStyles = { padding: '0.4rem 0.8rem' };
 
@@ -24,7 +13,7 @@ export default function CheckoutTable() {
     <div>
       <p>Finalizar pedidos</p>
 
-      <table style={ { boxShadow: '0.5rem 0.5rem 0.5rem 0.5rem black' } }>
+      <table style={ { boxShadow: '0.1rem 0.1rem 0.1rem rgba(0,0,0,0.3)' } }>
         <thead>
           <tr>
             <th>Item</th>
@@ -36,8 +25,8 @@ export default function CheckoutTable() {
           </tr>
         </thead>
         <tbody>
-          {orders.forEach((el, i) => (
-            <tr key={ el.description }>
+          {orders?.map((el, i) => (
+            <tr key={ el.description + i }>
               <td
                 data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
                 style={ { backgroundColor: 'green', ...tdStyles } }
@@ -79,6 +68,7 @@ export default function CheckoutTable() {
                 <button
                   type="button"
                   style={ { backgroundColor: 'green', ...tdStyles } }
+                  onClick={ () => handleItemRemoval(i) }
                 >
                   Remover
 

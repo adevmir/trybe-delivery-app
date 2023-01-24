@@ -1,7 +1,7 @@
-import useSubmit from '../hooks/useSubmit';
+import useSubmitOrders from '../hooks/useSubmitOrder';
 
 export default function DeliveryDetails() {
-  const { handleSubmit } = useSubmit();
+  const { handleSubmit } = useSubmitOrders();
 
   return (
     <div>
@@ -14,8 +14,8 @@ export default function DeliveryDetails() {
             id="select-seller"
             name="select-seller"
           >
-            <options value="Fulana Pereira">Fulana Pereira</options>
-            <options value="Ciclano Silveira">Ciclano Silveira</options>
+            <option value="Fulana Pereira">Fulana Pereira</option>
+            <option value="Ciclano Silveira">Ciclano Silveira</option>
           </select>
         </label>
 
@@ -40,7 +40,11 @@ export default function DeliveryDetails() {
         <button
           type="submit"
           data-testid="customer_checkout__button-submit-order"
-          style={ { color: 'white', fontStyle: 'uppercase', padding: '0.4rem 1rem' } }
+          style={ {
+            backgroundColor: 'green',
+            color: 'white',
+            fontStyle: 'uppercase',
+            padding: '0.4rem 1rem' } }
         >
           Finalizar pedido
         </button>

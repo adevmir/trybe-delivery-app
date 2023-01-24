@@ -1,4 +1,5 @@
 import CheckoutTable from '../components/CheckoutTable';
+import DeliveryDetails from '../components/DeliveryDetails';
 
 export default function Checkout() {
   return (
@@ -6,12 +7,14 @@ export default function Checkout() {
       <p
         style={ {
           backgroundColor: 'green',
+          width: '100%',
           padding: '1rem 3rem',
           justifyText: 'center' } }
       >
         Nav bar
       </p>
       <CheckoutTable />
+      <DeliveryDetails />
     </div>
   );
 }
