@@ -32,3 +32,32 @@ describe('Testando rota POST /customer/checkout', () => {
     expect(chaiHttpResponse.body.id).to.be.equal(1);
   });
 });
+
+describe('Testando rota GET /customer/orders/:id', () => {
+  let chaiHttpResponse;
+
+  it('é possível listar venda por id', async () => {
+    sinon.stub(sales, "findByPk").resolves(newSale);
+
+    chaiHttpResponse = await chai
+      .request(app)
+      .get('/customer/orders/1')
+      .set('authorization', tokenCustomer)
+
+    expect(chaiHttpResponse.status).to.be.equal(200);
+    expect(chaiHttpResponse.body).to.be.equal(newSale);
+  });
+
+  it('retorna erro caso venda não exista', async () => {
+    (sales.findByPk).restore();
+    sinon.stub(sales, "findByPk").resolves(null);
+
+    chaiHttpResponse = await chai
+      .request(app)
+      .get('/customer/orders/99')
+      .set('authorization', tokenCustomer)
+
+    expect(chaiHttpResponse.status).to.be.equal(404);
+    expect(chaiHttpResponse.body.message).to.be.equal('Not found');
+  });
+});

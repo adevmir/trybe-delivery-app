@@ -17,6 +17,7 @@ const newSale = {
   deliveryAddress: 'Rua do Zé',
   deliveryNumber: '123',
   saleDate: '2023-01-24T18:02:42.875Z',
+  status: 'Pendente'
 }
 
 module.exports = { sale, newSale };
