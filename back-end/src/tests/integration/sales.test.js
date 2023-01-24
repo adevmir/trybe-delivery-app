@@ -7,7 +7,7 @@ const { jwtUtil } = require('../../utils');
 const { sales, salesProducts } = require('../../database/models');
 
 const { tokenCustomer } = require('../mocks/user.mock');
-const { sale, newSale } = require('../mocks/sales.mock');
+const { sale, newSale, allOrders } = require('../mocks/sales.mock');
 
 const chaiHttp = require('chai-http');
 
@@ -18,7 +18,7 @@ const { expect } = chai;
 describe('Testando rota POST /customer/checkout', () => {
   let chaiHttpResponse;
 
-  it('é possível criar uma nova venda corretamente', async () => {
+  it('é possível criar um novo pedido corretamente', async () => {
     sinon.stub(sales, "create").resolves({ dataValues: newSale });
     sinon.stub(salesProducts, "bulkCreate").resolves();
 
@@ -36,7 +36,7 @@ describe('Testando rota POST /customer/checkout', () => {
 describe('Testando rota GET /customer/orders/:id', () => {
   let chaiHttpResponse;
 
-  it('é possível listar venda por id', async () => {
+  it('é possível listar pedido por id', async () => {
     sinon.stub(sales, "findByPk").resolves(newSale);
 
     chaiHttpResponse = await chai
@@ -48,7 +48,7 @@ describe('Testando rota GET /customer/orders/:id', () => {
     expect(chaiHttpResponse.body).to.be.deep.equal(newSale);
   });
 
-  it('retorna erro caso venda não exista', async () => {
+  it('retorna erro caso pedido não exista', async () => {
     (sales.findByPk).restore();
     sinon.stub(sales, "findByPk").resolves(null);
 
@@ -59,5 +59,21 @@ describe('Testando rota GET /customer/orders/:id', () => {
 
     expect(chaiHttpResponse.status).to.be.equal(404);
     expect(chaiHttpResponse.body.message).to.be.equal('Not found');
+  });
+});
+
+describe('Testando rota GET /customer/orders', () => {
+  let chaiHttpResponse;
+
+  it('é possível listar pedidos', async () => {
+    sinon.stub(sales, "findAll").resolves(allOrders);
+
+    chaiHttpResponse = await chai
+      .request(app)
+      .get('/customer/orders')
+      .set('authorization', tokenCustomer)
+
+    expect(chaiHttpResponse.status).to.be.equal(200);
+    expect(chaiHttpResponse.body).to.be.deep.equal(allOrders);
   });
 });

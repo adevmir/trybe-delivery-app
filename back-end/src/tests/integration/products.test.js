@@ -2,7 +2,6 @@ const sinon = require('sinon');
 const chai = require('chai')
 
 const app = require('../../api/app');
-const { jwtUtil } = require('../../utils');
 
 const { products } = require('../../database/models');
 
