@@ -8,7 +8,7 @@ const sequelize = new Sequelize(config[env]);
 
 const saleFactory = (sale, userId) => {
   const { sellerId, totalPrice, deliveryAddress, deliveryNumber } = sale;
-  return { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber };
+  return { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status: 'Pendente' };
 };
 
 const createSale = async (sale, userId) => {
