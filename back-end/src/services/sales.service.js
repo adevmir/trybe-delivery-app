@@ -15,15 +15,12 @@ const createSale = async (sale, userId) => {
   const t = await sequelize.transaction();
   try {
     const formatedSale = saleFactory(sale, userId);
-    // console.log(formatedSale);
     const newSale = await sales.create(formatedSale, { transaction: t });
-    // console.log(newSale.dataValues);
-
+    
     const saleProducts = sale.products.map((product) => 
       ({ saleId: newSale.dataValues.id, productId: product.id, quantity: product.quantity }));
-    console.log(saleProducts);
-    const bulk = await salesProducts.bulkCreate(saleProducts, { transaction: t });
-    console.log(bulk);
+
+    await salesProducts.bulkCreate(saleProducts, { transaction: t });
     
     await t.commit();
     return newSale.dataValues.id;
