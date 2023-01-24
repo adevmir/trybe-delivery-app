@@ -6,7 +6,7 @@ const { jwtUtil } = require('../../utils');
 
 const { users } = require('../../database/models');
 
-const { login, token, user } = require('../mocks/user.mock');
+const { login, tokenAdmin, user } = require('../mocks/user.mock');
 
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
@@ -18,7 +18,7 @@ describe('Testando rota /login', () => {
 
   before(async () => {
     sinon.stub(users, "findOne").resolves({ dataValues: user });
-    sinon.stub(jwtUtil, "createToken").resolves(token);
+    sinon.stub(jwtUtil, "createToken").resolves(tokenAdmin);
   });
   
   after(()=>{
@@ -31,9 +31,16 @@ describe('Testando rota /login', () => {
        .request(app)
        .post('/login')
        .send(login);
-    
+
+    const expected = {
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      token: tokenAdmin,
+    }
+
     expect(chaiHttpResponse.status).to.be.equal(200);
-    expect(chaiHttpResponse.body.token).to.be.equal(token);
+    expect(chaiHttpResponse.body).to.be.deep.equal(expected);
   });
 
   it('não é possível fazer login sem email', async () => {
