@@ -18,34 +18,54 @@ const login = async (data) => {
   return { name, email, role, token };
 };
 
-// const validateNewUser = (data) => {
-//   const regex = /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.(com)(\.[a-z]+)?/
-//   if (data.name < 12) return false;
-//   if (!data.email.match(regex)) return false;
-//   if (data.password < 6) return false;
-//   return true;
-// }
+const findUserByEmail = async (data) => {
+  const user = await users.findOne({ where: { email: data } });
+  return user;
+};
 
-const createUser = async (data) => {
+const validateNewUser = async (data) => {
   const user = await users.findOne({ where: { name: data.name } });
   const email = await users.findOne({ where: { email: data.email } });
+
   if (user || email) httpException(409, 'Conflict');
+  return true;
+}
 
-  // const validateUser = validateNewUser(data)
-  // if (!validateUser) httpException(401, 'Invalid user format');
-  const md5Password = md5(data.password);
+const createUser = async (data) => {
+  const validation = await validateNewUser(data)
 
-  const newUser = await users.create({
-    name: data.name,
-    email: data.email,
-    password: md5Password,
-    role: 'customer',
-  });
+  if (validation === true) {
+    
+    const md5Password = md5(data.password);
+    
+    await users.create({
+      name: data.name,
+      email: data.email,
+      password: md5Password,
+      role: 'customer',
+    });
+  };
+};
 
-  return newUser;
+const createUserByAdmin = async (data) => {
+  const validation = await validateNewUser(data)
+
+  if (validation === true) {
+
+    const md5Password = md5(data.password);
+
+    await users.create({
+      name: data.name,
+      email: data.email,
+      password: md5Password,
+      role: data.role,
+    });
+  };
 };
 
 module.exports = {
   login,
   createUser,
+  findUserByEmail,
+  createUserByAdmin,
 };
