@@ -9,4 +9,14 @@ const sale = {
   deliveryNumber: '123',
 };
 
-module.exports = { sale };
+const newSale = {
+  id: 1,
+  userId: 3,
+  sellerId: 1,
+  totalPrice: 9.7,
+  deliveryAddress: 'Rua do Zé',
+  deliveryNumber: '123',
+  saleDate: '2023-01-24T18:02:42.875Z',
+}
+
+module.exports = { sale, newSale };

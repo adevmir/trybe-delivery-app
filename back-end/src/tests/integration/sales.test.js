@@ -7,7 +7,7 @@ const { jwtUtil } = require('../../utils');
 const { sales, salesProducts } = require('../../database/models');
 
 const { tokenCustomer } = require('../mocks/user.mock');
-const { sale } = require('../mocks/sales.mock');
+const { sale, newSale } = require('../mocks/sales.mock');
 
 const chaiHttp = require('chai-http');
 
@@ -19,7 +19,7 @@ describe('Testando rota POST /customer/checkout', () => {
   let chaiHttpResponse;
 
   it('é possível criar uma nova venda corretamente', async () => {
-    sinon.stub(sales, "create").resolves(sale);
+    sinon.stub(sales, "create").resolves({ dataValues: newSale });
     sinon.stub(salesProducts, "bulkCreate").resolves();
 
     chaiHttpResponse = await chai

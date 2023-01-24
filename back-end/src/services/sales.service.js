@@ -14,15 +14,19 @@ const saleFactory = (sale, userId) => {
 const createSale = async (sale, userId) => {
   const t = await sequelize.transaction();
   try {
-    const newSale = saleFactory(sale, userId);
-    const { id } = await sales.create(newSale, { transaction: t });
+    const formatedSale = saleFactory(sale, userId);
+    // console.log(formatedSale);
+    const newSale = await sales.create(formatedSale, { transaction: t });
+    // console.log(newSale.dataValues);
 
     const saleProducts = sale.products.map((product) => 
-      ({ saleId: id, productId: product.id, quantity: product.quantity }));
-    await salesProducts.bulkCreate(saleProducts, { transaction: t });
+      ({ saleId: newSale.dataValues.id, productId: product.id, quantity: product.quantity }));
+    console.log(saleProducts);
+    const bulk = await salesProducts.bulkCreate(saleProducts, { transaction: t });
+    console.log(bulk);
     
     await t.commit();
-    return id;
+    return newSale.dataValues.id;
   } catch (e) {
     await t.rollback();
     return httpException(500, 'Something went wrong');

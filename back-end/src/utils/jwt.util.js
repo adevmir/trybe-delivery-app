@@ -1,5 +1,6 @@
 require('dotenv/config');
 const jwt = require('jsonwebtoken');
+const httpException = require('./httpException');
 
 const jwtSecret = process.env.JWT_SECRET || 'secret_key';
 const createToken = (data) => jwt.sign({ data }, jwtSecret, {
@@ -7,4 +8,13 @@ const createToken = (data) => jwt.sign({ data }, jwtSecret, {
     algorithm: 'HS256',
   });
 
-module.exports = { createToken };
+const readToken = (token) => {
+  try {
+    const { data } = jwt.verify(token, jwtSecret);
+    return data;
+  } catch (error) {
+    return httpException(401, 'Invalid or expired token');
+  }
+};
+
+module.exports = { createToken, readToken };
