@@ -45,7 +45,7 @@ describe('Testando rota GET /customer/orders/:id', () => {
       .set('authorization', tokenCustomer)
 
     expect(chaiHttpResponse.status).to.be.equal(200);
-    expect(chaiHttpResponse.body).to.be.equal(newSale);
+    expect(chaiHttpResponse.body).to.be.deep.equal(newSale);
   });
 
   it('retorna erro caso venda não exista', async () => {

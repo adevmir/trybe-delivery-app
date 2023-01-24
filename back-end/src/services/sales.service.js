@@ -30,4 +30,10 @@ const createSale = async (sale, userId) => {
   }
 };
 
-module.exports = { createSale };
+const findById = async (id) => {
+  const sale = await sales.findByPk(id);
+  if (!sale) return httpException(404, 'Not found');
+  return sale;
+};
+
+module.exports = { createSale, findById };

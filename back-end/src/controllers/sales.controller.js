@@ -10,4 +10,14 @@ const createSale = async (req, res, next) => {
   }
 };
 
-module.exports = { createSale };
+const findById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const sale = await salesService.findById(id);
+    return res.status(200).json(sale);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { createSale, findById };
