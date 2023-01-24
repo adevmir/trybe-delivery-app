@@ -18,4 +18,34 @@ const login = async (data) => {
   return { name, email, role, token };
 };
 
-module.exports = { login };
+// const validateNewUser = (data) => {
+//   const regex = /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.(com)(\.[a-z]+)?/
+//   if (data.name < 12) return false;
+//   if (!data.email.match(regex)) return false;
+//   if (data.password < 6) return false;
+//   return true;
+// }
+
+const createUser = async (data) => {
+  const user = await users.findOne({ where: { name: data.name } });
+  const email = await users.findOne({ where: { email: data.email } });
+  if (user || email) httpException(409, 'Conflict');
+
+  // const validateUser = validateNewUser(data)
+  // if (!validateUser) httpException(401, 'Invalid user format');
+  const md5Password = md5(data.password);
+
+  const newUser = await users.create({
+    name: data.name,
+    email: data.email,
+    password: md5Password,
+    role: 'customer',
+  });
+
+  return newUser;
+};
+
+module.exports = {
+  login,
+  createUser,
+};
