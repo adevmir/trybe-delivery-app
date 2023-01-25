@@ -135,6 +135,17 @@ describe('Testando rota GET /seller/orders', () => {
     expect(chaiHttpResponse.status).to.be.equal(401);
     expect(chaiHttpResponse.body.message).to.be.equal('Invalid or expired token');
   });
+
+  it('retorna erro caso usuário não seja um vendedor', async () => {
+    sinon.stub(jwtUtil, 'readToken').resolves(regCustomer);
+    chaiHttpResponse = await chai
+      .request(app)
+      .get('/seller/orders')
+      .set('authorization', tokenCustomer);
+
+    expect(chaiHttpResponse.status).to.be.equal(403);
+    expect(chaiHttpResponse.body.message).to.be.equal('Access denied');
+  });
 });
 
 describe('Testando rota GET /seller/orders/:id', () => {
@@ -142,6 +153,7 @@ describe('Testando rota GET /seller/orders/:id', () => {
 
   it('é possível listar venda por id', async () => {
     (sales.findOne).restore();
+    (jwtUtil.readToken).restore();
     sinon.stub(jwtUtil, 'readToken').resolves(seller);
     sinon.stub(sales, "findOne").resolves(newSale);
 
