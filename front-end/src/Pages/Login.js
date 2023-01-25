@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import apiAxios from '../services/axios';
 
 function Login() {
+  const history = useHistory();
   const [error, setError] = useState(false);
   const [redirectProducts, setRedirectProducts] = useState(false);
   const [email, setEmail] = useState('');
@@ -55,6 +56,7 @@ function Login() {
         <button
           type="button"
           data-testid="common_login__button-register"
+          onClick={ () => history.push('/register') }
         >
           Cadastre-se
         </button>
