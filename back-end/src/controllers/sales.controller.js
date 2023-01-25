@@ -32,4 +32,11 @@ const findOrdersBySeller = async (req, res) => {
   return res.status(200).json(orders);
 };
 
-module.exports = { createSale, findById, findOrdersByCustomer, findOrdersBySeller };
+const updateOrder = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  const message = await salesService.updateOrder(id, status);
+  return res.status(200).json({ message });
+};
+
+module.exports = { createSale, findById, findOrdersByCustomer, findOrdersBySeller, updateOrder };

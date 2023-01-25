@@ -7,7 +7,7 @@ const { jwtUtil } = require('../../utils');
 const { sales, salesProducts } = require('../../database/models');
 
 const { tokenCustomer, regCustomer, tokenSeller, seller } = require('../mocks/user.mock');
-const { sale, newSale, allOrders } = require('../mocks/sales.mock');
+const { sale, newSale, allOrders, updateOrder } = require('../mocks/sales.mock');
 
 const chaiHttp = require('chai-http');
 
@@ -177,5 +177,35 @@ describe('Testando rota GET /seller/orders/:id', () => {
 
     expect(chaiHttpResponse.status).to.be.equal(404);
     expect(chaiHttpResponse.body.message).to.be.equal('Not found');
+  });
+});
+
+describe('Testando rota PATCH /seller/orders/:id', () => {
+  let chaiHttpResponse;
+
+  it('é possível atualizar status da venda com sucesso', async () => {
+    sinon.stub(sales, 'update').resolves();
+    chaiHttpResponse = await chai
+      .request(app)
+      .patch('/seller/orders/1')
+      .set('authorization', tokenSeller)
+      .send(updateOrder);
+
+    expect(chaiHttpResponse.status).to.be.equal(200);
+    expect(chaiHttpResponse.body.message).to.be.equal('Updated');
+  });
+
+  it('não é possível atualizar status da venda caso não seja vendedor', async () => {
+    (jwtUtil.readToken).restore();
+    sinon.stub(jwtUtil, 'readToken').resolves(regCustomer);
+    
+    chaiHttpResponse = await chai
+      .request(app)
+      .patch('/seller/orders/1')
+      .set('authorization', tokenCustomer)
+      .send(updateOrder);
+
+    expect(chaiHttpResponse.status).to.be.equal(403);
+    expect(chaiHttpResponse.body.message).to.be.equal('Access denied');
   });
 });
