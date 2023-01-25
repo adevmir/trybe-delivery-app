@@ -6,7 +6,7 @@ const { jwtUtil } = require('../../utils');
 
 const { sales, salesProducts } = require('../../database/models');
 
-const { tokenCustomer, regCustomer } = require('../mocks/user.mock');
+const { tokenCustomer, regCustomer, tokenSeller, seller } = require('../mocks/user.mock');
 const { sale, newSale, allOrders } = require('../mocks/sales.mock');
 
 const chaiHttp = require('chai-http');
@@ -92,6 +92,44 @@ describe('Testando rota GET /customer/orders', () => {
     chaiHttpResponse = await chai
       .request(app)
       .get('/customer/orders')
+      .set('authorization', 'invalid token');
+
+    expect(chaiHttpResponse.status).to.be.equal(401);
+    expect(chaiHttpResponse.body.message).to.be.equal('Invalid or expired token');
+  });
+});
+
+describe('Testando rota GET /seller/orders', () => {
+  let chaiHttpResponse;
+
+  it('é possível listar vendas', async () => {
+    (sales.findAll).restore();
+    sinon.stub(jwtUtil, 'readToken').resolves(seller);
+    sinon.stub(sales, "findAll").resolves(allOrders);
+
+    chaiHttpResponse = await chai
+      .request(app)
+      .get('/seller/orders')
+      .set('authorization', tokenSeller);
+
+    expect(chaiHttpResponse.status).to.be.equal(200);
+    expect(chaiHttpResponse.body).to.be.deep.equal(allOrders);
+  });
+
+  it('retorna erro caso não haja token', async () => {
+    chaiHttpResponse = await chai
+      .request(app)
+      .get('/seller/orders');
+
+    expect(chaiHttpResponse.status).to.be.equal(401);
+    expect(chaiHttpResponse.body.message).to.be.equal('Token is required');
+  });
+
+  it('retorna erro caso token seja inválido', async () => {
+    (jwtUtil.readToken).restore();
+    chaiHttpResponse = await chai
+      .request(app)
+      .get('/seller/orders')
       .set('authorization', 'invalid token');
 
     expect(chaiHttpResponse.status).to.be.equal(401);
