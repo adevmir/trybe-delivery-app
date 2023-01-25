@@ -7,7 +7,7 @@ import Products from './Pages/Products';
 function App() {
   return (
     <Switch>
-      <Route path="/" component={ Login } />
+      <Route exact path="/" component={ Login } />
       <Route path="/login" component={ Login } />
       <Route path="/customer/products" component={ Products } />
     </Switch>
