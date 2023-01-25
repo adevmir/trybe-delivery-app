@@ -9,5 +9,6 @@ router.use(tokenMiddleware);
 router.use(roleMiddleware);
 router.get('/orders/:id', salesController.findById);
 router.get('/orders', salesController.findOrdersBySeller);
+router.patch('/orders/:id', salesController.updateOrder);
 
 module.exports = router;

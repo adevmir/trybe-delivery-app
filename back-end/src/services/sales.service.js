@@ -42,4 +42,9 @@ const findOrdersByCustomer = async (userId) => sales.findAll({ where: { userId }
 
 const findOrdersBySeller = async (sellerId) => sales.findAll({ where: { sellerId } });
 
-module.exports = { createSale, findById, findOrdersByCustomer, findOrdersBySeller };
+const updateOrder = async (id, status) => {
+  await sales.update({ status }, { where: { id } });
+  return 'Updated';
+};
+
+module.exports = { createSale, findById, findOrdersByCustomer, findOrdersBySeller, updateOrder };

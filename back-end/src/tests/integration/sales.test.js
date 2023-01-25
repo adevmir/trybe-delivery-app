@@ -198,7 +198,6 @@ describe('Testando rota PATCH /seller/orders/:id', () => {
   it('não é possível atualizar status da venda caso não seja vendedor', async () => {
     (jwtUtil.readToken).restore();
     sinon.stub(jwtUtil, 'readToken').resolves(regCustomer);
-    sinon.stub(sales, 'update').resolves();
     
     chaiHttpResponse = await chai
       .request(app)
