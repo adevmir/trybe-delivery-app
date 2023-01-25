@@ -31,4 +31,6 @@ const allOrders = [ newSale, {
   status: 'Pendente'
 }]
 
-module.exports = { sale, newSale, allOrders };
+const updateOrder = { status: 'Preparando' }
+
+module.exports = { sale, newSale, allOrders, updateOrder };
