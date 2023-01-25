@@ -38,7 +38,7 @@ describe('Testando rota GET /customer/orders/:id', () => {
   let chaiHttpResponse;
 
   it('é possível listar pedido por id', async () => {
-    sinon.stub(sales, "findByPk").resolves(newSale);
+    sinon.stub(sales, "findOne").resolves(newSale);
 
     chaiHttpResponse = await chai
       .request(app)
@@ -50,8 +50,8 @@ describe('Testando rota GET /customer/orders/:id', () => {
   });
 
   it('retorna erro caso pedido não exista', async () => {
-    (sales.findByPk).restore();
-    sinon.stub(sales, "findByPk").resolves(null);
+    (sales.findOne).restore();
+    sinon.stub(sales, "findOne").resolves(null);
 
     chaiHttpResponse = await chai
       .request(app)
