@@ -15,7 +15,7 @@ const login = async (data) => {
   // alterei o erro para 404 como esperado no teste.
   if (!validLogin) httpException(404, 'Incorrect email or password');
   const { id, name, email, role } = user.dataValues;
-  const token = jwtUtil.createToken({ id, name, email, role });
+  const token = await jwtUtil.createToken({ id, name, email, role });
   return { name, email, role, token };
 };
 
