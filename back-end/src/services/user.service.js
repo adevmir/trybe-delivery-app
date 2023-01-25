@@ -29,13 +29,12 @@ const validateNewUser = async (data) => {
 
   if (user || email) httpException(409, 'Conflict');
   return true;
-}
+};
 
 const createUser = async (data) => {
-  const validation = await validateNewUser(data)
+  const validation = await validateNewUser(data);
 
-  if (validation === true) {
-    
+  if (validation === true) {    
     const md5Password = md5(data.password);
     
     await users.create({
@@ -45,13 +44,12 @@ const createUser = async (data) => {
       role: 'customer',
     });
   };
-};
+}
 
 const createUserByAdmin = async (data) => {
-  const validation = await validateNewUser(data)
+  const validation = await validateNewUser(data);
 
   if (validation === true) {
-
     const md5Password = md5(data.password);
 
     await users.create({
@@ -61,7 +59,7 @@ const createUserByAdmin = async (data) => {
       role: data.role,
     });
   };
-};
+}
 
 module.exports = {
   login,
