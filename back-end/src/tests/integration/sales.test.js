@@ -72,9 +72,29 @@ describe('Testando rota GET /customer/orders', () => {
     chaiHttpResponse = await chai
       .request(app)
       .get('/customer/orders')
-      .set('authorization', tokenCustomer)
+      .set('authorization', tokenCustomer);
 
     expect(chaiHttpResponse.status).to.be.equal(200);
     expect(chaiHttpResponse.body).to.be.deep.equal(allOrders);
+  });
+
+  it('retorna erro caso não haja token', async () => {
+    chaiHttpResponse = await chai
+      .request(app)
+      .get('/customer/orders');
+
+    expect(chaiHttpResponse.status).to.be.equal(401);
+    expect(chaiHttpResponse.body.message).to.be.equal('Token is required');
+  });
+
+  it('retorna erro caso token seja inválido', async () => {
+    (jwtUtil.readToken).restore();
+    chaiHttpResponse = await chai
+      .request(app)
+      .get('/customer/orders')
+      .set('authorization', 'invalid token');
+
+    expect(chaiHttpResponse.status).to.be.equal(401);
+    expect(chaiHttpResponse.body.message).to.be.equal('Invalid or expired token');
   });
 });
