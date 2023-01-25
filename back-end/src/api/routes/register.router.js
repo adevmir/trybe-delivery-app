@@ -1,6 +1,6 @@
 const express = require('express');
 const { userController } = require('../../controllers');
-const validateJWT = require('../../auth/validateJWT')
+const validateJWT = require('../../auth/validateJWT');
 
 const router = express.Router();
 
