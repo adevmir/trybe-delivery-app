@@ -1,0 +1,21 @@
+[
+  {
+    "_id": "329d9a8e-16af-4222-b557-51c00938f2b3",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3001/register",
+    "url": "localhost:3001/register",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-01-25T17:57:53.945Z",
+    "modified": "2023-01-25T17:57:53.945Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"email@email.com\",\n  \"name\": \"anderson correa\",\n  \"password\": \"123456\"\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]
