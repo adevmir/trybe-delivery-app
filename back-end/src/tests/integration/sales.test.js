@@ -136,3 +136,33 @@ describe('Testando rota GET /seller/orders', () => {
     expect(chaiHttpResponse.body.message).to.be.equal('Invalid or expired token');
   });
 });
+
+describe('Testando rota GET /seller/orders/:id', () => {
+  let chaiHttpResponse;
+
+  it('é possível listar venda por id', async () => {
+    (sales.findOne).restore();
+    sinon.stub(sales, "findOne").resolves(newSale);
+
+    chaiHttpResponse = await chai
+      .request(app)
+      .get('/seller/orders/1')
+      .set('authorization', tokenSeller)
+
+    expect(chaiHttpResponse.status).to.be.equal(200);
+    expect(chaiHttpResponse.body).to.be.deep.equal(newSale);
+  });
+
+  it('retorna erro caso venda não exista', async () => {
+    (sales.findOne).restore();
+    sinon.stub(sales, "findOne").resolves(null);
+
+    chaiHttpResponse = await chai
+      .request(app)
+      .get('/seller/orders/99')
+      .set('authorization', tokenSeller)
+
+    expect(chaiHttpResponse.status).to.be.equal(404);
+    expect(chaiHttpResponse.body.message).to.be.equal('Not found');
+  });
+});
