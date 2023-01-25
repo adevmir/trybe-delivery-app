@@ -12,7 +12,6 @@ const validEmailAndPassword = (user, login) => {
 const login = async (data) => {
   const user = await users.findOne({ where: { email: data.email } });
   const validLogin = validEmailAndPassword(user, data);
-  // alterei o erro para 404 como esperado no teste.
   if (!validLogin) httpException(404, 'Incorrect email or password');
   const { id, name, email, role } = user.dataValues;
   const token = await jwtUtil.createToken({ id, name, email, role });

@@ -20,4 +20,10 @@ const findById = async (req, res, next) => {
   }
 };
 
-module.exports = { createSale, findById };
+const findOrdersByCustomer = async (req, res) => {
+  const { user } = req;
+  const orders = await salesService.findOrdersByCustomer(user.id);
+  return res.status(200).json(orders);
+};
+
+module.exports = { createSale, findById, findOrdersByCustomer };

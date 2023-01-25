@@ -20,4 +20,15 @@ const newSale = {
   status: 'Pendente'
 }
 
-module.exports = { sale, newSale };
+const allOrders = [ newSale, {
+  id: 2,
+  userId: 3,
+  sellerId: 1,
+  totalPrice: 9.7,
+  deliveryAddress: 'Rua do Zé',
+  deliveryNumber: '123',
+  saleDate: '2023-01-24T19:00:00.875Z',
+  status: 'Pendente'
+}]
+
+module.exports = { sale, newSale, allOrders };

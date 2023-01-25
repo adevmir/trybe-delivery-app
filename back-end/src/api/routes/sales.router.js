@@ -4,7 +4,9 @@ const tokenMiddleware = require('../../middlewares/token.middleware');
 
 const router = express.Router();
 
-router.post('/checkout', tokenMiddleware, salesController.createSale);
+router.use(tokenMiddleware);
+router.post('/checkout', salesController.createSale);
 router.get('/orders/:id', salesController.findById);
+router.get('/orders/', salesController.findOrdersByCustomer);
 
 module.exports = router;

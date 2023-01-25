@@ -36,4 +36,6 @@ const findById = async (id) => {
   return sale;
 };
 
-module.exports = { createSale, findById };
+const findOrdersByCustomer = async (userId) => sales.findAll({ where: { userId } });
+
+module.exports = { createSale, findById, findOrdersByCustomer };

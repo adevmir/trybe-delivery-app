@@ -69,7 +69,7 @@ describe('Testando rota /login', () => {
     .post('/login')
     .send({ email: login.email, password: 'senhainvalida' });
     
-    expect(chaiHttpResponse.status).to.be.equal(401);
+    expect(chaiHttpResponse.status).to.be.equal(404);
     expect(chaiHttpResponse.body.message).to.be.equal('Incorrect email or password');
   });
   
@@ -81,7 +81,7 @@ describe('Testando rota /login', () => {
       .post('/login')
       .send({ email: 'invalid@email.com', password: login.password });
 
-    expect(chaiHttpResponse.status).to.be.equal(401);
+    expect(chaiHttpResponse.status).to.be.equal(404);
     expect(chaiHttpResponse.body.message).to.be.equal('Incorrect email or password');
   });
 });
