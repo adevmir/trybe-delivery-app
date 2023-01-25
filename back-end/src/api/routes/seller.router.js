@@ -5,6 +5,7 @@ const tokenMiddleware = require('../../middlewares/token.middleware');
 const router = express.Router();
 
 router.use(tokenMiddleware);
+router.get('/orders/:id', salesController.findById);
 router.get('/orders', salesController.findOrdersBySeller);
 
 module.exports = router;

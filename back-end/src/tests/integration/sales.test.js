@@ -142,6 +142,7 @@ describe('Testando rota GET /seller/orders/:id', () => {
 
   it('é possível listar venda por id', async () => {
     (sales.findOne).restore();
+    sinon.stub(jwtUtil, 'readToken').resolves(seller);
     sinon.stub(sales, "findOne").resolves(newSale);
 
     chaiHttpResponse = await chai
