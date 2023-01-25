@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 function Login() {
+  const history = useHistory();
   const [error] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,6 +42,7 @@ function Login() {
         <button
           type="button"
           data-testid="common_login__button-register"
+          onClick={ () => history.push('/register') }
         >
           Cadastre-se
         </button>
