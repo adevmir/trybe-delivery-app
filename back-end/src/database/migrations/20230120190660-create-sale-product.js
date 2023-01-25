@@ -6,7 +6,7 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        reference: {
+        references: {
           model: "sales",
           key: "id",
         },
@@ -18,7 +18,7 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        reference: {
+        references: {
           model: "products",
           key: "id",
         },

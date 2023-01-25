@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { sales, salesProducts } = require('../database/models');
+const { sales, salesProducts, users } = require('../database/models');
 const config = require('../database/config/config');
 const httpException = require('../utils/httpException');
 
@@ -31,11 +31,15 @@ const createSale = async (sale, userId) => {
 };
 
 const findById = async (id) => {
-  const sale = await sales.findByPk(id);
+  const sale = await sales.findOne({ where: { id },
+    include: [{ model: users, as: 'seller', attributes: ['name'] }, 
+    { model: users, as: 'user', attributes: ['name'] }] });
   if (!sale) return httpException(404, 'Not found');
   return sale;
 };
 
 const findOrdersByCustomer = async (userId) => sales.findAll({ where: { userId } });
 
-module.exports = { createSale, findById, findOrdersByCustomer };
+const findOrdersBySeller = async (sellerId) => sales.findAll({ where: { sellerId } });
+
+module.exports = { createSale, findById, findOrdersByCustomer, findOrdersBySeller };
