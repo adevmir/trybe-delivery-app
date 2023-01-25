@@ -1,27 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import useSignup from '../hooks/useSignup';
 
 function Register() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [register, setRegister] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const nameLength = name.length >= Number('12');
-    const emailRegex = email.match(regex);
-    const passwordLength = password.length >= Number('6');
-    if (nameLength && emailRegex && passwordLength) {
-      setRegister(false);
-      setError(false);
-    }
-    if (!nameLength || !emailRegex || !passwordLength) {
-      setRegister(true);
-      setError(true);
-    }
-  }, [name, email, password]);
+  const { setName, setEmail, setPassword, register, error, submitSignup } = useSignup();
 
   return (
     <div>
@@ -50,6 +31,7 @@ function Register() {
           type="button"
           data-testid="common_register__button-register"
           disabled={ register }
+          onClick={ submitSignup }
         >
           Cadastrar
         </button>

@@ -1,11 +1,11 @@
 import apiAxios from './axios';
 
-export const requestSignupUser = (reqBody) => {
+export const requestSignupUser = async (reqBody) => {
   try {
-    const { data, status } = apiAxios.post('/register', reqBody);
+    const { data, status } = await apiAxios.post('/register', reqBody);
     return { data, status };
   } catch (err) {
-    return { error: err.message };
+    return { error: err.response.data.message, status: err.response.status };
   }
 };
 
