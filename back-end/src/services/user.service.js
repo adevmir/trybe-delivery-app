@@ -43,8 +43,8 @@ const createUser = async (data) => {
       password: md5Password,
       role: 'customer',
     });
-  };
-}
+  }
+};
 
 const createUserByAdmin = async (data) => {
   const validation = await validateNewUser(data);
@@ -58,8 +58,8 @@ const createUserByAdmin = async (data) => {
       password: md5Password,
       role: data.role,
     });
-  };
-}
+  }
+};
 
 module.exports = {
   login,
