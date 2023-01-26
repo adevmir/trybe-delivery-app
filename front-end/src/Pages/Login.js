@@ -16,15 +16,21 @@ function Login() {
     try {
       const api = await apiAxios.post('/login', { email, password });
       const { data: { role, token } } = api;
-
-      localStorage.setItem('JWT', token);
-
+      
+      // Redireciona para a pagina de admin
       if (role === 'administrator') setIsAdmin(true);
-      setRedirectProducts(true);
+       setRedirectProducts(true);
+      // insere os dados do usuario no localStorage após login com dados válidos
+      localStorage.setItem('JWT', token);
+      localStorage.setItem('user', JSON.stringify(data));
     } catch (err) {
       setError(true);
     }
   };
+  // assim que a página inicializa, como estamos na rota /login (inicial), o carrinho será limpo do localStorage, funcionando como 'logout'
+  useEffect(() => {
+    localStorage.clear('cart');
+  }, []);
 
   useEffect(() => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
