@@ -11,7 +11,7 @@ export const requestSignupUser = async (reqBody) => {
 
 export const requestAdminSignUp = async (reqBody) => {
   try {
-    const JWT = sessionStorage.getItem('JWT');
+    const JWT = localStorage.getItem('JWT');
     const { data, status } = await apiAxios.post(
       '/register/admin',
       reqBody,

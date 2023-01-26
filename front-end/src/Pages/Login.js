@@ -17,7 +17,7 @@ function Login() {
       const api = await apiAxios.post('/login', { email, password });
       const { data: { role, token } } = api;
 
-      sessionStorage.setItem('JWT', token);
+      localStorage.setItem('JWT', token);
 
       if (role === 'administrator') setIsAdmin(true);
       setRedirectProducts(true);
