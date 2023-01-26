@@ -13,12 +13,18 @@ function Login() {
   // criado a conexão de frontend com back atraves do AXIOS
   const toLogin = async () => {
     try {
-      await apiAxios.post('/login', { email, password });
+      const { data } = await apiAxios.post('/login', { email, password });
       setRedirectProducts(true);
+      // insere os dados do usuario no localStorage após login com dados válidos
+      localStorage.setItem('user', JSON.stringify(data));
     } catch (err) {
       setError(true);
     }
   };
+  // assim que a página inicializa, como estamos na rota /login (inicial), o carrinho será limpo do localStorage, funcionando como 'logout'
+  useEffect(() => {
+    localStorage.clear('cart');
+  }, []);
 
   useEffect(() => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

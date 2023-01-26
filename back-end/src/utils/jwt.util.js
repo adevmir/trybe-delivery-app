@@ -1,8 +1,11 @@
 require('dotenv/config');
 const jwt = require('jsonwebtoken');
+// importado o arquivo conforme o readme (Requisito 13) pede
+const jwtSecret = require('fs').readFileSync('./jwt.evaluation.key');
 const httpException = require('./httpException');
 
-const jwtSecret = process.env.JWT_SECRET || 'secret_key';
+// precisei comentar a linha abaixo para usar a jwtSecret do arquivo importado acima
+// const jwtSecret = process.env.JWT_SECRET || 'secret_key';
 const createToken = (data) => jwt.sign({ data }, jwtSecret, {
     expiresIn: '1d',
     algorithm: 'HS256',
