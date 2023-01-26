@@ -1,23 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
+import apiAxios from '../services/axios';
 
 function Login() {
-  const [error] = useState(false);
+  const history = useHistory();
+  const [error, setError] = useState(false);
+  const [redirectProducts, setRedirectProducts] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [login, setLogin] = useState(true);
+  const [loginDisabled, setLoginDisabled] = useState(true);
+
+  // criado a conexão de frontend com back atraves do AXIOS
+  const toLogin = async () => {
+    try {
+      const { data } = await apiAxios.post('/login', { email, password });
+      setRedirectProducts(true);
+      // insere os dados do usuario no localStorage após login com dados válidos
+      localStorage.setItem('user', JSON.stringify(data));
+    } catch (err) {
+      setError(true);
+    }
+  };
+  // assim que a página inicializa, como estamos na rota /login (inicial), o carrinho será limpo do localStorage, funcionando como 'logout'
+  useEffect(() => {
+    localStorage.clear('cart');
+  }, []);
 
   useEffect(() => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const emailRegex = email.match(regex);
     const passwordLength = password.length >= Number('6');
-    if (emailRegex && passwordLength) setLogin(false);
-    if (!emailRegex && passwordLength) setLogin(true);
+    if (emailRegex && passwordLength) setLoginDisabled(false);
+    if (!emailRegex && passwordLength) setLoginDisabled(true);
   }, [email, password]);
 
   return (
     <div>
       <Redirect to="/login" />
+      { redirectProducts && <Redirect to="/customer/products" /> }
       <form>
         <input
           type="email"
@@ -34,13 +54,15 @@ function Login() {
         <button
           type="button"
           data-testid="common_login__button-login"
-          disabled={ login }
+          disabled={ loginDisabled }
+          onClick={ toLogin }
         >
           Entrar
         </button>
         <button
           type="button"
           data-testid="common_login__button-register"
+          onClick={ () => history.push('/register') }
         >
           Cadastre-se
         </button>

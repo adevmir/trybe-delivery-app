@@ -9,6 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.sales.belongsTo(models.users, {
+        foreignKey: 'sellerId',
+        as: 'seller',
+      });
+      models.sales.belongsTo(models.users, {
+        foreignKey: 'userId',
+        as: 'user',
+      });
     }
   }
   Sale.init(
@@ -25,7 +33,9 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "sales",
       underscored: true,
-      timestamps: false,
+      timestamps: true,
+      createdAt: 'saleDate',
+      updatedAt: false,
     }
   );
   return Sale;

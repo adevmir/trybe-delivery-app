@@ -12,10 +12,58 @@ const validEmailAndPassword = (user, login) => {
 const login = async (data) => {
   const user = await users.findOne({ where: { email: data.email } });
   const validLogin = validEmailAndPassword(user, data);
-  if (!validLogin) httpException(401, 'Incorrect email or password');
+  if (!validLogin) httpException(404, 'Incorrect email or password');
   const { id, name, email, role } = user.dataValues;
-  const token = jwtUtil.createToken({ id, name, email, role });
+  const token = await jwtUtil.createToken({ id, name, email, role });
   return { name, email, role, token };
 };
 
-module.exports = { login };
+const findUserByEmail = async (data) => {
+  const user = await users.findOne({ where: { email: data } });
+  return user;
+};
+
+const validateNewUser = async (data) => {
+  const user = await users.findOne({ where: { name: data.name } });
+  const email = await users.findOne({ where: { email: data.email } });
+
+  if (user || email) httpException(409, 'Conflict');
+  return true;
+};
+
+const createUser = async (data) => {
+  const validation = await validateNewUser(data);
+
+  if (validation === true) {    
+    const md5Password = md5(data.password);
+    
+    await users.create({
+      name: data.name,
+      email: data.email,
+      password: md5Password,
+      role: 'customer',
+    });
+  }
+};
+
+const createUserByAdmin = async (data) => {
+  const validation = await validateNewUser(data);
+
+  if (validation === true) {
+    const md5Password = md5(data.password);
+
+    await users.create({
+      name: data.name,
+      email: data.email,
+      password: md5Password,
+      role: data.role,
+    });
+  }
+};
+
+module.exports = {
+  login,
+  createUser,
+  findUserByEmail,
+  createUserByAdmin,
+};
