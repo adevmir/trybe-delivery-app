@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
 import apiAxios from '../services/axios';
 
 function Products() {
   const [productsList, setProductsList] = useState([]);
+  const [redirectLogout, setRedirectLogout] = useState(false);
 
-  const renderProducts = async () => {
+  const renderProducts = async (token) => {
     try {
-      const { data } = await apiAxios.get('/customer/products');
+      // faz a requisição get na rota com o token encontrado no localStorage ( que foi armazendo no login)
+      const { data } = await apiAxios.get(
+        '/customer/products',
+        { headers: { authorization: token } },
+      );
       setProductsList(data);
     } catch (err) {
-      console.log(err);
+      // caso o token seja invalido, o usuario será deslogado
+      setRedirectLogout(true);
     }
   };
 
+  const getToken = () => {
+    // buscando o token armazenado no localStora após o login
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    renderProducts(token);
+  };
+
   useEffect(() => {
-    renderProducts();
+    getToken();
   }, []);
 
   return (
@@ -50,6 +63,7 @@ function Products() {
             type="number"
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
           />
+          { redirectLogout && <Redirect to="/login" /> }
         </div>
       )) }
     </div>
