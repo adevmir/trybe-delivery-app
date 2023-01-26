@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
-import CardProduct from '../Components/CardProcuct';
+import CardProduct from '../Components/CardProduct';
 import apiAxios from '../services/axios';
 
 function Products() {
   const [productsList, setProductsList] = useState([]);
   const [redirectLogout, setRedirectLogout] = useState(false);
   const [redirectCheckout, setRedirectCheckout] = useState(false);
+  // criado state no componente pai dos cards p/ mostrar o valor calculado dos itens do carrinho (armazenado no localstorage)
   const [total, setTotal] = useState(0);
 
   const renderProducts = async (token) => {
@@ -31,12 +32,14 @@ function Products() {
   };
 
   const getTotal = () => {
+    // funcao que recupera todos os itens do carrinho se existir e soma item por item o seu preço * a qtd escolhida pelo usuario
     const cartItems = JSON.parse(localStorage.getItem('cart'));
     if (cartItems.length > 0) {
       let sum = 0;
       cartItems.forEach((item) => {
         sum += Number(item.price) * item.quantity;
       });
+      // armazenei o valor somado no localStorage e no state total p/ renderizar na tela
       localStorage.setItem('total', JSON.stringify(sum.toFixed(2)));
       setTotal(sum.toFixed(2).replace(/\./, ','));
     }
@@ -50,6 +53,7 @@ function Products() {
     <div>
       <NavBar />
       { productsList.map((product, index) => (
+        // criado componente para cards dos produtos p/ gerenciar a qtd de cada um no state proprio, enviado como props alguns valores q serao usados la e a funcao getTotal
         <CardProduct
           product={ product }
           index={ index }
