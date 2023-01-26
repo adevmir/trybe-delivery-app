@@ -12,7 +12,6 @@ module.exports = {
         type: Sequelize.STRING,
       },
       price: {
-        // Mudando INTEGER para DECIMAL pois o preço deve ser nesse formato, exemplo: x.xx
         type: Sequelize.DECIMAL(3, 2),
       },
       urlImage: {
