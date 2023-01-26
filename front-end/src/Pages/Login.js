@@ -21,6 +21,10 @@ function Login() {
       setError(true);
     }
   };
+  // assim que a página inicializa, como estamos na rota /login (inicial), o carrinho será limpo do localStorage, funcionando como 'logout'
+  useEffect(() => {
+    localStorage.clear('cart');
+  }, []);
 
   useEffect(() => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

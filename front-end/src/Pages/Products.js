@@ -8,6 +8,7 @@ function Products() {
   const [productsList, setProductsList] = useState([]);
   const [redirectLogout, setRedirectLogout] = useState(false);
   const [redirectCheckout, setRedirectCheckout] = useState(false);
+  const [checkoutDisabled, setCheckoutDisabled] = useState(true);
   // criado state no componente pai dos cards p/ mostrar o valor calculado dos itens do carrinho (armazenado no localstorage)
   const [total, setTotal] = useState(0);
 
@@ -39,9 +40,12 @@ function Products() {
       cartItems.forEach((item) => {
         sum += Number(item.price) * item.quantity;
       });
-      // armazenei o valor somado no localStorage e no state total p/ renderizar na tela
-      localStorage.setItem('total', JSON.stringify(sum.toFixed(2)));
+      // tirei o armazenamento anterior no local storage desse total e agora só armazena no state
       setTotal(sum.toFixed(2).replace(/\./, ','));
+      // se a soma do carrinho for maior que zero, o botão p/ tela de checkout ficará habilitado
+      if (sum > 0) setCheckoutDisabled(false);
+      // se a soma for zero, significa que não existe nenhum item no carrinho. entao nao será possivel ir para tela de checkout
+      if (sum === 0) setCheckoutDisabled(true);
     }
   };
 
@@ -64,6 +68,7 @@ function Products() {
         type="button"
         data-testid="customer_products__button-cart"
         onClick={ () => setRedirectCheckout(true) }
+        disabled={ checkoutDisabled }
       >
         Carrinho: R$
         <span data-testid="customer_products__checkout-bottom-value">{ total }</span>
