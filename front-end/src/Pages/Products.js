@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
+import CardProduct from '../Components/CardProcuct';
 import apiAxios from '../services/axios';
 
 function Products() {
   const [productsList, setProductsList] = useState([]);
   const [redirectLogout, setRedirectLogout] = useState(false);
+  const [redirectCheckout, setRedirectCheckout] = useState(false);
+  const [total, setTotal] = useState(0);
 
   const renderProducts = async (token) => {
     try {
@@ -27,6 +30,18 @@ function Products() {
     renderProducts(token);
   };
 
+  const getTotal = () => {
+    const cartItems = JSON.parse(localStorage.getItem('cart'));
+    if (cartItems.length > 0) {
+      let sum = 0;
+      cartItems.forEach((item) => {
+        sum += Number(item.price) * item.quantity;
+      });
+      localStorage.setItem('total', JSON.stringify(sum.toFixed(2)));
+      setTotal(sum.toFixed(2).replace(/\./, ','));
+    }
+  };
+
   useEffect(() => {
     getToken();
   }, []);
@@ -35,39 +50,22 @@ function Products() {
     <div>
       <NavBar />
       { productsList.length > 0 && productsList.map((product, index) => (
-        <div key={ index }>
-          <h3 data-testid={ `customer_products__element-card-title-${product.id}` }>
-            { product.name }
-          </h3>
-          <p data-testid={ `customer_products__element-card-price-${product.id}` }>
-            { product.price.replace(/\./, ',') }
-          </p>
-          <img
-            alt={ product.name }
-            src={ product.urlImage }
-            width="100px"
-            data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-          />
-          <button
-            type="button"
-            data-testid={ `customer_products__button-card-add-item-${product.id}` }
-          >
-            Adicionar
-          </button>
-          <button
-            type="button"
-            data-testid={ `customer_products__button-card-rm-item-${product.id}` }
-          >
-            Remover
-          </button>
-          <input
-            type="number"
-            value="0"
-            data-testid={ `customer_products__input-card-quantity-${product.id}` }
-          />
-          { redirectLogout && <Redirect to="/login" /> }
-        </div>
-      )) }
+        <CardProduct
+          product={ product }
+          index={ index }
+          key={ index }
+          getTotal={ getTotal }
+        />))}
+      <button
+        type="button"
+        data-testid="customer_products__button-cart"
+        onClick={ () => setRedirectCheckout(true) }
+      >
+        Carrinho: R$
+        <span data-testid="customer_products__checkout-bottom-value">{ total }</span>
+      </button>
+      { redirectLogout && <Redirect to="/login" /> }
+      { redirectCheckout && <Redirect to="/customer/checkout" /> }
     </div>
   );
 }
