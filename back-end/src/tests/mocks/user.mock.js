@@ -15,19 +15,6 @@ const tokenAdmin = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJ
 const tokenSeller = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoyLCJuYW1lIjoiRnVsYW5hIFBlcmVpcmEiLCJlbWFpbCI6ImZ1bGFuYUBkZWxpdmVyeWFwcC5jb20iLCJyb2xlIjoic2VsbGVyIn0sImlhdCI6MTY3NDUwNTIzNywiZXhwIjoxNjc0NTkxNjM3fQ.QC2ABiso-FeTN3uCy23OTVj8MFIe1pd-gWwO-VDnPRw";
 const tokenCustomer = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjozLCJuYW1lIjoiQ2xpZW50ZSBaw6kgQmlyaXRhIiwiZW1haWwiOiJ6ZWJpcml0YUBkZWxpdmVyeWFwcC5jb20iLCJyb2xlIjoiY3VzdG9tZXIifSwiaWF0IjoxNjc0NTA1MTg1LCJleHAiOjE2NzQ1OTE1ODV9.BYgOyqgvkWfSJ7VpleC7Xh0RUQyzn9WV3CzifXpxfl0";
 
-const regCustomer = {
-  id: 5,
-  name: "Cliente ub eats",
-  email: "ubeats@email.com",
-  password: "3806a526e2c7af2ec712718c3de4d4a5",
-  role: "customer",
-}
-
-const newCustomer = {
-  name: "Cliente ub eats",
-  email: "ubeats@email.com",
-  password: "novasenha"
-}
 
 const seller = {
   id: 2,
@@ -43,7 +30,6 @@ module.exports = {
   tokenAdmin,
   tokenSeller,
   tokenCustomer,
-  regCustomer,
-  newCustomer,
   seller
 }
+
