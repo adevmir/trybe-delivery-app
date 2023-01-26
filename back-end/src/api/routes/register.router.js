@@ -5,6 +5,7 @@ const tokenMiddleware = require('../../middlewares/token.middleware');
 const router = express.Router();
 
 router.post('/', userController.registerUser);
-router.post('/admin', tokenMiddleware, userController.adminRegister);
+router.use(tokenMiddleware);
+router.post('/admin', userController.adminRegister);
 
 module.exports = router;

@@ -16,7 +16,7 @@ export const requestAdminSignUp = async (reqBody) => {
       '/register/admin',
       reqBody,
       {
-        headers: { Authorization: `${JWT}` },
+        headers: { Authorization: JWT },
       },
     );
     return { data, status };

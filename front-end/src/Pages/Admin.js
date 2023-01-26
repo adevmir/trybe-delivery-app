@@ -48,14 +48,14 @@ function Admin() {
       </form>
       {error && (
         <span
-          data-testid="admin_manage__element-invalid_register"
+          data-testid="admin_manage__element-invalid-register"
         >
           Usuário ou email já cadastrado!
         </span>
       )}
       {tokenError && (
         <span
-          data-testid="admin_manage__element-invalid_register"
+          data-testid="admin_manage__element-invalid-register"
         >
           Acesso restrito.
 
