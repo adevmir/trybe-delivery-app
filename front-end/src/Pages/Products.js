@@ -40,11 +40,11 @@ function Products() {
             { product.name }
           </h3>
           <p data-testid={ `customer_products__element-card-price-${product.id}` }>
-            { product.price }
+            { product.price.replace(/\./, ',') }
           </p>
           <img
             alt={ product.name }
-            src=""
+            src={ product.urlImage }
             data-testid={ `customer_products__img-card-bg-image-${product.id}` }
           />
           <button
