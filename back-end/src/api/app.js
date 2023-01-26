@@ -9,8 +9,8 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
-
-app.use('/images', express.static('public'));
+// criando rota estatica com acesso na pasta uploads dentro de backend/src
+app.use('/images', express.static(__dirname.replace('/api', '/uploads')));
 
 app.use(router);
 

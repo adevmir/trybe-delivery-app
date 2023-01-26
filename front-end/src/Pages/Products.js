@@ -45,6 +45,7 @@ function Products() {
           <img
             alt={ product.name }
             src={ product.urlImage }
+            width="100px"
             data-testid={ `customer_products__img-card-bg-image-${product.id}` }
           />
           <button
@@ -61,6 +62,7 @@ function Products() {
           </button>
           <input
             type="number"
+            value="0"
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
           />
           { redirectLogout && <Redirect to="/login" /> }
