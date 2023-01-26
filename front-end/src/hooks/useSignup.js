@@ -27,9 +27,21 @@ export default function useSignup() {
     const { status } = await requestAdminSignUp({
       name, email, password, role,
     });
-    if (status === HTTP_STATUS.CREATED) { setUserCreated(true); }
-    if (status === HTTP_STATUS.TOKEN_ERROR) { setTokenError(true); }
-    if (status === HTTP_STATUS.CONFLICT) { setError(true); }
+    if (status === HTTP_STATUS.CREATED) {
+      setTokenError(false);
+      setError(false);
+      setUserCreated(true);
+    }
+    if (status === HTTP_STATUS.TOKEN_ERROR) {
+      setUserCreated(false);
+      setError(false);
+      setTokenError(true);
+    }
+    if (status === HTTP_STATUS.CONFLICT) {
+      setTokenError(false);
+      setUserCreated(false);
+      setError(true);
+    }
   };
 
   useEffect(() => {
