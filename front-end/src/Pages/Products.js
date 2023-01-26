@@ -49,7 +49,7 @@ function Products() {
   return (
     <div>
       <NavBar />
-      { productsList.length > 0 && productsList.map((product, index) => (
+      { productsList.map((product, index) => (
         <CardProduct
           product={ product }
           index={ index }
