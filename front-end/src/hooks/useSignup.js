@@ -13,6 +13,7 @@ export default function useSignup() {
   const [error, setError] = useState(false);
   const [role, setRole] = useState('customer');
   const [tokenError, setTokenError] = useState(false);
+  const [userCreated, setUserCreated] = useState(false);
 
   const submitSignup = async () => {
     const { status } = await requestSignupUser({
@@ -26,11 +27,7 @@ export default function useSignup() {
     const { status } = await requestAdminSignUp({
       name, email, password, role,
     });
-    if (status === HTTP_STATUS.CREATED) {
-      setName('');
-      setEmail('');
-      setPassword('');
-    }
+    if (status === HTTP_STATUS.CREATED) { setUserCreated(true); }
     if (status === HTTP_STATUS.TOKEN_ERROR) { setTokenError(true); }
     if (status === HTTP_STATUS.CONFLICT) { setError(true); }
   };
@@ -59,5 +56,6 @@ export default function useSignup() {
     setRole,
     adminSignUp,
     tokenError,
+    userCreated,
   };
 }

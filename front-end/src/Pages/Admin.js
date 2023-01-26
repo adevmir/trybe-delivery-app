@@ -4,7 +4,7 @@ import useSignup from '../hooks/useSignup';
 function Admin() {
   const {
     setName, setEmail, setPassword, setRole,
-    register, error, adminSignUp, tokenError } = useSignup();
+    register, error, adminSignUp, tokenError, userCreated } = useSignup();
 
   return (
     <div>
@@ -60,6 +60,9 @@ function Admin() {
           Acesso restrito.
 
         </span>
+      )}
+      {userCreated && (
+        <span>Usuário criado com sucesso!</span>
       )}
     </div>
   );
