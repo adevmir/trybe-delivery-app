@@ -9,4 +9,16 @@ export const requestSignupUser = async (reqBody) => {
   }
 };
 
+export const requestSubmitOrder = async (reqBody, token) => {
+  try {
+    const { data, status } = await apiAxios
+      .post('/customer/checkout', reqBody, {
+        headers: { authorization: token },
+      });
+    return { data, status };
+  } catch (err) {
+    return { error: err.response.data.message, status: err.response.status };
+  }
+};
+
 export default {};

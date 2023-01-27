@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 function CardProduct({ product, index, getTotal }) {
+  console.log(product);
   // recebi via props o objeto de cada produto, seu index e a funcao getTotal
   const [quantity, setQuantity] = useState(0);
 
@@ -47,7 +48,8 @@ function CardProduct({ product, index, getTotal }) {
         { product?.name }
       </h3>
       <p data-testid={ `customer_products__element-card-price-${product?.id}` }>
-        { `R$ ${product?.price.toFixed(2).toLocaleString('')}` }
+        { `R$ ${Number(product?.price).toLocaleString('pt-BR', {
+          minimumFractionDigits: 2 })}` }
       </p>
       <img
         alt={ product?.name }

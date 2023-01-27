@@ -57,7 +57,7 @@ function Products() {
   return (
     <div>
       <NavBar />
-      { productsList.map((product, index) => (
+      { productsList?.map((product, index) => (
         // criado componente para cards dos produtos p/ gerenciar a qtd de cada um no state proprio, enviado como props alguns valores q serao usados la e a funcao getTotal
         <CardProduct
           product={ product }

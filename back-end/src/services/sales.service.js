@@ -26,7 +26,7 @@ const createSale = async (sale, userId) => {
     return newSale.dataValues.id;
   } catch (e) {
     await t.rollback();
-    return httpException(500, 'Something went wrong');
+    return httpException(500, 'Something went wrong while creating the sale');
   }
 };
 

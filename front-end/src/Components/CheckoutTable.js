@@ -1,13 +1,10 @@
-import { useMemo } from 'react';
-import useCheckout from '../hooks/useCheckout';
+import ProptTypes from 'prop-types';
 
-export default function CheckoutTable() {
-  const { orders, handleItemRemoval } = useCheckout();
+export default function CheckoutTable({ orders, handleItemRemoval }) {
+  const tdStyles = { padding: '0.4rem 0.8rem' };
 
   const totalPrice = useMemo(() => orders
     ?.reduce((acc, el) => acc + (el.price * el.quantity), 0), [orders]);
-
-  const tdStyles = { padding: '0.4rem 0.8rem' };
 
   return (
     <div>
@@ -52,14 +49,15 @@ export default function CheckoutTable() {
                 data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
                 style={ { backgroundColor: 'purple', ...tdStyles } }
               >
-                {el.price}
+                {Number(el.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
 
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
                 style={ { backgroundColor: 'blue', ...tdStyles } }
               >
-                {el.quantity * el.price}
+                {Number(el.quantity * el.price)
+                  .toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
 
               </td>
               <td
@@ -88,3 +86,18 @@ export default function CheckoutTable() {
     </div>
   );
 }
+
+CheckoutTable.propTypes = {
+  orders: ProptTypes.arrayOf(
+    ProptTypes.shape(
+      {
+        name: ProptTypes.string.isRequired,
+        price: ProptTypes.number.isRequired,
+        quantity: ProptTypes.number.isRequired,
+        id: ProptTypes.number.isRequired,
+      },
+    ),
+  ),
+  handleItemRemoval: ProptTypes.func.isRequired,
+  totalPrice: ProptTypes.number.isRequired,
+}.isRequired;
