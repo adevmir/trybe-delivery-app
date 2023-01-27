@@ -13,7 +13,7 @@ export default function useSubmitOrders({ products, totalPrice }) {
       deliveryNumber,
     } = Object.fromEntries([...new FormData(e.target)]);
 
-    const reqBody = JSON.stringify({
+    const reqBody = ({
       sellerId,
       products: products.map((prod) => ({ id: prod.id, quantity: prod.quantity })),
       totalPrice,
@@ -21,12 +21,9 @@ export default function useSubmitOrders({ products, totalPrice }) {
       deliveryNumber,
     });
 
-    console.log(reqBody);
-
     const user = getFromLocalStorage('user');
 
-    const { data, status, error } = await requestSubmitOrder(reqBody, user?.token);
-    console.log(data, status, error);
+    const { data, status } = await requestSubmitOrder(reqBody, user?.token);
     if (status === HTTP_STATUS.CREATED) {
       history.push(`/customer/orders/${data.id}`);
     }

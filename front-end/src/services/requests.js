@@ -13,7 +13,7 @@ export const requestSubmitOrder = async (reqBody, token) => {
   try {
     const { data, status } = await apiAxios
       .post('/customer/checkout', reqBody, {
-        headers: { authorization: token },
+        headers: { Authorization: token },
       });
     return { data, status };
   } catch (err) {

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 function CardProduct({ product, index, getTotal }) {
-  console.log(product);
   // recebi via props o objeto de cada produto, seu index e a funcao getTotal
   const [quantity, setQuantity] = useState(0);
 
@@ -19,7 +18,9 @@ function CardProduct({ product, index, getTotal }) {
       // se o carrinho ja tiver itens (acrescente mais um)
       if (cartItems !== null) {
         // filtra para eliminar do carrinho todos os produtos com ids repetidos
-        const deleteRepeats = cartItems.filter((item) => item.id !== product.id);
+        const deleteRepeats = cartItems.filter(
+          (item) => item.id !== product.id,
+        );
         const addNewItem = [...deleteRepeats, newItem];
         // filtra para retirar todos os produtos que agora tem quantidade zero
         const deleteZeros = addNewItem.filter((item) => item.quantity !== 0);
@@ -45,11 +46,12 @@ function CardProduct({ product, index, getTotal }) {
   return (
     <div key={ index }>
       <h3 data-testid={ `customer_products__element-card-title-${product?.id}` }>
-        { product?.name }
+        {product?.name}
       </h3>
       <p data-testid={ `customer_products__element-card-price-${product?.id}` }>
-        { `R$ ${Number(product?.price).toLocaleString('pt-BR', {
-          minimumFractionDigits: 2 })}` }
+        {`R$ ${Number(product?.price).toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+        })}`}
       </p>
       <img
         alt={ product?.name }

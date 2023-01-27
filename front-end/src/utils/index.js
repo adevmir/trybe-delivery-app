@@ -34,7 +34,6 @@ export function saveToLocalStorage(key, value) {
  */
 export function removeEntryFromLocalStorage(key, entryIdentifier) {
   const data = getFromLocalStorage(key);
-  console.log(data);
   if (data === null) return null;
   const newData = data.filter((el) => el[entryIdentifier.key] !== entryIdentifier.value);
   saveToLocalStorage('cart', newData);
