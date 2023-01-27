@@ -9,13 +9,18 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginDisabled, setLoginDisabled] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   // criado a conexão de frontend com back atraves do AXIOS
   const toLogin = async () => {
     try {
-      const { data } = await apiAxios.post('/login', { email, password });
+      const api = await apiAxios.post('/login', { email, password });
+      const { data } = api;
+      // Redireciona para a pagina de admin
+      if (data.role === 'administrator') setIsAdmin(true);
       setRedirectProducts(true);
       // insere os dados do usuario no localStorage após login com dados válidos
+      localStorage.setItem('JWT', data.token);
       localStorage.setItem('user', JSON.stringify(data));
     } catch (err) {
       setError(true);
@@ -37,6 +42,7 @@ function Login() {
   return (
     <div>
       <Redirect to="/login" />
+      { isAdmin && <Redirect to="/admin/manage" /> }
       { redirectProducts && <Redirect to="/customer/products" /> }
       <form>
         <input
