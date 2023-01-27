@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { requestSubmitOrder } from '../services/requests';
 import { HTTP_STATUS } from '../utils/config';
-import getFromLocalStorage from '../utils/getFromLocalStorage';
+import { getFromLocalStorage } from '../utils';
 
 export default function useSubmitOrders({ products, totalPrice }) {
   const history = useHistory();

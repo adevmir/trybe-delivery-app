@@ -5,7 +5,7 @@ import useCheckout from '../hooks/useCheckout';
 import useSubmitOrders from '../hooks/useSubmitOrder';
 
 export default function Checkout() {
-  const { orders, handleItemRemoval } = useCheckout();
+  const { orders, handleItemRemoval, totalPrice } = useCheckout();
   const { handleSubmit } = useSubmitOrders({ products: orders, totalPrice });
 
   return (

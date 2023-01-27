@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import getFromLocalStorage from '../utils/getFromLocalStorage';
-import removeEntryFromLocalStorage from '../utils/removeEntryFromLocalStorage';
+import { getFromLocalStorage, removeEntryFromLocalStorage } from '../utils';
 
 /**
  * @typedef {Object} IOrder
@@ -14,25 +13,31 @@ import removeEntryFromLocalStorage from '../utils/removeEntryFromLocalStorage';
  * @property {function} handleItemRemoval
  * @property {IOrder[]} orders
  * @property {function} setOrders
+ * @property {number} totalOrders
  *
  * @returns { IUseCheckoutReturn }
  */
 export default function useCheckout() {
   const [orders, setOrders] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const retriveCart = () => {
-    const data = getFromLocalStorage('cart');
-    setOrders(data);
+    setOrders(getFromLocalStorage('cart'));
   };
 
   useEffect(() => {
     retriveCart();
   }, []);
 
+  useEffect(() => {
+    const total = orders?.reduce((acc, el) => acc + (el.price * el.quantity), 0);
+    setTotalPrice(total || 0);
+  }, [orders]);
+
   const handleItemRemoval = (productId) => {
     removeEntryFromLocalStorage('cart', { key: 'id', value: productId });
-    setOrders(getFromLocalStorage('cart'));
+    retriveCart();
   };
 
-  return { handleItemRemoval, orders, setOrders };
+  return { handleItemRemoval, orders, setOrders, totalPrice };
 }

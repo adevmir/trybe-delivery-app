@@ -1,10 +1,8 @@
 import ProptTypes from 'prop-types';
+import { fixedToTwoDecimalDigits } from '../utils';
 
-export default function CheckoutTable({ orders, handleItemRemoval }) {
+export default function CheckoutTable({ orders, handleItemRemoval, totalPrice }) {
   const tdStyles = { padding: '0.4rem 0.8rem' };
-
-  const totalPrice = useMemo(() => orders
-    ?.reduce((acc, el) => acc + (el.price * el.quantity), 0), [orders]);
 
   return (
     <div>
@@ -49,15 +47,14 @@ export default function CheckoutTable({ orders, handleItemRemoval }) {
                 data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
                 style={ { backgroundColor: 'purple', ...tdStyles } }
               >
-                {Number(el.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                {fixedToTwoDecimalDigits(el.price)}
 
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
                 style={ { backgroundColor: 'blue', ...tdStyles } }
               >
-                {Number(el.quantity * el.price)
-                  .toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                {fixedToTwoDecimalDigits(el.quantity * el.price)}
 
               </td>
               <td
@@ -80,8 +77,12 @@ export default function CheckoutTable({ orders, handleItemRemoval }) {
 
       <p>
         Total: R$
-        <span data-testid="customer_checkout__element-order-total-price" />
-        <span>{totalPrice}</span>
+        <span
+          data-testid="customer_checkout__element-order-total-price"
+        >
+          {fixedToTwoDecimalDigits(totalPrice)}
+
+        </span>
       </p>
     </div>
   );
