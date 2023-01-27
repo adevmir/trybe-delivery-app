@@ -18,7 +18,9 @@ function CardProduct({ product, index, getTotal }) {
       // se o carrinho ja tiver itens (acrescente mais um)
       if (cartItems !== null) {
         // filtra para eliminar do carrinho todos os produtos com ids repetidos
-        const deleteRepeats = cartItems.filter((item) => item.id !== product.id);
+        const deleteRepeats = cartItems.filter(
+          (item) => item.id !== product.id,
+        );
         const addNewItem = [...deleteRepeats, newItem];
         // filtra para retirar todos os produtos que agora tem quantidade zero
         const deleteZeros = addNewItem.filter((item) => item.quantity !== 0);
@@ -43,21 +45,23 @@ function CardProduct({ product, index, getTotal }) {
 
   return (
     <div key={ index }>
-      <h3 data-testid={ `customer_products__element-card-title-${product.id}` }>
-        { product.name }
+      <h3 data-testid={ `customer_products__element-card-title-${product?.id}` }>
+        {product?.name}
       </h3>
-      <p data-testid={ `customer_products__element-card-price-${product.id}` }>
-        { `R$ ${product.price.replace(/\./, ',')}` }
+      <p data-testid={ `customer_products__element-card-price-${product?.id}` }>
+        {`R$ ${Number(product?.price).toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+        })}`}
       </p>
       <img
-        alt={ product.name }
-        src={ product.urlImage }
+        alt={ product?.name }
+        src={ product?.urlImage }
         width="100px"
-        data-testid={ `customer_products__img-card-bg-image-${product.id}` }
+        data-testid={ `customer_products__img-card-bg-image-${product?.id}` }
       />
       <button
         type="button"
-        data-testid={ `customer_products__button-card-add-item-${product.id}` }
+        data-testid={ `customer_products__button-card-add-item-${product?.id}` }
         onClick={ () => {
           // caso a quantity seja uma string vazia inserida pelo onFocus, altero para zero, senao acrescenta mais um ao clicar no "Adicionar"
           setQuantity(quantity !== '' ? quantity + 1 : 0);
@@ -67,7 +71,7 @@ function CardProduct({ product, index, getTotal }) {
       </button>
       <button
         type="button"
-        data-testid={ `customer_products__button-card-rm-item-${product.id}` }
+        data-testid={ `customer_products__button-card-rm-item-${product?.id}` }
         onClick={ () => {
           // caso a quantity -1 seja menor que zero, permanece no zero, impedindo numeros negativos
           setQuantity(quantity - 1 > 0 ? quantity - 1 : 0);
@@ -80,7 +84,7 @@ function CardProduct({ product, index, getTotal }) {
         value={ quantity }
         onChange={ (event) => setQuantityCondition(event) }
         onFocus={ () => setQuantity('') }
-        data-testid={ `customer_products__input-card-quantity-${product.id}` }
+        data-testid={ `customer_products__input-card-quantity-${product?.id}` }
       />
     </div>
   );

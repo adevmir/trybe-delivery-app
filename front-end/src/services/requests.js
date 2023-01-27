@@ -9,6 +9,18 @@ export const requestSignupUser = async (reqBody) => {
   }
 };
 
+export const requestSubmitOrder = async (reqBody, token) => {
+  try {
+    const { data, status } = await apiAxios
+      .post('/customer/checkout', reqBody, {
+        headers: { Authorization: token },
+      });
+    return { data, status };
+  } catch (err) {
+    return { error: err.response.data.message, status: err.response.status };
+  }
+};
+
 export const requestAdminSignUp = async (reqBody) => {
   try {
     const JWT = localStorage.getItem('JWT');
@@ -24,5 +36,3 @@ export const requestAdminSignUp = async (reqBody) => {
     return { error: err.response.data.message, status: err.response.status };
   }
 };
-
-export default {};
