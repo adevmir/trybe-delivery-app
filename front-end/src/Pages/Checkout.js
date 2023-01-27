@@ -1,18 +1,11 @@
-import CheckoutTable from '../components/CheckoutTable';
-import DeliveryDetails from '../components/DeliveryDetails';
+import CheckoutTable from '../Components/CheckoutTable';
+import DeliveryDetails from '../Components/DeliveryDetails';
+import NavBar from '../Components/NavBar';
 
 export default function Checkout() {
   return (
     <div>
-      <p
-        style={ {
-          backgroundColor: 'green',
-          width: '100%',
-          padding: '1rem 3rem',
-          justifyText: 'center' } }
-      >
-        Nav bar
-      </p>
+      <NavBar />
       <CheckoutTable />
       <DeliveryDetails />
     </div>

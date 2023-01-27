@@ -7,8 +7,9 @@ function NavBar() {
 
   const getUserName = () => {
     // colocando no state o nome encontrado na chave user do localStorage
-    const { name } = JSON.parse(localStorage.getItem('user'));
-    setUserName(name);
+    const userData = localStorage.getItem('user');
+    const userObj = userData ? JSON.parse(userData) : null;
+    if (userObj != null) setUserName(userObj.name);
   };
 
   const toLogout = () => {

@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import getFromLocalStorage from '../utils/getFromLocalStorage';
 
 /**
  * @typedef {Object} IOrder
- * @property {string} description
- * @property {number} qty
- * @property {number} unitPrice
+ * @property {string} name
+ * @property {number} price
+ * @property {number} quantity
+ * @property {number} id
 
 * @typedef {Object} IUseCheckoutReturn
  * @property {function} handleItemRemoval
@@ -14,16 +16,18 @@ import { useState } from 'react';
  * @returns { IUseCheckoutReturn }
  */
 export default function useCheckout() {
-  const [orders, setOrders] = useState([
-    { description: 'prod 1', unitPrice: 1, qty: 1 },
-    { description: 'prod 2', unitPrice: 10, qty: 1 },
-    { description: 'prod 3', unitPrice: 10, qty: 1 },
-    { description: 'prod 4', unitPrice: 10, qty: 1 },
-    { description: 'prod 5', unitPrice: 10, qty: 1 },
-  ]);
+  const [orders, setOrders] = useState(null);
+
+  const retriveCart = () => {
+    const data = getFromLocalStorage({ key: 'cart' });
+    setOrders(data);
+  };
+
+  useEffect(() => {
+    retriveCart();
+  }, []);
 
   const handleItemRemoval = (productId) => {
-    console.log(productId);
     console.log('remove product from the state based on its identifier)');
     setOrders(orders.filter((_el, i) => i !== productId));
   };

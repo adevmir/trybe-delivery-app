@@ -5,7 +5,7 @@ export default function CheckoutTable() {
   const { orders, handleItemRemoval } = useCheckout();
 
   const totalPrice = useMemo(() => orders
-    ?.reduce((acc, el) => acc + (el.unitPrice * el.qty), 0), [orders]);
+    ?.reduce((acc, el) => acc + (el.price * el.quantity), 0), [orders]);
 
   const tdStyles = { padding: '0.4rem 0.8rem' };
 
@@ -26,7 +26,7 @@ export default function CheckoutTable() {
         </thead>
         <tbody>
           {orders?.map((el, i) => (
-            <tr key={ el.description + i }>
+            <tr key={ el.id }>
               <td
                 data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
                 style={ { backgroundColor: 'green', ...tdStyles } }
@@ -38,28 +38,28 @@ export default function CheckoutTable() {
                 data-testid={ `customer_checkout__element-order-table-name-${i}` }
                 style={ { backgroundColor: 'grey', ...tdStyles } }
               >
-                {el.description}
+                {el.name}
 
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
                 style={ { backgroundColor: 'green', ...tdStyles } }
               >
-                {el.qty}
+                {el.quantity}
 
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
                 style={ { backgroundColor: 'purple', ...tdStyles } }
               >
-                {el.unitPrice}
+                {el.price}
 
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
                 style={ { backgroundColor: 'blue', ...tdStyles } }
               >
-                {el.qty * el.unitPrice}
+                {el.quantity * el.price}
 
               </td>
               <td
@@ -68,7 +68,7 @@ export default function CheckoutTable() {
                 <button
                   type="button"
                   style={ { backgroundColor: 'green', ...tdStyles } }
-                  onClick={ () => handleItemRemoval(i) }
+                  onClick={ () => handleItemRemoval(el.id) }
                 >
                   Remover
 

@@ -28,8 +28,9 @@ function Products() {
 
   const getToken = () => {
     // buscando o token armazenado no localStora após o login
-    const { token } = JSON.parse(localStorage.getItem('user'));
-    renderProducts(token);
+    const userData = localStorage.getItem('user');
+    const userObj = userData ? JSON.parse(localStorage.getItem('user')) : null;
+    if (userObj) renderProducts(userObj.token);
   };
 
   const getTotal = () => {
