@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { formatDate } from '../utils';
 
 export default function OrderDetailsHeader({ id, status, seller, sellDate }) {
   return (
@@ -19,7 +20,7 @@ export default function OrderDetailsHeader({ id, status, seller, sellDate }) {
       <p
         data-testid="customer_order_details__element-order-details-label-order-date"
       >
-        {sellDate}
+        {formatDate(sellDate, 'pt-BR')}
       </p>
       <p
         data-testid={

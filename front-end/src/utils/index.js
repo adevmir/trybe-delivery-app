@@ -39,6 +39,6 @@ export function removeEntryFromLocalStorage(key, entryIdentifier) {
   saveToLocalStorage('cart', newData);
 }
 
-export function formatDate(data, locale) {
-  return new Intl.DateTimeFormat(locale).format(date);
+export function formatDate(date, locale) {
+  return new Intl.DateTimeFormat(locale).format(new Date(date));
 }

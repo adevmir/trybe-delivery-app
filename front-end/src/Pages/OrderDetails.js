@@ -4,6 +4,7 @@ import NavBar from '../Components/NavBar';
 import OrderDetailsHeader from '../Components/OrderDetailsHeader';
 import OrderDetailsTable from '../Components/OrderDetailsTable';
 import useOrders from '../hooks/useOrders';
+import { fixedToTwoDecimalDigits } from '../utils';
 
 export default function OrderDetails() {
   const { id } = useParams();
@@ -33,7 +34,7 @@ export default function OrderDetails() {
               data-testid="customer_order_details__element-order-total-price"
             >
               Total: R$
-              {total}
+              {fixedToTwoDecimalDigits(total)}
             </div>
           </div>
         )
