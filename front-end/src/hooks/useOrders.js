@@ -16,7 +16,7 @@ export default function useOrders(id) {
           setOrdersDetails(data);
         }
       })
-      .catch((err) => { alert(err); });
+      .catch((err) => { console.error(err); });
   }, [id, jwt]);
 
   return {
