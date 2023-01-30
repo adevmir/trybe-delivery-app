@@ -38,3 +38,7 @@ export function removeEntryFromLocalStorage(key, entryIdentifier) {
   const newData = data.filter((el) => el[entryIdentifier.key] !== entryIdentifier.value);
   saveToLocalStorage('cart', newData);
 }
+
+export function formatDate(date, locale) {
+  return new Intl.DateTimeFormat(locale).format(new Date(date));
+}

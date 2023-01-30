@@ -36,3 +36,14 @@ export const requestAdminSignUp = async (reqBody) => {
     return { error: err.response.data.message, status: err.response.status };
   }
 };
+
+export const requestOrderById = async (id, token) => {
+  try {
+    const { data, status } = await apiAxios.get(`/customer/orders/${id}`, {
+      headers: { Authorization: token },
+    });
+    return { data, status, error: null };
+  } catch (err) {
+    return { error: err.response.data, status: err.response.status };
+  }
+};
