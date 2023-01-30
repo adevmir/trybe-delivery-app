@@ -31,6 +31,7 @@ export default function OrderDetailsHeader({ id, status, seller, sellDate }) {
       <button
         data-testid="customer_order_details__button-delivery-check"
         type="button"
+        disabled
       >
         Marcar com entregue
       </button>

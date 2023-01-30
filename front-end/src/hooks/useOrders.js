@@ -1,27 +1,26 @@
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { requestOrderById } from '../services/requests';
 import { HTTP_STATUS } from '../utils/config';
+import { getFromLocalStorage } from '../utils';
 
-export default async function useOrders({ id, token }) {
-  const [orders, setOrders] = useState(null);
+export default function useOrders(id) {
+  const [ordersDetails, setOrdersDetails] = useState(null);
+
+  const jwt = getFromLocalStorage('user')?.token;
+  const cart = getFromLocalStorage('cart');
 
   useEffect(() => {
-    requestOrderById(id, token)
+    requestOrderById(id, jwt)
       .then(({ data, status }) => {
         if (status === HTTP_STATUS.OK) {
-          setOrders(data);
+          setOrdersDetails(data);
         }
       })
       .catch((err) => { alert(err); });
-  }, [id, token]);
+  }, [id, jwt]);
 
   return {
-    orders,
+    ordersDetails,
+    cart,
   };
 }
-
-useOrders.propTypes = {
-  id: PropTypes.string,
-  token: PropTypes.string,
-}.isRequired;

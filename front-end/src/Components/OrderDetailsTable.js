@@ -1,6 +1,6 @@
 import PropTypes, { string, number } from 'prop-types';
 
-export default function OrderDetailsTable({ orders }) {
+export default function OrderDetailsTable({ cart }) {
   return (
     <table>
       <thead>
@@ -13,7 +13,7 @@ export default function OrderDetailsTable({ orders }) {
         </tr>
       </thead>
       <tbody>
-        {orders.map((order, index) => (
+        {cart?.map((order, index) => (
           <tr key={ order.id }>
             <td
               data-testid={
@@ -26,7 +26,7 @@ export default function OrderDetailsTable({ orders }) {
             <td
               data-testid="customer_order_details__element-order-table-name-<index>"
             >
-              {order.description}
+              {order.name}
 
             </td>
             <td
@@ -43,13 +43,15 @@ export default function OrderDetailsTable({ orders }) {
               }
             >
               R$
-              {order.unitPrice}
+              {order.price}
             </td>
             <td
-              data-testid="customer_order_details__element-order-table-sub-total-<index>"
+              data-testid={
+                `customer_order_details__element-order-table-sub-total-${index}`
+              }
             >
               R$
-              {order.unitPrice * order.quantity}
+              {Number(order.price) * order.quantity}
             </td>
           </tr>
         ))}
@@ -59,12 +61,12 @@ export default function OrderDetailsTable({ orders }) {
 }
 
 OrderDetailsTable.propTypes = {
-  orders: PropTypes.arrayOf(PropTypes.shape(
+  cart: PropTypes.arrayOf(PropTypes.shape(
     {
       id: number,
-      description: string,
+      name: string,
       quantity: number,
-      unitPrice: number,
+      price: string,
     },
   )),
 }.isRequired;
