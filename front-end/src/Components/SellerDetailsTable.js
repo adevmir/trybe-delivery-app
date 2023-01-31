@@ -1,6 +1,6 @@
 import PropTypes, { string, number } from 'prop-types';
 
-export default function OrderDetailsTable({ cart }) {
+export default function SellerDetailsTable() {
   return (
     <table>
       <thead>
@@ -17,21 +17,21 @@ export default function OrderDetailsTable({ cart }) {
           <tr key={ order.id }>
             <td
               data-testid={
-                `customer_order_details__element-order-table-item-number-${index}`
+                `seller_order_details__element-order-table-item-number-${index}`
               }
             >
               {index + 1}
 
             </td>
             <td
-              data-testid={ `customer_order_details__element-order-table-name-${index}` }
+              data-testid={ `seller_order_details__element-order-table-name-${index}` }
             >
               {order.name}
 
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-table-quantity-${index}`
+                `seller_order_details__element-order-table-quantity-${index}`
               }
             >
               {order.quantity}
@@ -39,7 +39,7 @@ export default function OrderDetailsTable({ cart }) {
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-table-unit-price-${index}`
+                `seller_order_details__element-order-table-unit-price-${index}`
               }
             >
               R$
@@ -47,7 +47,7 @@ export default function OrderDetailsTable({ cart }) {
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-table-sub-total-${index}`
+                `seller_order_details__element-order-table-sub-total-${index}`
               }
             >
               R$
@@ -60,7 +60,7 @@ export default function OrderDetailsTable({ cart }) {
   );
 }
 
-OrderDetailsTable.propTypes = {
+SellerDetailsTable.propTypes = {
   cart: PropTypes.arrayOf(PropTypes.shape(
     {
       id: number,
