@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
-import useSellerSales from '../hooks/useSales';
+import useSellerSales from '../hooks/useSellerSales';
 
 function SellerSales() {
   const { sales } = useSellerSales();
@@ -15,13 +15,10 @@ function SellerSales() {
         <div key={ index }>
           <Link
             to={ `/seller/orders/${order.id}` }
+            data-testid={ `seller_orders__element-order-id-${order.id}` }
           >
-            <div>
-              <p>Pedido</p>
-              <p data-testid={ `seller_orders__element-order-id-${order.id}` }>
-                { order.id }
-              </p>
-            </div>
+            Pedido
+            { order.id }
             <div>
               <div data-testid={ `seller_orders__element-delivery-status-${order.id}` }>
                 { order.status }

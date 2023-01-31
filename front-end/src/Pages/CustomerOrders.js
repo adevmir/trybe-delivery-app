@@ -7,6 +7,7 @@ function CustomersSales() {
   const { sales } = useSales();
 
   const newDate = (date) => new Date(date);
+  console.log('aqui teste');
 
   return (
     <div>

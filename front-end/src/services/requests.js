@@ -50,6 +50,7 @@ export const requestOrderById = async (id, token) => {
 
 export const requestSalesByCostumer = async (token) => {
   try {
+    console.log('reqCostumers');
     const user = localStorage.getItem('user');
     const { data, status } = await apiAxios.get(
       '/customer/orders',
@@ -66,6 +67,7 @@ export const requestSalesByCostumer = async (token) => {
 
 export const requestSalesBySeller = async (token) => {
   try {
+    console.log('reqSales');
     const user = localStorage.getItem('user');
     const baseUrl = '/seller/orders';
     const { data, status } = await apiAxios.get(

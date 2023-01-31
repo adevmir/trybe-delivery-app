@@ -18,13 +18,13 @@ function Login() {
     try {
       const api = await apiAxios.post('/login', { email, password });
       const { data } = api;
-      // Redireciona para a pagina de admin
-      if (data.role === 'administrator') setIsAdmin(true);
-      if (data.role === 'seller') setIsSeller(true);
-      setRedirectProducts(true);
       // insere os dados do usuario no localStorage após login com dados válidos
       localStorage.setItem('JWT', data.token);
       localStorage.setItem('user', JSON.stringify(data));
+      // Redireciona para a pagina de admin
+      if (data.role === 'administrator') setIsAdmin(true);
+      if (data.role === 'seller') setIsSeller(true);
+      if (data.role === 'customer') setRedirectProducts(true);
     } catch (err) {
       setError(true);
     }
