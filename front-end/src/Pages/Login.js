@@ -29,7 +29,7 @@ function Login() {
   };
   // assim que a página inicializa, como estamos na rota /login (inicial), o carrinho será limpo do localStorage, funcionando como 'logout'
   useEffect(() => {
-    if (getFromLocalStorage('user')?.token) return setRedirectProducts(true);
+    if (getFromLocalStorage('user')) return setRedirectProducts(true);
     localStorage.clear('cart');
   }, []);
 

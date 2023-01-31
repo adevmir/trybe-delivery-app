@@ -4,19 +4,22 @@ import NavBar from '../Components/NavBar';
 // import apiAxios from '../services/axios';
 import useSales from '../hooks/useSales';
 
-function CostumersSales() {
+function CustomersSales() {
   // const history = useHistory();
   // const [ordersList, setOrdersList] = useState([]);
 
+  // let dataFormatada = `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`;
   const { sales } = useSales();
+
+  const newDate = (date) => new Date(date);
 
   return (
     <div>
       <NavBar />
-      { console.log(sales) && sales.map((order, index) => (
+      { console.log(sales) || sales?.map((order, index) => (
         <div key={ index }>
           <Link
-            to={ `/costumer/orders/${order.id}` }
+            to={ `/customer/orders/${order.id}` }
           >
             <div>
               <p>Pedido</p>
@@ -30,11 +33,11 @@ function CostumersSales() {
               </div>
               <div>
                 <p data-testid={ `customer_orders__element-order-date-${order.id}` }>
-                  { order.date }
+                  { newDate(order.saleDate).toLocaleDateString() }
                 </p>
                 <p data-testid={ `customer_orders__element-card-price-${order.id}` }>
-                  R$
-                  { order.price }
+                  { `${Number(order.totalPrice)
+                    .toLocaleString('pt-br', { minimumFractionDigits: 2 })}` }
                 </p>
               </div>
             </div>
@@ -45,4 +48,4 @@ function CostumersSales() {
   );
 }
 
-export default CostumersSales;
+export default CustomersSales;

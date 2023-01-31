@@ -7,7 +7,7 @@ import OrderDetails from './Pages/OrderDetails';
 import Products from './Pages/Products';
 import Register from './Pages/Register';
 import Admin from './Pages/Admin';
-import CostumersSales from './Pages/Orders';
+import CustomersSales from './Pages/CustomerOrders';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
       <Route exact path="/register" component={ Register } />
       <Route exact path="/customer/checkout" component={ Checkout } />
       <Route exact path="/customer/products" component={ Products } />
-      <Route exact path="/customer/orders" component={ CostumersSales } />
+      <Route exact path="/customer/orders" component={ CustomersSales } />
       <Route exact path="/customer/orders/:id" component={ OrderDetails } />
       <Route exact path="/admin/manage" component={ Admin } />
       <Route exact path="/" component={ Login } />

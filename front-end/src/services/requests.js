@@ -52,9 +52,9 @@ export const requestSalesByCostumer = async (token) => {
   try {
     const user = localStorage.getItem('user');
     const { data, status } = await apiAxios.get(
-      '/customer/orders}',
-      user,
+      '/customer/orders',
       {
+        user,
         headers: { Authorization: token },
       },
     );
