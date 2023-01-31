@@ -9,7 +9,7 @@ import { fixedToTwoDecimalDigits } from '../utils';
 export default function OrderDetails() {
   const { id } = useParams();
 
-  const { ordersDetails, cart } = useOrders(id);
+  const { ordersDetails, cart, isSeller, orderRole, isCustomer } = useOrders(id);
   const total = useMemo(() => cart
     ?.reduce((acc, el) => acc + (el.quantity * el.price), 0), [cart]);
 
@@ -21,23 +21,30 @@ export default function OrderDetails() {
 
         {
           ordersDetails !== null
-        && (
-          <div>
-            <OrderDetailsHeader
-              status={ ordersDetails?.status }
-              id={ ordersDetails?.id }
-              sellDate={ ordersDetails?.saleDate }
-              seller={ ordersDetails?.seller.name }
-            />
-            <OrderDetailsTable orders={ cart } />
-            <div
-              data-testid="customer_order_details__element-order-total-price"
-            >
-              Total: R$
-              {fixedToTwoDecimalDigits(total)}
+          && (
+            <div>
+              <OrderDetailsHeader
+                status={ ordersDetails?.status }
+                id={ ordersDetails?.id }
+                sellDate={ ordersDetails?.saleDate }
+                seller={ ordersDetails?.seller.name }
+                isSeller={ isSeller }
+                isCustomer={ isCustomer }
+                orderRole={ orderRole }
+              />
+              <OrderDetailsTable
+                orders={ cart }
+                orderRole={ orderRole }
+              />
+
+              <div
+                data-testid={ `${orderRole}_order_details__element-order-total-price` }
+              >
+                Total: R$
+                {fixedToTwoDecimalDigits(total)}
+              </div>
             </div>
-          </div>
-        )
+          )
         }
 
       </main>
