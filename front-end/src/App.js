@@ -7,6 +7,7 @@ import OrderDetails from './Pages/OrderDetails';
 import Products from './Pages/Products';
 import Register from './Pages/Register';
 import Admin from './Pages/Admin';
+import SellerOrderDetails from './Pages/SellerOrderDetails';
 
 function App() {
   return (

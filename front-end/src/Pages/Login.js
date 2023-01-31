@@ -15,6 +15,9 @@ function Login() {
   const toLogin = async () => {
     try {
       const api = await apiAxios.post('/login', { email, password });
+      console.log('oi');
+
+      console.log(api);
       const { data } = api;
       // Redireciona para a pagina de admin
       if (data.role === 'administrator') setIsAdmin(true);
