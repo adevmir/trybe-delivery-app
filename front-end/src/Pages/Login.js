@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import apiAxios from '../services/axios';
+import { getFromLocalStorage } from '../utils';
 
 function Login() {
   const history = useHistory();
@@ -28,6 +29,7 @@ function Login() {
   };
   // assim que a página inicializa, como estamos na rota /login (inicial), o carrinho será limpo do localStorage, funcionando como 'logout'
   useEffect(() => {
+    if (getFromLocalStorage('user')?.token) return setRedirectProducts(true);
     localStorage.clear('cart');
   }, []);
 
