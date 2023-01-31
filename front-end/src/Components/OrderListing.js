@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-class OrderListing extends React.Component {
+class ProductListing extends React.Component {
   render() {
     const {
       title,
@@ -41,4 +41,4 @@ ProductListing.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-export default OrderListing;
+export default ProductListing;

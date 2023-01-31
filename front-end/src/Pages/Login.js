@@ -11,6 +11,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [loginDisabled, setLoginDisabled] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
 
   // criado a conexão de frontend com back atraves do AXIOS
   const toLogin = async () => {
@@ -19,6 +20,7 @@ function Login() {
       const { data } = api;
       // Redireciona para a pagina de admin
       if (data.role === 'administrator') setIsAdmin(true);
+      if (data.role === 'seller') setIsSeller(true);
       setRedirectProducts(true);
       // insere os dados do usuario no localStorage após login com dados válidos
       localStorage.setItem('JWT', data.token);
@@ -29,7 +31,10 @@ function Login() {
   };
   // assim que a página inicializa, como estamos na rota /login (inicial), o carrinho será limpo do localStorage, funcionando como 'logout'
   useEffect(() => {
-    if (getFromLocalStorage('user')) return setRedirectProducts(true);
+    const role = getFromLocalStorage('user')?.role;
+    if (role === 'customer') return setRedirectProducts(true);
+    if (role === 'administrator') return setIsAdmin(true);
+    if (role === 'seller') return setIsSeller(true);
     localStorage.clear('cart');
   }, []);
 
@@ -46,6 +51,7 @@ function Login() {
       <Redirect to="/login" />
       { isAdmin && <Redirect to="/admin/manage" /> }
       { redirectProducts && <Redirect to="/customer/products" /> }
+      { isSeller && <Redirect to="/seller/orders" /> }
       <form>
         <input
           type="email"

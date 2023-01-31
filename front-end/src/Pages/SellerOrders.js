@@ -1,40 +1,43 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
-import useSales from '../hooks/useSales';
+import useSellerSales from '../hooks/useSales';
 
-function CustomersSales() {
-  const { sales } = useSales();
+function SellerSales() {
+  const { sales } = useSellerSales();
 
   const newDate = (date) => new Date(date);
 
   return (
     <div>
       <NavBar />
-      { console.log(sales) || sales?.map((order, index) => (
+      { sales?.map((order, index) => (
         <div key={ index }>
           <Link
-            to={ `/customer/orders/${order.id}` }
+            to={ `/seller/orders/${order.id}` }
           >
             <div>
               <p>Pedido</p>
-              <p data-testid={ `customer_orders__element-order-id-${order.id}` }>
+              <p data-testid={ `seller_orders__element-order-id-${order.id}` }>
                 { order.id }
               </p>
             </div>
             <div>
-              <div data-testid={ `customer_orders__element-delivery-status-${order.id}` }>
+              <div data-testid={ `seller_orders__element-delivery-status-${order.id}` }>
                 { order.status }
               </div>
               <div>
-                <p data-testid={ `customer_orders__element-order-date-${order.id}` }>
+                <p data-testid={ `seller_orders__element-order-date-${order.id}` }>
                   { newDate(order.saleDate).toLocaleDateString() }
                 </p>
-                <p data-testid={ `customer_orders__element-card-price-${order.id}` }>
+                <p data-testid={ `seller_orders__element-card-price-${order.id}` }>
                   { `${Number(order.totalPrice)
                     .toLocaleString('pt-br', { minimumFractionDigits: 2 })}` }
                 </p>
               </div>
+              <p data-testid={ `seller_orders__element-card-address-${order.id}` }>
+                {order.address}
+              </p>
             </div>
           </Link>
         </div>
@@ -43,4 +46,4 @@ function CustomersSales() {
   );
 }
 
-export default CustomersSales;
+export default SellerSales;
