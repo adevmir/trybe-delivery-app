@@ -2,19 +2,14 @@ import PropTypes from 'prop-types';
 import { formatDate } from '../utils';
 
 export default function OrderDetailsHeader({ id,
-  status, seller, sellDate, orderRole, isSeller, isCustomer }) {
+  status, seller, sellDate, orderRole, isSeller, isCustomer, sellerOrder }) {
   const testid = '_order_details__element-order-';
-  // console.log('orderrole in details header:', orderRole);
-  // console.log('isSeller in details header:', isSeller);
-  // console.log('isCustomer in details header:', isCustomer);
-
   return (
     <div>
       <p data-testid={ `${orderRole + testid}details-label-order-id` }>
         PEDIDO
         {' '}
-        {id}
-        ;
+        { id }
       </p>
       <p
         data-testid={
@@ -32,43 +27,56 @@ export default function OrderDetailsHeader({ id,
       >
         {formatDate(sellDate, 'pt-BR')}
       </p>
-      <p
-        data-testid={
-          `${orderRole + testid}details-label-delivery-status${id}`
-        }
-      >
-        {status}
-      </p>
-      {/* <button
-        data-testid={
-          `${orderRole}_order_details__button-delivery-check`
-        }
-        type="button"
-        disabled
-      > */}
-      {/* Marcar com entregue
-      </button> */}
       {isCustomer && (
-        <button
-          data-testid={
-            `${orderRole}_order_details__button-delivery-check`
-          }
-          type="button"
-          disabled
-        >
-          Marcar como entregue
+        <>
+          <p
+            data-testid={
+              `${orderRole + testid}details-label-delivery-status${id}`
+            }
+          >
+            {status}
+          </p>
+          <button
+            data-testid={
+              `${orderRole}_order_details__button-delivery-check`
+            }
+            type="button"
+            disabled
+          >
+            Marcar como entregue
 
-        </button>)}
+          </button>
+        </>
+      )}
       {isSeller && (
-        <button
-          data-testid={
-            `${orderRole}_order_details__button-delivery-check`
-          }
-          type="button"
-        >
-          Saiu para entrega
+        <>
+          <p
+            data-testid={
+              `${orderRole + testid}details-label-delivery-status${id}`
+            }
+          >
+            {sellerOrder.status}
+          </p>
+          <button
+            data-testid={
+              `${orderRole}_order_details__button-preparing-check`
+            }
+            type="button"
+          >
+            Preparar pedido
 
-        </button>
+          </button>
+          <button
+            data-testid={
+              `${orderRole}_order_details__button-dispatch-check`
+            }
+            type="button"
+            disabled
+          >
+            Saiu para entrega
+
+          </button>
+        </>
       )}
     </div>
   );
@@ -82,4 +90,5 @@ OrderDetailsHeader.propTypes = {
   orderRole: PropTypes.string.isRequired,
   isSeller: PropTypes.bool.isRequired,
   isCustomer: PropTypes.bool.isRequired,
+  sellerOrder: PropTypes.string.isRequired,
 };

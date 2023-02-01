@@ -21,7 +21,7 @@ function Login() {
       // insere os dados do usuario no localStorage após login com dados válidos
       localStorage.setItem('JWT', data.token);
       localStorage.setItem('user', JSON.stringify(data));
-      // Redireciona para a pagina de admin
+      // Redireciona para a pagina da role
       if (data.role === 'administrator') setIsAdmin(true);
       if (data.role === 'seller') setIsSeller(true);
       if (data.role === 'customer') setRedirectProducts(true);

@@ -67,7 +67,6 @@ export const requestSalesByCostumer = async (token) => {
 
 export const requestSalesBySeller = async (token) => {
   try {
-    console.log('reqSales');
     const user = localStorage.getItem('user');
     const baseUrl = '/seller/orders';
     const { data, status } = await apiAxios.get(
