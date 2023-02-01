@@ -50,7 +50,6 @@ export const requestOrderById = async (id, token) => {
 
 export const requestSalesByCostumer = async (token) => {
   try {
-    console.log('reqCostumers');
     const user = localStorage.getItem('user');
     const { data, status } = await apiAxios.get(
       '/customer/orders',
