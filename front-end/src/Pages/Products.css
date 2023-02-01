@@ -1,0 +1,16 @@
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 50px;
+}
+
+.button-cart {
+  background: #036B52;
+  border-radius: 10px;
+  bottom: 10px;
+  height: 8vh;
+  position: fixed;
+  right: 10px;
+  width: 40vh;
+}
