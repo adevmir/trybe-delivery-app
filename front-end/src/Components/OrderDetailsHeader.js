@@ -4,17 +4,12 @@ import { formatDate } from '../utils';
 export default function OrderDetailsHeader({ id,
   status, seller, sellDate, orderRole, isSeller, isCustomer }) {
   const testid = '_order_details__element-order-';
-  // console.log('orderrole in details header:', orderRole);
-  // console.log('isSeller in details header:', isSeller);
-  // console.log('isCustomer in details header:', isCustomer);
-
   return (
     <div>
       <p data-testid={ `${orderRole + testid}details-label-order-id` }>
         PEDIDO
         {' '}
-        {id}
-        ;
+        { id }
       </p>
       <p
         data-testid={
@@ -39,15 +34,6 @@ export default function OrderDetailsHeader({ id,
       >
         {status}
       </p>
-      {/* <button
-        data-testid={
-          `${orderRole}_order_details__button-delivery-check`
-        }
-        type="button"
-        disabled
-      > */}
-      {/* Marcar com entregue
-      </button> */}
       {isCustomer && (
         <button
           data-testid={
@@ -58,17 +44,30 @@ export default function OrderDetailsHeader({ id,
         >
           Marcar como entregue
 
-        </button>)}
-      {isSeller && (
-        <button
-          data-testid={
-            `${orderRole}_order_details__button-delivery-check`
-          }
-          type="button"
-        >
-          Saiu para entrega
-
         </button>
+      )}
+      {isSeller && (
+        <>
+          <button
+            data-testid={
+              `${orderRole}_order_details__button-preparing-check`
+            }
+            type="button"
+          >
+            Preparar pedido
+
+          </button>
+          <button
+            data-testid={
+              `${orderRole}_order_details__button-dispatch-check`
+            }
+            type="button"
+            disabled
+          >
+            Saiu para entrega
+
+          </button>
+        </>
       )}
     </div>
   );
