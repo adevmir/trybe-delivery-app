@@ -15,17 +15,20 @@ function SellerSales() {
         <div key={ index }>
           <Link
             to={ `/seller/orders/${order.id}` }
-            data-testid={ `seller_orders__element-order-id-${order.id}` }
           >
-            Pedido
-            { order.id }
+            <div>
+              <p>Pedido</p>
+              <p data-testid={ `seller_orders__element-order-id-${order.id}` }>
+                { order.id }
+              </p>
+            </div>
             <div>
               <div data-testid={ `seller_orders__element-delivery-status-${order.id}` }>
                 { order.status }
               </div>
               <div>
                 <p data-testid={ `seller_orders__element-order-date-${order.id}` }>
-                  { newDate(order.saleDate).toLocaleDateString() }
+                  { newDate(order.saleDate).toLocaleDateString('pt-br') }
                 </p>
                 <p data-testid={ `seller_orders__element-card-price-${order.id}` }>
                   { `${Number(order.totalPrice)
