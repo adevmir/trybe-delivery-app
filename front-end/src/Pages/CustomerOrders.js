@@ -17,7 +17,7 @@ function CustomersSales() {
             to={ `/customer/orders/${order.id}` }
           >
             <div>
-              <p>Pedido</p>
+              <p>pedido</p>
               <p data-testid={ `customer_orders__element-order-id-${order.id}` }>
                 { order.id }
               </p>
