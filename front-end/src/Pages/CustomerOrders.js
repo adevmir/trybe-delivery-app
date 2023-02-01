@@ -7,12 +7,11 @@ function CustomersSales() {
   const { sales } = useSales();
 
   const newDate = (date) => new Date(date);
-  console.log('aqui teste');
 
   return (
     <div>
       <NavBar />
-      { console.log(sales) || sales?.map((order, index) => (
+      { sales?.map((order, index) => (
         <div key={ index }>
           <Link
             to={ `/customer/orders/${order.id}` }
@@ -29,7 +28,7 @@ function CustomersSales() {
               </div>
               <div>
                 <p data-testid={ `customer_orders__element-order-date-${order.id}` }>
-                  { newDate(order.saleDate).toLocaleDateString() }
+                  { newDate(order.saleDate).toLocaleDateString('pt-br') }
                 </p>
                 <p data-testid={ `customer_orders__element-card-price-${order.id}` }>
                   { `${Number(order.totalPrice)
