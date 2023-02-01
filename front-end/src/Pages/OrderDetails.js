@@ -15,6 +15,7 @@ export default function OrderDetails() {
   const total = useMemo(() => cart
     ?.reduce((acc, el) => acc + (el.quantity * el.price), 0), [cart]);
 
+  // sellerOrder = Pedido de acordo com o id recebido no params
   const sellerOrder = sales?.find((order) => order.id === JSON.parse(id));
 
   return (
@@ -35,6 +36,7 @@ export default function OrderDetails() {
                 isSeller={ isSeller }
                 isCustomer={ isCustomer }
                 orderRole={ orderRole }
+                sellerOrder={ sellerOrder }
               />
               <OrderDetailsTable
                 orders={ cart }

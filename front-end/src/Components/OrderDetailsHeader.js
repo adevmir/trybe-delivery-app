@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { formatDate } from '../utils';
 
 export default function OrderDetailsHeader({ id,
-  status, seller, sellDate, orderRole, isSeller, isCustomer }) {
+  status, seller, sellDate, orderRole, isSeller, isCustomer, sellerOrder }) {
   const testid = '_order_details__element-order-';
   return (
     <div>
@@ -27,27 +27,36 @@ export default function OrderDetailsHeader({ id,
       >
         {formatDate(sellDate, 'pt-BR')}
       </p>
-      <p
-        data-testid={
-          `${orderRole + testid}details-label-delivery-status${id}`
-        }
-      >
-        {status}
-      </p>
       {isCustomer && (
-        <button
-          data-testid={
-            `${orderRole}_order_details__button-delivery-check`
-          }
-          type="button"
-          disabled
-        >
-          Marcar como entregue
+        <>
+          <p
+            data-testid={
+              `${orderRole + testid}details-label-delivery-status${id}`
+            }
+          >
+            {status}
+          </p>
+          <button
+            data-testid={
+              `${orderRole}_order_details__button-delivery-check`
+            }
+            type="button"
+            disabled
+          >
+            Marcar como entregue
 
-        </button>
+          </button>
+        </>
       )}
       {isSeller && (
         <>
+          <p
+            data-testid={
+              `${orderRole + testid}details-label-delivery-status${id}`
+            }
+          >
+            {sellerOrder.status}
+          </p>
           <button
             data-testid={
               `${orderRole}_order_details__button-preparing-check`
@@ -81,4 +90,5 @@ OrderDetailsHeader.propTypes = {
   orderRole: PropTypes.string.isRequired,
   isSeller: PropTypes.bool.isRequired,
   isCustomer: PropTypes.bool.isRequired,
+  sellerOrder: PropTypes.string.isRequired,
 };
