@@ -19,8 +19,12 @@ function App() {
       <Route exact path="/customer/products" component={ Products } />
       <Route exact path="/customer/orders" component={ CustomersSales } />
       <Route exact path="/customer/orders/:id" component={ OrderDetails } />
+
+      <Route exact path="/seller/orders/:id" component={ OrderDetails } />
+
       <Route exact path="/seller/orders" component={ SellerSales } />
-      {/* <Route exact path="/seller/orders/:id" component={ OrderDetails } /> */}
+      <Route exact path="/seller/orders/:id" component={ OrderDetails } />
+
       <Route exact path="/admin/manage" component={ Admin } />
       <Route exact path="/" component={ Login } />
     </Switch>
