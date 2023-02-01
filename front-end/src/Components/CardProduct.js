@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import './CardProduct.css';
 
 function CardProduct({ product, index, getTotal }) {
   // recebi via props o objeto de cada produto, seu index e a funcao getTotal
@@ -44,48 +45,59 @@ function CardProduct({ product, index, getTotal }) {
   }, [quantity]);
 
   return (
-    <div key={ index }>
-      <h3 data-testid={ `customer_products__element-card-title-${product?.id}` }>
-        {product?.name}
-      </h3>
-      <p data-testid={ `customer_products__element-card-price-${product?.id}` }>
+    <div key={ index } className="card-product">
+      <p
+        data-testid={ `customer_products__element-card-price-${product?.id}` }
+        className="card-price"
+      >
         {`R$ ${Number(product?.price).toLocaleString('pt-BR', {
           minimumFractionDigits: 2,
         })}`}
       </p>
-      <img
-        alt={ product?.name }
-        src={ product?.urlImage }
-        width="100px"
-        data-testid={ `customer_products__img-card-bg-image-${product?.id}` }
-      />
-      <button
-        type="button"
-        data-testid={ `customer_products__button-card-add-item-${product?.id}` }
-        onClick={ () => {
-          // caso a quantity seja uma string vazia inserida pelo onFocus, altero para zero, senao acrescenta mais um ao clicar no "Adicionar"
-          setQuantity(quantity !== '' ? quantity + 1 : 0);
-        } }
-      >
-        Adicionar
-      </button>
-      <button
-        type="button"
-        data-testid={ `customer_products__button-card-rm-item-${product?.id}` }
-        onClick={ () => {
-          // caso a quantity -1 seja menor que zero, permanece no zero, impedindo numeros negativos
-          setQuantity(quantity - 1 > 0 ? quantity - 1 : 0);
-        } }
-      >
-        Remover
-      </button>
-      <input
-        type="number"
-        value={ quantity }
-        onChange={ (event) => setQuantityCondition(event) }
-        onFocus={ () => setQuantity('') }
-        data-testid={ `customer_products__input-card-quantity-${product?.id}` }
-      />
+      <div className="card-image">
+        <img
+          alt={ product?.name }
+          src={ product?.urlImage }
+          data-testid={ `customer_products__img-card-bg-image-${product?.id}` }
+        />
+      </div>
+      <div className="card-title-and-quantity">
+        <h3
+          data-testid={ `customer_products__element-card-title-${product?.id}` }
+          className="card-title"
+        >
+          {product?.name}
+        </h3>
+        <div className="counter">
+          <button
+            type="button"
+            data-testid={ `customer_products__button-card-rm-item-${product?.id}` }
+            onClick={ () => {
+              // caso a quantity -1 seja menor que zero, permanece no zero, impedindo numeros negativos
+              setQuantity(quantity - 1 > 0 ? quantity - 1 : 0);
+            } }
+          >
+            -
+          </button>
+          <input
+            type="number"
+            value={ quantity }
+            onChange={ (event) => setQuantityCondition(event) }
+            onFocus={ () => setQuantity('') }
+            data-testid={ `customer_products__input-card-quantity-${product?.id}` }
+          />
+          <button
+            type="button"
+            data-testid={ `customer_products__button-card-add-item-${product?.id}` }
+            onClick={ () => {
+              // caso a quantity seja uma string vazia inserida pelo onFocus, altero para zero, senao acrescenta mais um ao clicar no "Adicionar"
+              setQuantity(quantity !== '' ? quantity + 1 : 0);
+            } }
+          >
+            +
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
