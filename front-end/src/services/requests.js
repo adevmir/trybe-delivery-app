@@ -77,7 +77,6 @@ export const requestSalesBySeller = async (token) => {
         headers: { Authorization: token },
       },
     );
-    console.log('reqSales', data);
     return { data, status, error: null };
   } catch (err) {
     return { error: err.response.data, status: err.response.status };
