@@ -7,6 +7,6 @@ const router = express.Router();
 router.use(tokenMiddleware);
 router.post('/checkout', salesController.createSale);
 router.get('/orders/:id', salesController.findById);
-router.get('/orders/', salesController.findOrdersByCustomer);
+router.get('/orders', salesController.findOrdersByCustomer);
 
 module.exports = router;

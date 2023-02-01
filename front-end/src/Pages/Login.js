@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import apiAxios from '../services/axios';
+import { getFromLocalStorage } from '../utils';
 
 function Login() {
   const history = useHistory();
@@ -10,24 +11,30 @@ function Login() {
   const [password, setPassword] = useState('');
   const [loginDisabled, setLoginDisabled] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
 
   // criado a conexão de frontend com back atraves do AXIOS
   const toLogin = async () => {
     try {
       const api = await apiAxios.post('/login', { email, password });
       const { data } = api;
-      // Redireciona para a pagina de admin
-      if (data.role === 'administrator') setIsAdmin(true);
-      setRedirectProducts(true);
       // insere os dados do usuario no localStorage após login com dados válidos
       localStorage.setItem('JWT', data.token);
       localStorage.setItem('user', JSON.stringify(data));
+      // Redireciona para a pagina de admin
+      if (data.role === 'administrator') setIsAdmin(true);
+      if (data.role === 'seller') setIsSeller(true);
+      if (data.role === 'customer') setRedirectProducts(true);
     } catch (err) {
       setError(true);
     }
   };
   // assim que a página inicializa, como estamos na rota /login (inicial), o carrinho será limpo do localStorage, funcionando como 'logout'
   useEffect(() => {
+    const role = getFromLocalStorage('user')?.role;
+    if (role === 'customer') return setRedirectProducts(true);
+    if (role === 'administrator') return setIsAdmin(true);
+    if (role === 'seller') return setIsSeller(true);
     localStorage.clear('cart');
   }, []);
 
@@ -44,6 +51,7 @@ function Login() {
       <Redirect to="/login" />
       { isAdmin && <Redirect to="/admin/manage" /> }
       { redirectProducts && <Redirect to="/customer/products" /> }
+      { isSeller && <Redirect to="/seller/orders" /> }
       <form>
         <input
           type="email"

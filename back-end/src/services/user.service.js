@@ -15,7 +15,7 @@ const login = async (data) => {
   if (!validLogin) httpException(404, 'Incorrect email or password');
   const { id, name, email, role } = user.dataValues;
   const token = await jwtUtil.createToken({ id, name, email, role });
-  return { name, email, role, token };
+  return { id, name, email, role, token };
 };
 
 const findUserByEmail = async (data) => {

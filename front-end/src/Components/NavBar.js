@@ -31,7 +31,7 @@ function NavBar() {
           Produtos
         </Link>
         <Link
-          to="customer/orders"
+          to="/customer/orders"
           data-testid="customer_products__element-navbar-link-orders"
         >
           Pedidos
