@@ -33,6 +33,7 @@ describe('Testando rota /login', () => {
        .send(login);
 
     const expected = {
+      id: user.id,
       name: user.name,
       email: user.email,
       role: user.role,

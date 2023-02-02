@@ -6,7 +6,7 @@ const { jwtUtil } = require('../../utils');
 
 const { sales, salesProducts } = require('../../database/models');
 
-const { tokenCustomer, regCustomer, tokenSeller, seller } = require('../mocks/user.mock');
+const { tokenCustomer, tokenSeller, seller, usersList } = require('../mocks/user.mock');
 const { sale, newSale, allOrders, updateOrder } = require('../mocks/sales.mock');
 
 const chaiHttp = require('chai-http');
@@ -21,7 +21,8 @@ describe('Testando rota POST /customer/checkout', () => {
   it('é possível criar um novo pedido corretamente', async () => {
     sinon.stub(sales, "create").resolves({ dataValues: newSale });
     sinon.stub(salesProducts, "bulkCreate").resolves();
-    sinon.stub(jwtUtil, 'readToken').resolves(regCustomer)
+    (jwtUtil.readToken).restore();
+    sinon.stub(jwtUtil, 'readToken').resolves(usersList[1])
 
     chaiHttpResponse = await chai
       .request(app)
@@ -137,7 +138,7 @@ describe('Testando rota GET /seller/orders', () => {
   });
 
   it('retorna erro caso usuário não seja um vendedor', async () => {
-    sinon.stub(jwtUtil, 'readToken').resolves(regCustomer);
+    sinon.stub(jwtUtil, 'readToken').resolves(usersList[1]);
     chaiHttpResponse = await chai
       .request(app)
       .get('/seller/orders')
@@ -197,7 +198,7 @@ describe('Testando rota PATCH /seller/orders/:id', () => {
 
   it('não é possível atualizar status da venda caso não seja vendedor', async () => {
     (jwtUtil.readToken).restore();
-    sinon.stub(jwtUtil, 'readToken').resolves(regCustomer);
+    sinon.stub(jwtUtil, 'readToken').resolves(usersList[1]);
     
     chaiHttpResponse = await chai
       .request(app)
