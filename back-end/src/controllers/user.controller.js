@@ -30,8 +30,14 @@ const adminRegister = async (req, res, next) => {
   }
 };
 
+const findUsersByAdmin = async (_req, res) => {
+  const users = await userService.findUsersByAdmin();
+  return res.status(200).json(users);
+};
+
 module.exports = {
   login,
   registerUser,
   adminRegister,
+  findUsersByAdmin,
 };
