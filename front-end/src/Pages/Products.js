@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
 import CardProduct from '../Components/CardProduct';
 import apiAxios from '../services/axios';
+import './Products.css';
 
 function Products() {
   const [productsList, setProductsList] = useState([]);
@@ -57,21 +58,24 @@ function Products() {
   return (
     <div>
       <NavBar />
-      { productsList?.map((product, index) => (
+      <div className="products">
+        { productsList?.map((product, index) => (
         // criado componente para cards dos produtos p/ gerenciar a qtd de cada um no state proprio, enviado como props alguns valores q serao usados la e a funcao getTotal
-        <CardProduct
-          product={ product }
-          index={ index }
-          key={ index }
-          getTotal={ getTotal }
-        />))}
+          <CardProduct
+            product={ product }
+            index={ index }
+            key={ index }
+            getTotal={ getTotal }
+          />))}
+      </div>
       <button
         type="button"
+        className="button-cart"
         data-testid="customer_products__button-cart"
         onClick={ () => setRedirectCheckout(true) }
         disabled={ checkoutDisabled }
       >
-        Carrinho: R$
+        Ver Carrinho: R$
         <span data-testid="customer_products__checkout-bottom-value">{ total }</span>
       </button>
       { redirectLogout && <Redirect to="/login" /> }
