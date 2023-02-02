@@ -56,7 +56,7 @@ function Register() {
             onClick={ () => history.push('/') }
             className="common_register__button-login"
           >
-            Retornar para Login
+            Faça Login
           </button>
         </div>
       </form>
