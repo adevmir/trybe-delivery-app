@@ -8,5 +8,6 @@ const router = express.Router();
 router.use(tokenMiddleware);
 router.use(roleMiddleware);
 router.get('/', userController.findUsersByAdmin);
+router.delete('/:id', userController.deleteUser);
 
 module.exports = router;

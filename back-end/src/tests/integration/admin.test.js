@@ -18,7 +18,7 @@ const { expect } = chai;
 describe('Testando rota GET /admin/manage', () => {
   let chaiHttpResponse;
 
-  it('é possível criar um novo pedido corretamente', async () => {
+  it('retorna todos os usuários', async () => {
     sinon.stub(users, "findAll").resolves(usersList);
     sinon.stub(jwtUtil, 'readToken').resolves(admin)
 
@@ -29,5 +29,22 @@ describe('Testando rota GET /admin/manage', () => {
 
     expect(chaiHttpResponse.status).to.be.equal(200);
     expect(chaiHttpResponse.body).to.be.deep.equal(usersList);
+  });
+});
+
+describe('Testando rota DELETE /admin/manage/:id', () => {
+  let chaiHttpResponse;
+
+  it('é possível deletar um usuário corretamente', async () => {
+    (jwtUtil.readToken).restore();
+    sinon.stub(users, "destroy").resolves();
+    sinon.stub(jwtUtil, 'readToken').resolves(admin);
+
+    chaiHttpResponse = await chai
+      .request(app)
+      .delete('/admin/manage/3')
+      .set('authorization', tokenAdmin);
+
+    expect(chaiHttpResponse.status).to.be.equal(204);
   });
 });

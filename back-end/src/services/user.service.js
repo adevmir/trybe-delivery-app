@@ -65,10 +65,13 @@ const createUserByAdmin = async (data) => {
 const findUsersByAdmin = async () => 
   users.findAll({ where: { role: { [Op.not]: 'administrator' } } });
 
+const deleteUser = async (id) => users.destroy({ where: { id } });
+
 module.exports = {
   login,
   createUser,
   findUserByEmail,
   createUserByAdmin,
   findUsersByAdmin,
+  deleteUser,
 };

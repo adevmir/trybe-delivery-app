@@ -35,9 +35,16 @@ const findUsersByAdmin = async (_req, res) => {
   return res.status(200).json(users);
 };
 
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  await userService.deleteUser(id);
+  return res.status(204).end();
+};
+
 module.exports = {
   login,
   registerUser,
   adminRegister,
   findUsersByAdmin,
+  deleteUser,
 };
