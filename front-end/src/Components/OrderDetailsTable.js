@@ -1,6 +1,7 @@
 import PropTypes, { string, number } from 'prop-types';
 
-export default function OrderDetailsTable({ cart }) {
+export default function OrderDetailsTable({ cart, orderRole }) {
+  const testid = '_order_details__element-order-';
   return (
     <table>
       <thead>
@@ -17,21 +18,22 @@ export default function OrderDetailsTable({ cart }) {
           <tr key={ order.id }>
             <td
               data-testid={
-                `customer_order_details__element-order-table-item-number-${index}`
+                `${orderRole + testid}table-item-number-${index}`
               }
             >
               {index + 1}
 
             </td>
             <td
-              data-testid={ `customer_order_details__element-order-table-name-${index}` }
+
+              data-testid={ `${orderRole + testid}table-name-${index}` }
             >
               {order.name}
 
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-table-quantity-${index}`
+                `${orderRole + testid}table-quantity-${index}`
               }
             >
               {order.quantity}
@@ -39,7 +41,9 @@ export default function OrderDetailsTable({ cart }) {
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-table-unit-price-${index}`
+
+                `${orderRole + testid}table-unit-price-${index}`
+
               }
             >
               R$
@@ -47,7 +51,7 @@ export default function OrderDetailsTable({ cart }) {
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-table-sub-total-${index}`
+                `${orderRole + testid}table-sub-total-${index}`
               }
             >
               R$

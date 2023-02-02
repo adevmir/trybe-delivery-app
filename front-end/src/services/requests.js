@@ -47,3 +47,37 @@ export const requestOrderById = async (id, token) => {
     return { error: err.response.data, status: err.response.status };
   }
 };
+
+export const requestSalesByCostumer = async (token) => {
+  try {
+    const user = localStorage.getItem('user');
+    const { data, status } = await apiAxios.get(
+      '/customer/orders',
+      {
+        user,
+        headers: { Authorization: token },
+      },
+    );
+    return { data, status, error: null };
+  } catch (err) {
+    return { error: err.response.data, status: err.response.status };
+  }
+};
+
+export const requestSalesBySeller = async (token) => {
+  try {
+    const user = localStorage.getItem('user');
+    const baseUrl = '/seller/orders';
+    const { data, status } = await apiAxios.get(
+      '/seller/orders',
+      {
+        baseUrl,
+        user,
+        headers: { Authorization: token },
+      },
+    );
+    return { data, status, error: null };
+  } catch (err) {
+    return { error: err.response.data, status: err.response.status };
+  }
+};

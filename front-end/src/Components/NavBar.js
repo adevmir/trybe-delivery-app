@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, useLocation } from 'react-router-dom';
+import './NavBar.css';
 
 function NavBar() {
   const [userName, setUserName] = useState('');
   const [redirectLogout, setRedirectLogout] = useState(false);
+  const { pathname } = useLocation();
 
   const getUserName = () => {
     // colocando no state o nome encontrado na chave user do localStorage
@@ -24,28 +26,46 @@ function NavBar() {
   return (
     <div>
       <nav>
-        <Link
-          to="/customer/products"
-          data-testid="customer_products__element-navbar-link-products"
-        >
-          Produtos
-        </Link>
-        <Link
-          to="customer/orders"
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          Pedidos
-        </Link>
-        <span data-testid="customer_products__element-navbar-user-full-name">
-          { userName }
-        </span>
-        <button
-          type="button"
-          data-testid="customer_products__element-navbar-link-logout"
-          onClick={ () => toLogout() }
-        >
-          Logout
-        </button>
+        <div className="navbar-links">
+          <div
+            className={ `navbar-container ${pathname.includes('products')
+              ? 'selected' : undefined}` }
+          >
+            <Link
+              to="/customer/products"
+              data-testid="customer_products__element-navbar-link-products"
+            >
+              { console.log(pathname) }
+              PRODUTOS
+            </Link>
+          </div>
+          <div
+            className={ `navbar-container ${pathname.includes('orders')
+              ? 'selected' : undefined}` }
+          >
+            <Link
+              to="/customer/orders"
+              data-testid="customer_products__element-navbar-link-orders"
+            >
+              PEDIDOS
+            </Link>
+          </div>
+        </div>
+        <div className="navbar-items">
+          <div className="navbar-container">
+            <span data-testid="customer_products__element-navbar-user-full-name">
+              { userName }
+            </span>
+          </div>
+          <button
+            type="button"
+            data-testid="customer_products__element-navbar-link-logout"
+            onClick={ () => toLogout() }
+            className="navbar-button"
+          >
+            Sair
+          </button>
+        </div>
         {/* renderização condicional para caso a pessoa tenha apertado o botão logout vá para página de login e limpe o localStorage conforme a função 'toLogout' */}
         { redirectLogout && <Redirect to="/login" /> }
       </nav>

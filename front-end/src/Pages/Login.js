@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import apiAxios from '../services/axios';
+import { getFromLocalStorage } from '../utils';
+import './Login.css';
 
 function Login() {
   const history = useHistory();
@@ -10,6 +12,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [loginDisabled, setLoginDisabled] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
 
   // criado a conexão de frontend com back atraves do AXIOS
   const toLogin = async () => {
@@ -19,18 +22,23 @@ function Login() {
 
       console.log(api);
       const { data } = api;
-      // Redireciona para a pagina de admin
-      if (data.role === 'administrator') setIsAdmin(true);
-      setRedirectProducts(true);
       // insere os dados do usuario no localStorage após login com dados válidos
       localStorage.setItem('JWT', data.token);
       localStorage.setItem('user', JSON.stringify(data));
+      // Redireciona para a pagina da role
+      if (data.role === 'administrator') setIsAdmin(true);
+      if (data.role === 'seller') setIsSeller(true);
+      if (data.role === 'customer') setRedirectProducts(true);
     } catch (err) {
       setError(true);
     }
   };
   // assim que a página inicializa, como estamos na rota /login (inicial), o carrinho será limpo do localStorage, funcionando como 'logout'
   useEffect(() => {
+    const role = getFromLocalStorage('user')?.role;
+    if (role === 'customer') return setRedirectProducts(true);
+    if (role === 'administrator') return setIsAdmin(true);
+    if (role === 'seller') return setIsSeller(true);
     localStorage.clear('cart');
   }, []);
 
@@ -47,41 +55,57 @@ function Login() {
       <Redirect to="/login" />
       { isAdmin && <Redirect to="/admin/manage" /> }
       { redirectProducts && <Redirect to="/customer/products" /> }
-      <form>
-        <input
-          type="email"
-          placeholder="Insira seu e-mail"
-          data-testid="common_login__input-email"
-          onChange={ (event) => setEmail(event.target.value) }
-        />
-        <input
-          type="password"
-          placeholder="Insira sua senha"
-          data-testid="common_login__input-password"
-          onChange={ (event) => setPassword(event.target.value) }
-        />
-        <button
-          type="button"
-          data-testid="common_login__button-login"
-          disabled={ loginDisabled }
-          onClick={ toLogin }
-        >
-          Entrar
-        </button>
-        <button
-          type="button"
-          data-testid="common_login__button-register"
-          onClick={ () => history.push('/register') }
-        >
-          Cadastre-se
-        </button>
-        { error && (
-          <span
-            data-testid="common_login__element-invalid-email"
+      { isSeller && <Redirect to="/seller/orders" /> }
+      <form className="form-class">
+        <h3 className="title-app">App de Delivery</h3>
+        <div className="div-class">
+          <label htmlFor="email">
+            Email
+            <input
+              id="email"
+              type="email"
+              placeholder="Insira seu e-mail"
+              data-testid="common_login__input-email"
+              onChange={ (event) => setEmail(event.target.value) }
+              className="common_login__input-email"
+            />
+          </label>
+          <label htmlFor="password">
+            Senha
+            <input
+              id="password"
+              type="password"
+              placeholder="Insira sua senha"
+              data-testid="common_login__input-password"
+              onChange={ (event) => setPassword(event.target.value) }
+              className="common_login__input-password"
+            />
+          </label>
+          <button
+            type="button"
+            data-testid="common_login__button-login"
+            disabled={ loginDisabled }
+            onClick={ toLogin }
+            className="common_login__button-login"
           >
-            Este e-mail/senha estão incorretos ou não existem.
-          </span>
-        )}
+            Entrar
+          </button>
+          <button
+            type="button"
+            data-testid="common_login__button-register"
+            onClick={ () => history.push('/register') }
+            className="common_login__button-register"
+          >
+            Cadastre-se
+          </button>
+          { error && (
+            <span
+              data-testid="common_login__element-invalid-email"
+            >
+              Este e-mail/senha estão incorretos ou não existem.
+            </span>
+          )}
+        </div>
       </form>
     </div>
   );

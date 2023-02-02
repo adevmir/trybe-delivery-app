@@ -5,15 +5,19 @@ import OrderDetailsHeader from '../Components/OrderDetailsHeader';
 import OrderDetailsTable from '../Components/OrderDetailsTable';
 import useOrders from '../hooks/useOrders';
 import { fixedToTwoDecimalDigits } from '../utils';
+import useSellerSales from '../hooks/useSellerSales';
 
 export default function OrderDetails() {
   const { id } = useParams();
 
-  const { ordersDetails, cart } = useOrders(id);
-  const total = useMemo(
-    () => cart?.reduce((acc, el) => acc + el.quantity * el.price, 0),
-    [cart],
-  );
+
+  const { sales } = useSellerSales();
+  const { ordersDetails, cart, isSeller, orderRole, isCustomer } = useOrders(id);
+  const total = useMemo(() => cart
+    ?.reduce((acc, el) => acc + (el.quantity * el.price), 0), [cart]);
+
+  // sellerOrder = Pedido de acordo com o id recebido no params
+  const sellerOrder = sales?.find((order) => order.id === JSON.parse(id));
 
   return (
     <>
@@ -21,21 +25,43 @@ export default function OrderDetails() {
       <main>
         <p>Detalhe do Pedido</p>
 
-        {ordersDetails !== null && (
-          <div>
-            <OrderDetailsHeader
-              status={ ordersDetails?.status }
-              id={ ordersDetails?.id }
-              sellDate={ ordersDetails?.saleDate }
-              seller={ ordersDetails?.seller.name }
-            />
-            <OrderDetailsTable orders={ cart } />
-            <div data-testid="customer_order_details__element-order-total-price">
-              Total: R$
-              {fixedToTwoDecimalDigits(total)}
+        {
+          ordersDetails !== null
+          && (
+            <div>
+              <OrderDetailsHeader
+                status={ ordersDetails?.status }
+                id={ ordersDetails?.id }
+                sellDate={ ordersDetails?.saleDate }
+                seller={ ordersDetails?.seller.name }
+                isSeller={ isSeller }
+                isCustomer={ isCustomer }
+                orderRole={ orderRole }
+                sellerOrder={ sellerOrder }
+              />
+              <OrderDetailsTable
+                orders={ cart }
+                orderRole={ orderRole }
+              />
+
+              <div
+                data-testid={ `${orderRole}_order_details__element-order-total-price` }
+              >
+                Total: R$
+                {isCustomer
+                  && (
+                    fixedToTwoDecimalDigits(total)
+
+                  )}
+
+                {isSeller
+                  && (
+                    fixedToTwoDecimalDigits(sellerOrder.totalPrice)
+                  )}
+              </div>
             </div>
-          </div>
-        )}
+          )
+        }
       </main>
     </>
   );
