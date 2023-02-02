@@ -10,6 +10,7 @@ import useSellerSales from '../hooks/useSellerSales';
 export default function OrderDetails() {
   const { id } = useParams();
 
+
   const { sales } = useSellerSales();
   const { ordersDetails, cart, isSeller, orderRole, isCustomer } = useOrders(id);
   const total = useMemo(() => cart
@@ -61,7 +62,6 @@ export default function OrderDetails() {
             </div>
           )
         }
-
       </main>
     </>
   );

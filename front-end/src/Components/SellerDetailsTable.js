@@ -1,7 +1,6 @@
 import PropTypes, { string, number } from 'prop-types';
 
-export default function OrderDetailsTable({ cart, orderRole }) {
-  const testid = '_order_details__element-order-';
+export default function SellerDetailsTable() {
   return (
     <table>
       <thead>
@@ -18,22 +17,21 @@ export default function OrderDetailsTable({ cart, orderRole }) {
           <tr key={ order.id }>
             <td
               data-testid={
-                `${orderRole + testid}table-item-number-${index}`
+                `seller_order_details__element-order-table-item-number-${index}`
               }
             >
               {index + 1}
 
             </td>
             <td
-
-              data-testid={ `${orderRole + testid}table-name-${index}` }
+              data-testid={ `seller_order_details__element-order-table-name-${index}` }
             >
               {order.name}
 
             </td>
             <td
               data-testid={
-                `${orderRole + testid}table-quantity-${index}`
+                `seller_order_details__element-order-table-quantity-${index}`
               }
             >
               {order.quantity}
@@ -41,9 +39,7 @@ export default function OrderDetailsTable({ cart, orderRole }) {
             </td>
             <td
               data-testid={
-
-                `${orderRole + testid}table-unit-price-${index}`
-
+                `seller_order_details__element-order-table-unit-price-${index}`
               }
             >
               R$
@@ -51,7 +47,7 @@ export default function OrderDetailsTable({ cart, orderRole }) {
             </td>
             <td
               data-testid={
-                `${orderRole + testid}table-sub-total-${index}`
+                `seller_order_details__element-order-table-sub-total-${index}`
               }
             >
               R$
@@ -64,7 +60,7 @@ export default function OrderDetailsTable({ cart, orderRole }) {
   );
 }
 
-OrderDetailsTable.propTypes = {
+SellerDetailsTable.propTypes = {
   cart: PropTypes.arrayOf(PropTypes.shape(
     {
       id: number,
