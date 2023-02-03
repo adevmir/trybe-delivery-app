@@ -1,9 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
 import useSellerSales from '../hooks/useSellerSales';
+import './CostumerOrders.css';
 
 function SellerSales() {
+  const history = useHistory();
   const { sales } = useSellerSales();
 
   const newDate = (date) => new Date(date);
@@ -11,37 +13,51 @@ function SellerSales() {
   return (
     <div>
       <NavBar />
-      { sales?.map((order, index) => (
-        <div key={ index }>
-          <Link
-            to={ `/seller/orders/${order.id}` }
+      <div className="orders">
+        { sales?.map((order, index) => (
+          <button
+            type="button"
+            key={ index }
+            onClick={ () => history.push(`/seller/orders/${order.id}`) }
+            className="card-order"
           >
-            <div>
-              <p>Pedido</p>
-              <p data-testid={ `seller_orders__element-order-id-${order.id}` }>
+            <div className="order">
+              <p className="order-text">Pedido</p>
+              <p
+                data-testid={ `seller_orders__element-order-id-${order.id}` }
+                className="order-id"
+              >
                 { order.id }
               </p>
             </div>
+            <div
+              data-testid={ `seller_orders__element-delivery-status-${order.id}` }
+              className="order-status"
+              id={ `order-status-${order.status}` }
+            >
+              { order.status }
+            </div>
             <div>
-              <div data-testid={ `seller_orders__element-delivery-status-${order.id}` }>
-                { order.status }
-              </div>
-              <div>
-                <p data-testid={ `seller_orders__element-order-date-${order.id}` }>
-                  { newDate(order.saleDate).toLocaleDateString('pt-br') }
-                </p>
+              <p
+                data-testid={ `seller_orders__element-order-date-${order.id}` }
+                className="order-date-and-value"
+              >
+                { newDate(order.saleDate).toLocaleDateString('pt-br') }
+              </p>
+              <div className="order-date-and-value">
                 <p data-testid={ `seller_orders__element-card-price-${order.id}` }>
+                  <span> R$ </span>
                   { `${Number(order.totalPrice)
                     .toLocaleString('pt-br', { minimumFractionDigits: 2 })}` }
                 </p>
               </div>
-              <p data-testid={ `seller_orders__element-card-address-${order.id}` }>
-                {order.address}
-              </p>
             </div>
-          </Link>
-        </div>
-      )) }
+            <p data-testid={ `seller_orders__element-card-address-${order.id}` }>
+              {order.address}
+            </p>
+          </button>
+        )) }
+      </div>
     </div>
   );
 }
