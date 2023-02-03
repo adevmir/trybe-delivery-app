@@ -25,7 +25,6 @@ export default function OrderDetailsTable({ cart, orderRole }) {
 
             </td>
             <td
-
               data-testid={ `${orderRole + testid}table-name-${index}` }
             >
               {order.name}

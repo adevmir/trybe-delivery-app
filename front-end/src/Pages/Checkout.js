@@ -3,6 +3,7 @@ import DeliveryDetails from '../Components/DeliveryDetails';
 import NavBar from '../Components/NavBar';
 import useCheckout from '../hooks/useCheckout';
 import useSubmitOrders from '../hooks/useSubmitOrder';
+import './Checkout.css';
 
 export default function Checkout() {
   const { orders, handleItemRemoval, totalPrice } = useCheckout();
@@ -11,12 +12,14 @@ export default function Checkout() {
   return (
     <div>
       <NavBar />
-      <CheckoutTable
-        orders={ orders }
-        handleItemRemoval={ handleItemRemoval }
-        totalPrice={ totalPrice }
-      />
-      <DeliveryDetails handleSubmit={ handleSubmit } />
+      <div className="delivery-div">
+        <CheckoutTable
+          orders={ orders }
+          handleItemRemoval={ handleItemRemoval }
+          totalPrice={ totalPrice }
+        />
+        <DeliveryDetails handleSubmit={ handleSubmit } />
+      </div>
     </div>
   );
 }
