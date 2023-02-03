@@ -6,6 +6,7 @@
 }
 
 .card-order {
+  display: block; 
   background: #eaf1ef;
   border: 1px solid #b1c2be;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -13,13 +14,18 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 100px;
+  height: 130px;
   margin-top: 50px;
   margin-left: 50px;
   padding-left: 0px;
+  padding-bottom: 0px;
   width: 500px;
   font-size: large;
   color: #001813;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
 }
 
 .order-text {
@@ -47,15 +53,15 @@
 
 .order-status {
   justify-content: center;
+  align-self: flex-start;
   text-align: center;
   display: flex;
   flex-direction: column;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
   font-size: larger;
-  height: 80%;
+  height: 80px;
   width: 200px;
-  margin: 0px;
   border-radius: 10px;
   margin: 10px;
 }
@@ -79,7 +85,18 @@
   flex-direction: column;
   background: #F2FFFC;
   height: 40px;
-  width: 120px;
+  align-self: flex-start;
+  width: 110px;
   margin: 5px;
   border-radius: 10px;
+}
+
+.order-address {
+  text-align: center;
+  left: 150px;
+  top: -30px;
+  margin: 0px;
+  height: 20px;
+  width: 350px;
+  position: relative;
 }

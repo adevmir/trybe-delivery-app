@@ -14,7 +14,7 @@ function SellerSales() {
     <div>
       <NavBar />
       <div className="orders">
-        { sales?.map((order, index) => (
+        { console.log(sales) || sales?.map((order, index) => (
           <button
             type="button"
             key={ index }
@@ -52,8 +52,11 @@ function SellerSales() {
                 </p>
               </div>
             </div>
-            <p data-testid={ `seller_orders__element-card-address-${order.id}` }>
-              {order.address}
+            <p
+              data-testid={ `seller_orders__element-card-address-${order.id}` }
+              className="order-address"
+            >
+              {order.deliveryAddress}
             </p>
           </button>
         )) }
