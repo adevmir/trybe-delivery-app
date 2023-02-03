@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
 import useSellerSales from '../hooks/useSellerSales';
-import './CostumerOrders.css';
+import './Orders.css';
 
 function SellerSales() {
   const history = useHistory();
