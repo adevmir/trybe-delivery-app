@@ -18,6 +18,9 @@ function Login() {
   const toLogin = async () => {
     try {
       const api = await apiAxios.post('/login', { email, password });
+      console.log('oi');
+
+      console.log(api);
       const { data } = api;
       // insere os dados do usuario no localStorage após login com dados válidos
       localStorage.setItem('JWT', data.token);

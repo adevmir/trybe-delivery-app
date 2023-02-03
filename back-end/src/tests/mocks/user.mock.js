@@ -24,12 +24,33 @@ const seller = {
   role: "seller",
 }
 
+const usersList = [{
+  id: 2,
+  name: "Fulana Pereira",
+  email: "fulana@deliveryapp.com",
+  role: "seller",
+}, {
+  id: 3,
+  name: "Zé Birita",
+  email: "zebirita@email.com",
+  role: "customer",
+}];
+
+const admin = {
+  id: 1,
+  name: "Delivery App Admin",
+  email: "adm@deliveryapp.com",
+  role: "administrator",
+}
+
 module.exports = { 
   user,
   login,
   tokenAdmin,
   tokenSeller,
   tokenCustomer,
-  seller
+  seller,
+  usersList,
+  admin
 }
 
