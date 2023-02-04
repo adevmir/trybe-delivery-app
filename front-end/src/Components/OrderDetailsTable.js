@@ -1,10 +1,11 @@
 import PropTypes, { string, number } from 'prop-types';
+import './OrderDetailsTable.css'
 
 export default function OrderDetailsTable({ cart, orderRole }) {
   const testid = '_order_details__element-order-';
   return (
     <table>
-      <thead>
+      <thead className="order-details-header">
         <tr>
           <th>Item</th>
           <th>Descrição</th>
@@ -20,12 +21,14 @@ export default function OrderDetailsTable({ cart, orderRole }) {
               data-testid={
                 `${orderRole + testid}table-item-number-${index}`
               }
+              className="order-details-id"
             >
               {index + 1}
 
             </td>
             <td
               data-testid={ `${orderRole + testid}table-name-${index}` }
+              className="order-details-name"
             >
               {order.name}
 
@@ -34,6 +37,7 @@ export default function OrderDetailsTable({ cart, orderRole }) {
               data-testid={
                 `${orderRole + testid}table-quantity-${index}`
               }
+              className="order-details-quantity"
             >
               {order.quantity}
 
@@ -42,19 +46,20 @@ export default function OrderDetailsTable({ cart, orderRole }) {
               data-testid={
 
                 `${orderRole + testid}table-unit-price-${index}`
-
               }
+              className="order-details-price"
             >
-              R$
-              {order.price}
+              <span> R$ </span>
+              {(Number(order.price)).toLocaleString('pt-br', { minimumFractionDigits: 2 })}
             </td>
             <td
               data-testid={
                 `${orderRole + testid}table-sub-total-${index}`
               }
+              className="order-details-sub-total"
             >
-              R$
-              {Number(order.price) * order.quantity}
+              <span> R$ </span>
+              {(Number(order.price) * order.quantity).toLocaleString('pt-br', { minimumFractionDigits: 2 })}
             </td>
           </tr>
         ))}

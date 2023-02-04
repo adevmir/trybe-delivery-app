@@ -6,6 +6,7 @@ import OrderDetailsTable from '../Components/OrderDetailsTable';
 import useOrders from '../hooks/useOrders';
 import { fixedToTwoDecimalDigits } from '../utils';
 import useSellerSales from '../hooks/useSellerSales';
+import './OrderDetails.css'
 
 export default function OrderDetails() {
   const { id } = useParams();
@@ -17,17 +18,17 @@ export default function OrderDetails() {
 
   // sellerOrder = Pedido de acordo com o id recebido no params
   const sellerOrder = sales?.find((order) => order.id === JSON.parse(id));
+  console.log(cart);
 
   return (
     <>
       <NavBar />
       <main>
-        <p>Detalhe do Pedido</p>
-
+        <p className="details-title">Detalhe do Pedido</p>
         {
           ordersDetails !== null
           && (
-            <div>
+            <div className="card-details">
               <OrderDetailsHeader
                 status={ ordersDetails?.status }
                 id={ ordersDetails?.id }
@@ -39,24 +40,25 @@ export default function OrderDetails() {
                 sellerOrder={ sellerOrder }
               />
               <OrderDetailsTable
-                orders={ cart }
+                cart={ cart }
                 orderRole={ orderRole }
               />
 
               <div
                 data-testid={ `${orderRole}_order_details__element-order-total-price` }
+                className="details-total"
               >
-                Total: R$
-                {isCustomer
-                  && (
-                    fixedToTwoDecimalDigits(total)
-
-                  )}
-
-                {isSeller
-                  && (
-                    fixedToTwoDecimalDigits(sellerOrder.totalPrice)
-                  )}
+                <p>
+                  Total: R$
+                  {isCustomer
+                    && (
+                      fixedToTwoDecimalDigits(total)
+                    )}
+                  {isSeller
+                    && (
+                      fixedToTwoDecimalDigits(sellerOrder.totalPrice)
+                    )}
+                </p>
               </div>
             </div>
           )
