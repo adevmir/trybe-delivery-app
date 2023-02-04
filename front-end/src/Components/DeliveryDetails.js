@@ -65,25 +65,27 @@ export default function DeliveryDetails({ handleSubmit }) {
             style={ { display: 'block', fontSize: 'x-large' } }
           />
         </label>
+        <button
+          type="submit"
+          data-testid="customer_checkout__button-submit-order"
+          style={ {
+            color: 'white',
+            fontStyle: 'uppercase',
+            padding: '0.4rem 1rem',
+            fontSize: '27px',
+            borderRadius: '15px',
+            backgroundColor: '#2FC18C',
+            fontWeight: 'bold',
+            width: '350px',
+            marginLeft: '310px',
+            marginTop: '105px',
+            height: '70px',
+            position: 'absolute',
+          } }
+        >
+          Finalizar pedido
+        </button>
       </form>
-      <button
-        type="submit"
-        data-testid="customer_checkout__button-submit-order"
-        style={ {
-          color: 'white',
-          fontStyle: 'uppercase',
-          padding: '0.4rem 1rem',
-          fontSize: '27px',
-          borderRadius: '15px',
-          backgroundColor: '#2FC18C',
-          fontWeight: 'bold',
-          width: '350px',
-          marginLeft: '310px',
-          height: '70px',
-        } }
-      >
-        Finalizar pedido
-      </button>
     </div>
   );
 }
