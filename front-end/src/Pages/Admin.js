@@ -21,13 +21,13 @@ function Admin() {
     }
   };
 
-  const removeUser = async (user) => {
-    console.log(user);
-    console.log(user.id);
+  const removeUser = async (id, index) => {
+    console.log(id);
     try {
       const { token } = JSON.parse(localStorage.getItem('user'));
       await apiAxios.delete(`/admin/manage/${id}`, { headers: { authorization: token } });
-      getUsers();
+      const newUsers = users.splice(index, 1);
+      setUsers(newUsers);
     } catch (err) {
       console.log(err);
     }
@@ -97,17 +97,21 @@ function Admin() {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
+            <th>Item</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Tipo</th>
+            <th>Excluir</th>
           </tr>
         </thead>
-        { users.length > 0 && users.map((user, index) => (
-          <tbody key={ user.id }>
+        <tbody>
+          { users.length > 0 && users.map((user, index) => (
             <tr
-              key={ user.id }
-              data-testid={ `admin_manage__element-user-table-item-number-${index + 1}` }
+              key={ index }
             >
+              <td data-testid={ `admin_manage__element-user-table-item-number-${index + 1}` }>
+                { index + 1 }
+              </td>
               <td data-testid={ `admin_manage__element-user-table-name-${index + 1}` }>
                 { user.name }
               </td>
@@ -120,15 +124,15 @@ function Admin() {
               <td>
                 <button
                   type="button"
-                  data-testid={ `admin_manage__element-user-table-remove-${index + 2}}` }
-                  onClick={ () => removeUser(user) }
+                  data-testid={ `admin_manage__element-user-table-remove-${index + 1}` }
+                  onClick={ () => removeUser(user.id, index) }
                 >
-                  Remove
+                  Excluir
                 </button>
               </td>
             </tr>
-          </tbody>
-        ))}
+          ))}
+        </tbody>
       </table>
     </div>
   );
