@@ -21,6 +21,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: -10px;
+  width:57%;
   width: 57%;
 }
 
@@ -29,7 +30,7 @@
   border-radius: 8px;
   box-shadow: 2px 2px 4px #999;
   display: block;
-  font-size: large;
+  font-size: large; 
   height: 25px;
   margin: 5px;
   padding: 10px;
@@ -75,4 +76,23 @@
   color: rgba(0, 0, 0, 0.897);
   display: block;
   font-size: 18px;
+}
+
+.admin_users_list {
+  align-items: center;
+  background-color: #f1eeee79;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px #999;
+  height: 100%;
+  justify-content:center;
+  margin: auto;
+  padding: 5px;
+  text-align: center;
+  width: fit-content;
+}
+
+.admin_users_text {
+  color: rgba(0, 0, 0, 0.897);
+  font-size: 18px;
+  width: 240px;
 }
