@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { formatDate } from '../utils';
+import './OrderDetailsHeader.css';
 
 export default function OrderDetailsHeader({ id,
   status, seller, sellDate, orderRole, deliveryOrder,
@@ -12,8 +13,11 @@ export default function OrderDetailsHeader({ id,
   }
 
   return (
-    <div>
-      <p data-testid={ `${orderRole + testid}details-label-order-id` }>
+    <div className="details-header">
+      <p
+        data-testid={ `${orderRole + testid}details-label-order-id` }
+        className="details-text"
+      >
         PEDIDO
         {' '}
         { id }
@@ -22,6 +26,7 @@ export default function OrderDetailsHeader({ id,
         data-testid={
           `${orderRole + testid}details-label-seller-name`
         }
+        className="details-seller-name"
       >
         P.Vend:
         {' '}
@@ -31,6 +36,7 @@ export default function OrderDetailsHeader({ id,
         data-testid={
           `${orderRole + testid}details-label-order-date`
         }
+        className="details-text"
       >
         {formatDate(sellDate, 'pt-BR')}
       </p>
@@ -40,6 +46,8 @@ export default function OrderDetailsHeader({ id,
             data-testid={
               `${orderRole + testid}details-label-delivery-status${id}`
             }
+            className="details-status"
+            id={ `details-status-${status}` }
           >
             {saleStatus}
           </p>
@@ -47,6 +55,7 @@ export default function OrderDetailsHeader({ id,
             data-testid={
               `${orderRole}_order_details__button-delivery-check`
             }
+            className="details-button"
             type="button"
             disabled={ onYourWay }
             onClick={ () => setSalesStatus('Entregue') }

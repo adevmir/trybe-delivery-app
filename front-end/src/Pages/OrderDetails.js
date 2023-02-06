@@ -6,6 +6,7 @@ import useOrders from '../hooks/useOrders';
 import { fixedToTwoDecimalDigits } from '../utils';
 import useUserRole from '../hooks/useUserRole';
 import useSellerSales from '../hooks/useSellerSales';
+import './OrderDetails.css';
 
 export default function OrderDetails() {
   const { ordersDetails, cart } = useOrders();
@@ -21,9 +22,11 @@ export default function OrderDetails() {
     <>
       <NavBar />
       <main>
-        <div>
-          {ordersDetails !== null && (
-            <>
+        <p className="details-title">Detalhe do Pedido</p>
+        {
+          ordersDetails !== null
+          && (
+            <div className="card-details">
               <OrderDetailsHeader
                 status={ ordersDetails?.status }
                 id={ ordersDetails?.id }
@@ -41,13 +44,14 @@ export default function OrderDetails() {
               />
               <div
                 data-testid={ `${orderRole}_order_details__element-order-total-price` }
+                className="details-total"
               >
                 Total: R$
                 {fixedToTwoDecimalDigits(total)}
               </div>
-            </>
-          )}
-        </div>
+            </div>
+          )
+        }
       </main>
     </>
   );
