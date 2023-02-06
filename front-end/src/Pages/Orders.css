@@ -1,6 +1,6 @@
 .orders {
   display: flex;
-  flex-flow:wrap;
+  flex-flow: wrap;
   justify-content: space-evenly , start;
   margin-bottom: 50px;
 }
