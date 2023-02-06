@@ -1,7 +1,8 @@
 import PropTypes, { string, number } from 'prop-types';
-import './OrderDetailsTable.css'
+import './OrderDetailsTable.css';
+import { fixedToTwoDecimalDigits } from '../utils';
 
-export default function OrderDetailsTable({ cart, orderRole }) {
+export default function OrderDetailsTable({ orders, orderRole }) {
   const testid = '_order_details__element-order-';
   return (
     <table>
@@ -15,7 +16,7 @@ export default function OrderDetailsTable({ cart, orderRole }) {
         </tr>
       </thead>
       <tbody>
-        {cart?.map((order, index) => (
+        {orders?.map((order, index) => (
           <tr key={ order.id }>
             <td
               data-testid={
@@ -39,6 +40,7 @@ export default function OrderDetailsTable({ cart, orderRole }) {
               }
               className="order-details-quantity"
             >
+              {!order.quantity && (1)}
               {order.quantity}
 
             </td>
@@ -50,7 +52,8 @@ export default function OrderDetailsTable({ cart, orderRole }) {
               className="order-details-price"
             >
               <span> R$ </span>
-              {(Number(order.price)).toLocaleString('pt-br', { minimumFractionDigits: 2 })}
+              {(Number(order.price))
+                .toLocaleString('pt-br', { minimumFractionDigits: 2 })}
             </td>
             <td
               data-testid={
@@ -59,7 +62,9 @@ export default function OrderDetailsTable({ cart, orderRole }) {
               className="order-details-sub-total"
             >
               <span> R$ </span>
-              {(Number(order.price) * order.quantity).toLocaleString('pt-br', { minimumFractionDigits: 2 })}
+              {!order.quantity && (fixedToTwoDecimalDigits(Number(order.price * 1)))}
+              {order.quantity
+                && (fixedToTwoDecimalDigits(Number(order.price) * order.quantity))}
             </td>
           </tr>
         ))}

@@ -1,24 +1,22 @@
 import { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
 import OrderDetailsHeader from '../Components/OrderDetailsHeader';
 import OrderDetailsTable from '../Components/OrderDetailsTable';
 import useOrders from '../hooks/useOrders';
 import { fixedToTwoDecimalDigits } from '../utils';
+import useUserRole from '../hooks/useUserRole';
 import useSellerSales from '../hooks/useSellerSales';
-import './OrderDetails.css'
+import './OrderDetails.css';
 
 export default function OrderDetails() {
-  const { id } = useParams();
+  const { ordersDetails, cart } = useOrders();
+  const { orderRole, isCustomer } = useUserRole();
+  const { onYourWay, setSalesStatus, saleStatus } = useSellerSales();
 
-  const { sales } = useSellerSales();
-  const { ordersDetails, cart, isSeller, orderRole, isCustomer } = useOrders(id);
   const total = useMemo(() => cart
     ?.reduce((acc, el) => acc + (el.quantity * el.price), 0), [cart]);
 
-  // sellerOrder = Pedido de acordo com o id recebido no params
-  const sellerOrder = sales?.find((order) => order.id === JSON.parse(id));
-  console.log(cart);
+  console.log('orderDetails', ordersDetails);
 
   return (
     <>
@@ -34,31 +32,22 @@ export default function OrderDetails() {
                 id={ ordersDetails?.id }
                 sellDate={ ordersDetails?.saleDate }
                 seller={ ordersDetails?.seller.name }
-                isSeller={ isSeller }
-                isCustomer={ isCustomer }
                 orderRole={ orderRole }
-                sellerOrder={ sellerOrder }
+                isCustomer={ isCustomer }
+                onYourWay={ onYourWay }
+                setSalesStatus={ setSalesStatus }
+                saleStatus={ saleStatus }
               />
               <OrderDetailsTable
-                cart={ cart }
+                orders={ ordersDetails?.products }
                 orderRole={ orderRole }
               />
-
               <div
                 data-testid={ `${orderRole}_order_details__element-order-total-price` }
                 className="details-total"
               >
-                <p>
-                  Total: R$
-                  {isCustomer
-                    && (
-                      fixedToTwoDecimalDigits(total)
-                    )}
-                  {isSeller
-                    && (
-                      fixedToTwoDecimalDigits(sellerOrder.totalPrice)
-                    )}
-                </p>
+                Total: R$
+                {fixedToTwoDecimalDigits(total)}
               </div>
             </div>
           )
