@@ -6,7 +6,6 @@ import { getFromLocalStorage } from '../utils';
 export default function useSales() {
   const [sales, setSales] = useState(null);
 
-  // const req = getFromLocalStorage('user');
   const jwt = getFromLocalStorage('user')?.token;
 
   useEffect(() => {

@@ -1,6 +1,7 @@
 import PropTypes, { string, number } from 'prop-types';
+import { fixedToTwoDecimalDigits } from '../utils';
 
-export default function OrderDetailsTable({ cart, orderRole }) {
+export default function OrderDetailsTable({ orders, orderRole }) {
   const testid = '_order_details__element-order-';
   return (
     <table>
@@ -14,7 +15,7 @@ export default function OrderDetailsTable({ cart, orderRole }) {
         </tr>
       </thead>
       <tbody>
-        {cart?.map((order, index) => (
+        {orders?.map((order, index) => (
           <tr key={ order.id }>
             <td
               data-testid={
@@ -35,6 +36,7 @@ export default function OrderDetailsTable({ cart, orderRole }) {
                 `${orderRole + testid}table-quantity-${index}`
               }
             >
+              {!order.quantity && (1)}
               {order.quantity}
 
             </td>
@@ -54,7 +56,9 @@ export default function OrderDetailsTable({ cart, orderRole }) {
               }
             >
               R$
-              {Number(order.price) * order.quantity}
+              {!order.quantity && (fixedToTwoDecimalDigits(Number(order.price * 1)))}
+              {order.quantity
+                && (fixedToTwoDecimalDigits(Number(order.price) * order.quantity))}
             </td>
           </tr>
         ))}

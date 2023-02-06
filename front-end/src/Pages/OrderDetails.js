@@ -1,66 +1,53 @@
 import { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
 import OrderDetailsHeader from '../Components/OrderDetailsHeader';
 import OrderDetailsTable from '../Components/OrderDetailsTable';
 import useOrders from '../hooks/useOrders';
 import { fixedToTwoDecimalDigits } from '../utils';
+import useUserRole from '../hooks/useUserRole';
 import useSellerSales from '../hooks/useSellerSales';
 
 export default function OrderDetails() {
-  const { id } = useParams();
+  const { ordersDetails, cart } = useOrders();
+  const { orderRole, isCustomer } = useUserRole();
+  const { onYourWay, setSalesStatus, saleStatus } = useSellerSales();
 
-  const { sales } = useSellerSales();
-  const { ordersDetails, cart, isSeller, orderRole, isCustomer } = useOrders(id);
   const total = useMemo(() => cart
     ?.reduce((acc, el) => acc + (el.quantity * el.price), 0), [cart]);
 
-  // sellerOrder = Pedido de acordo com o id recebido no params
-  const sellerOrder = sales?.find((order) => order.id === JSON.parse(id));
+  console.log('orderDetails', ordersDetails);
 
   return (
     <>
       <NavBar />
       <main>
-        <p>Detalhe do Pedido</p>
-
-        {
-          ordersDetails !== null
-          && (
-            <div>
+        <div>
+          {ordersDetails !== null && (
+            <>
               <OrderDetailsHeader
                 status={ ordersDetails?.status }
                 id={ ordersDetails?.id }
                 sellDate={ ordersDetails?.saleDate }
                 seller={ ordersDetails?.seller.name }
-                isSeller={ isSeller }
-                isCustomer={ isCustomer }
                 orderRole={ orderRole }
-                sellerOrder={ sellerOrder }
+                isCustomer={ isCustomer }
+                onYourWay={ onYourWay }
+                setSalesStatus={ setSalesStatus }
+                saleStatus={ saleStatus }
               />
               <OrderDetailsTable
-                orders={ cart }
+                orders={ ordersDetails?.products }
                 orderRole={ orderRole }
               />
-
               <div
                 data-testid={ `${orderRole}_order_details__element-order-total-price` }
               >
                 Total: R$
-                {isCustomer
-                  && (
-                    fixedToTwoDecimalDigits(total)
-
-                  )}
-
-                {isSeller
-                  && (
-                    fixedToTwoDecimalDigits(sellerOrder.totalPrice)
-                  )}
+                {fixedToTwoDecimalDigits(total)}
               </div>
-            </div>
-          )
-        }
+            </>
+          )}
+        </div>
       </main>
     </>
   );

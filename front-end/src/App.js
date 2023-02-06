@@ -7,7 +7,6 @@ import OrderDetails from './Pages/OrderDetails';
 import Products from './Pages/Products';
 import Register from './Pages/Register';
 import Admin from './Pages/Admin';
-
 import SellerOrderDetails from './Pages/SellerOrderDetails';
 
 import CustomersSales from './Pages/CustomerOrders';
@@ -22,9 +21,8 @@ function App() {
       <Route exact path="/customer/products" component={ Products } />
       <Route exact path="/customer/orders" component={ CustomersSales } />
       <Route exact path="/customer/orders/:id" component={ OrderDetails } />
-      <Route exact path="/seller/orders/:id" component={ SellerOrderDetails } />
       <Route exact path="/seller/orders" component={ SellerSales } />
-      <Route exact path="/seller/orders/:id" component={ OrderDetails } />
+      <Route exact path="/seller/orders/:id" component={ SellerOrderDetails } />
       <Route exact path="/admin/manage" component={ Admin } />
       <Route exact path="/" component={ Login } />
     </Switch>

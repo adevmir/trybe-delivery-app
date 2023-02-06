@@ -2,8 +2,15 @@ import PropTypes from 'prop-types';
 import { formatDate } from '../utils';
 
 export default function OrderDetailsHeader({ id,
-  status, seller, sellDate, orderRole, isSeller, isCustomer, sellerOrder }) {
+  status, seller, sellDate, orderRole, deliveryOrder,
+  isSeller, isCustomer, pending, setSalesStatus, onYourWay, saleStatus }) {
   const testid = '_order_details__element-order-';
+  console.log('status customer', status);
+
+  if (saleStatus === undefined) {
+    setSalesStatus(status);
+  }
+
   return (
     <div>
       <p data-testid={ `${orderRole + testid}details-label-order-id` }>
@@ -34,14 +41,15 @@ export default function OrderDetailsHeader({ id,
               `${orderRole + testid}details-label-delivery-status${id}`
             }
           >
-            {status}
+            {saleStatus}
           </p>
           <button
             data-testid={
               `${orderRole}_order_details__button-delivery-check`
             }
             type="button"
-            disabled
+            disabled={ onYourWay }
+            onClick={ () => setSalesStatus('Entregue') }
           >
             Marcar como entregue
 
@@ -55,13 +63,15 @@ export default function OrderDetailsHeader({ id,
               `${orderRole + testid}details-label-delivery-status${id}`
             }
           >
-            {sellerOrder.status}
+            {status}
           </p>
           <button
             data-testid={
               `${orderRole}_order_details__button-preparing-check`
             }
             type="button"
+            disabled={ pending }
+            onClick={ () => setSalesStatus('Preparando') }
           >
             Preparar pedido
 
@@ -71,7 +81,8 @@ export default function OrderDetailsHeader({ id,
               `${orderRole}_order_details__button-dispatch-check`
             }
             type="button"
-            disabled
+            disabled={ deliveryOrder }
+            onClick={ () => setSalesStatus('Em Trânsito') }
           >
             Saiu para entrega
 
@@ -90,5 +101,9 @@ OrderDetailsHeader.propTypes = {
   orderRole: PropTypes.string.isRequired,
   isSeller: PropTypes.bool.isRequired,
   isCustomer: PropTypes.bool.isRequired,
-  sellerOrder: PropTypes.string.isRequired,
+  pending: PropTypes.bool.isRequired,
+  setSalesStatus: PropTypes.func.isRequired,
+  deliveryOrder: PropTypes.bool.isRequired,
+  onYourWay: PropTypes.bool.isRequired,
+  saleStatus: PropTypes.string.isRequired,
 };
