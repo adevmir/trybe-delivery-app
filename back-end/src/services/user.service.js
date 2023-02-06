@@ -1,4 +1,5 @@
 const md5 = require('md5');
+const { Op } = require('sequelize');
 const { users } = require('../database/models');
 const { jwtUtil } = require('../utils');
 const httpException = require('../utils/httpException');
@@ -61,9 +62,17 @@ const createUserByAdmin = async (data) => {
   }
 };
 
+const findUsersByAdmin = async () => 
+  users.findAll({ where: { role: { [Op.not]: 'administrator' } },
+  attributes: { exclude: ['password'] } });
+
+const deleteUser = async (id) => users.destroy({ where: { id } });
+
 module.exports = {
   login,
   createUser,
   findUserByEmail,
   createUserByAdmin,
+  findUsersByAdmin,
+  deleteUser,
 };
