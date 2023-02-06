@@ -35,9 +35,9 @@ label {
   margin: 10px;
 }
 
-.common_register__input-email, 
-.common_register__input-password, 
-.common_register__input-name {
+.common_register__input-email,
+ .common_register__input-password,
+ .common_register__input-name {
   border: 1px solid black;
   border-radius: 8px;
   box-shadow: 2px 2px 4px #999;
