@@ -109,7 +109,11 @@ function Admin() {
             <tr
               key={ index }
             >
-              <td data-testid={ `admin_manage__element-user-table-item-number-${index + 1}` }>
+              <td
+                data-testid={
+                  `admin_manage__element-user-table-item-number-${index + 1}`
+                }
+              >
                 { index + 1 }
               </td>
               <td data-testid={ `admin_manage__element-user-table-name-${index + 1}` }>

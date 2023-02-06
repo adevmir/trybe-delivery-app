@@ -8,5 +8,6 @@ router.use(tokenMiddleware);
 router.post('/checkout', salesController.createSale);
 router.get('/orders/:id', salesController.findById);
 router.get('/orders', salesController.findOrdersByCustomer);
+router.patch('/orders/:id', salesController.updateOrder);
 
 module.exports = router;

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, Link, useLocation } from 'react-router-dom';
 import './NavBar.css';
+import useUserRole from '../hooks/useUserRole';
 
 function NavBar() {
   const [userName, setUserName] = useState('');
   const [redirectLogout, setRedirectLogout] = useState(false);
   const { pathname } = useLocation();
+  const { isSeller, isCustomer } = useUserRole();
 
   const getUserName = () => {
     // colocando no state o nome encontrado na chave user do localStorage
@@ -35,7 +37,7 @@ function NavBar() {
               to="/customer/products"
               data-testid="customer_products__element-navbar-link-products"
             >
-              { console.log(pathname) }
+              {/* { console.log(pathname) } */}
               PRODUTOS
             </Link>
           </div>
@@ -43,12 +45,22 @@ function NavBar() {
             className={ `navbar-container ${pathname.includes('orders')
               ? 'selected' : undefined}` }
           >
-            <Link
-              to="/customer/orders"
-              data-testid="customer_products__element-navbar-link-orders"
-            >
-              PEDIDOS
-            </Link>
+            {isCustomer && (
+              <Link
+                to="/customer/orders"
+                data-testid="customer_products__element-navbar-link-orders"
+              >
+                PEDIDOS
+              </Link>
+            )}
+            {isSeller && (
+              <Link
+                to="/seller/orders"
+                data-testid="customer_products__element-navbar-link-orders"
+              >
+                PEDIDOS
+              </Link>
+            )}
           </div>
         </div>
         <div className="navbar-items">

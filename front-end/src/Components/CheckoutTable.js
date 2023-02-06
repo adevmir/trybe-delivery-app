@@ -2,14 +2,13 @@ import ProptTypes from 'prop-types';
 import { fixedToTwoDecimalDigits } from '../utils';
 
 export default function CheckoutTable({ orders, handleItemRemoval, totalPrice }) {
-  const tdStyles = { padding: '0.4rem 0.8rem' };
+  // const tdStyles = { padding: '0.4rem 0.8rem' };
 
   return (
     <div>
-      <p>Finalizar pedidos</p>
-
-      <table style={ { boxShadow: '0.1rem 0.1rem 0.1rem rgba(0,0,0,0.3)' } }>
-        <thead>
+      <div className="div-checkout-table">
+        <p>Finalizar pedidos</p>
+        <table style={ { boxShadow: '0.1rem 0.1rem 0.1rem rgba(0,0,0,0.3)' } }>
           <tr>
             <th>Item</th>
             <th>Descrição</th>
@@ -18,52 +17,64 @@ export default function CheckoutTable({ orders, handleItemRemoval, totalPrice })
             <th>Sub-total</th>
             <th>Remover item</th>
           </tr>
-        </thead>
-        <tbody>
           {orders?.map((el, i) => (
             <tr key={ el.id }>
               <td
                 data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
-                style={ { backgroundColor: 'green', ...tdStyles } }
+                // style={ { backgroundColor: 'green', ...tdStyles } }
+                className="item-number"
               >
                 {i + 1}
 
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-name-${i}` }
-                style={ { backgroundColor: 'grey', ...tdStyles } }
+                // style={ { backgroundColor: 'grey', ...tdStyles } }
+                className="name-item"
               >
                 {el.name}
 
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
-                style={ { backgroundColor: 'green', ...tdStyles } }
+                // style={ { backgroundColor: 'green', ...tdStyles } }
+                className="quantity-item"
               >
                 {el.quantity}
 
               </td>
               <td
-                data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
-                style={ { backgroundColor: 'purple', ...tdStyles } }
+                // style={ { backgroundColor: 'purple', ...tdStyles } }
+                className="unit-price"
               >
-                {fixedToTwoDecimalDigits(el.price)}
-
+                R$
+                <span
+                  data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
+                >
+                  {fixedToTwoDecimalDigits(el.price)}
+                </span>
               </td>
               <td
-                data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
-                style={ { backgroundColor: 'blue', ...tdStyles } }
+                // style={ { backgroundColor: 'blue', ...tdStyles } }
+                className="sub-total"
               >
-                {fixedToTwoDecimalDigits(el.quantity * el.price)}
+                R$
+                <span
+                  data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
+                >
+                  {fixedToTwoDecimalDigits(el.quantity * el.price)}
+                </span>
 
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-remove-${i}` }
+                className="item-remove"
               >
                 <button
                   type="button"
-                  style={ { backgroundColor: 'green', ...tdStyles } }
+                  // style={ { backgroundColor: 'green', ...tdStyles } }
                   onClick={ () => handleItemRemoval(el.id) }
+                  className="button-remove"
                 >
                   Remover
 
@@ -72,18 +83,17 @@ export default function CheckoutTable({ orders, handleItemRemoval, totalPrice })
               </td>
             </tr>
           ))}
-        </tbody>
-      </table>
+        </table>
+        <p className="total-price">
+          Total: R$
+          <span
+            data-testid="customer_checkout__element-order-total-price"
+          >
+            {fixedToTwoDecimalDigits(totalPrice)}
 
-      <p>
-        Total: R$
-        <span
-          data-testid="customer_checkout__element-order-total-price"
-        >
-          {fixedToTwoDecimalDigits(totalPrice)}
-
-        </span>
-      </p>
+          </span>
+        </p>
+      </div>
     </div>
   );
 }

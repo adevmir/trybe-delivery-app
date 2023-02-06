@@ -81,3 +81,35 @@ export const requestSalesBySeller = async (token) => {
     return { error: err.response.data, status: err.response.status };
   }
 };
+
+export const requestSellerSalesById = async (id, token) => {
+  try {
+    const { data, status } = await apiAxios.get(
+      `seller/orders/${id}`,
+      {
+        headers: { Authorization: token },
+      },
+    );
+    return { data, status, error: null };
+  } catch (err) {
+    return { error: err.response.data, status: err.response.status };
+  }
+};
+
+export const requestUpdateStatus = async (orderRole, id, req, token) => {
+  try {
+    const statusToPatch = {
+      status: req,
+    };
+    const { data } = await apiAxios.patch(
+      `${orderRole}/orders/${id}`,
+      statusToPatch,
+      {
+        headers: { Authorization: token },
+      },
+    );
+    return { data, error: null };
+  } catch (err) {
+    return { error: err.response.data };
+  }
+};

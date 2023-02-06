@@ -10,7 +10,6 @@ function Products() {
   const [redirectLogout, setRedirectLogout] = useState(false);
   const [redirectCheckout, setRedirectCheckout] = useState(false);
   const [checkoutDisabled, setCheckoutDisabled] = useState(true);
-  // criado state no componente pai dos cards p/ mostrar o valor calculado dos itens do carrinho (armazenado no localstorage)
   const [total, setTotal] = useState(0);
 
   const renderProducts = async (token) => {

@@ -1,0 +1,63 @@
+.details-header {
+  text-align: center;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0px;
+}
+
+.details-text {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.details-seller-name {
+  font-family: 'Roboto', sans-serif;
+  font-size: larger;
+}
+
+.details-status {
+  justify-content: center;
+  align-self: flex-start;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  height: 40px;
+  width: 150px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+#details-status-Pendente {
+  background: #CCB800;
+}
+
+#details-status-Preparando {
+  background: #66CC00;
+}
+
+#details-status-Entregue {
+  background: #2FC18C;;
+}
+
+.details-button {
+  justify-content: center;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  color: aliceblue;
+  height: 40px;
+  width: 260px;
+  border-radius: 10px;
+  margin-top: 10px;
+  background-color: #036b52;
+}
