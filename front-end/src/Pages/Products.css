@@ -7,13 +7,13 @@
 
 .button-cart {
   background: #036b52;
-  border-radius: 10px;
   border: none;
+  border-radius: 10px;
   bottom: 10px;
   color: #f2fffc;
-  font-family: 'Roboto', sans-serif;
+  font-family: Roboto , sans-serif;
   font-size: large;
-  font-weight: bolder;
+  font-weight: 700;
   height: 8vh;
   position: fixed;
   right: 10px;
