@@ -6,39 +6,46 @@ import useSales from '../hooks/useSales';
 function CustomersSales() {
   const { sales } = useSales();
 
+  console.log('sales no customer orders:', sales);
+
   const newDate = (date) => new Date(date);
 
   return (
     <div>
       <NavBar />
-      { sales?.map((order, index) => (
-        <div key={ index }>
-          <Link
-            to={ `/customer/orders/${order.id}` }
-          >
-            <div>
-              <p>pedido</p>
-              <p data-testid={ `customer_orders__element-order-id-${order.id}` }>
-                { order.id }
-              </p>
-            </div>
-            <div>
-              <div data-testid={ `customer_orders__element-delivery-status-${order.id}` }>
-                { order.status }
+      {sales !== null && (
+
+        sales?.map((order, index) => (
+          <div key={ index }>
+            <Link
+              to={ `/customer/orders/${order.id}` }
+            >
+              <div>
+                <p>pedido</p>
+                <p data-testid={ `customer_orders__element-order-id-${order.id}` }>
+                  { order.id }
+                </p>
               </div>
               <div>
-                <p data-testid={ `customer_orders__element-order-date-${order.id}` }>
-                  { newDate(order.saleDate).toLocaleDateString('pt-br') }
-                </p>
-                <p data-testid={ `customer_orders__element-card-price-${order.id}` }>
-                  { `${Number(order.totalPrice)
-                    .toLocaleString('pt-br', { minimumFractionDigits: 2 })}` }
-                </p>
+                <div
+                  data-testid={ `customer_orders__element-delivery-status-${order.id}` }
+                >
+                  { order.status }
+                </div>
+                <div>
+                  <p data-testid={ `customer_orders__element-order-date-${order.id}` }>
+                    { newDate(order.saleDate).toLocaleDateString('pt-br') }
+                  </p>
+                  <p data-testid={ `customer_orders__element-card-price-${order.id}` }>
+                    { `${Number(order.totalPrice)
+                      .toLocaleString('pt-br', { minimumFractionDigits: 2 })}` }
+                  </p>
+                </div>
               </div>
-            </div>
-          </Link>
-        </div>
-      )) }
+            </Link>
+          </div>
+        ))
+      )}
     </div>
   );
 }
