@@ -71,6 +71,8 @@ export default function OrderDetailsHeader({ id,
             data-testid={
               `${orderRole + testid}details-label-delivery-status${id}`
             }
+            className="details-status"
+            id={ `details-status-${status}` }
           >
             {status}
           </p>
@@ -78,6 +80,7 @@ export default function OrderDetailsHeader({ id,
             data-testid={
               `${orderRole}_order_details__button-preparing-check`
             }
+            className="details-seller-button"
             type="button"
             disabled={ pending }
             onClick={ () => setSalesStatus('Preparando') }
@@ -90,6 +93,7 @@ export default function OrderDetailsHeader({ id,
               `${orderRole}_order_details__button-dispatch-check`
             }
             type="button"
+            className="details-seller-button"
             disabled={ deliveryOrder }
             onClick={ () => setSalesStatus('Em Trânsito') }
           >
