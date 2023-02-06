@@ -5,7 +5,7 @@
   box-shadow: 2px 2px 4px #999;
   display: flex;
   height: 100%;
-  justify-content:center;
+  justify-content: center;
   margin: auto;
   padding: 5px;
   width: fit-content;
@@ -13,7 +13,7 @@
 
 .admin-title {
   color: #383838f5;
-  font-family: 'Roboto', sans-serif;
+  font-family: Roboto , sans-serif;
   font-size: 30px;
 }
 
@@ -22,6 +22,7 @@
   justify-content: center;
   margin-bottom: -10px;
   width:57%;
+  width: 57%;
 }
 
 .admin_manage__input {
@@ -41,7 +42,7 @@
   border-radius: 8px;
   box-shadow: 2px 2px 4px #999;
   display: block;
-  font-size: large; 
+  font-size: large;
   height: 46px;
   margin: 10px;
   padding-left: 7px;
@@ -56,15 +57,14 @@
 }
 
 .admin_manage__button {
-  border: none;
-  border-radius: 8px;
-  background-color: #036B52;
+  background-color: #036b52;
   border: 1px solid black;
+  border-radius: 8px;
   box-shadow: 2px 2px 4px #999;
   color: white;
   cursor: pointer;
-  font-weight: bold;
   font-size: large;
+  font-weight: 700;
   height: 45px;
   margin: 10px;
   margin-top: 27px;

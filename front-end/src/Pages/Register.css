@@ -1,68 +1,67 @@
 .form-class-register {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
+  display: flex;
   flex-direction: column;
+  height: 100%;
+  justify-content: center;
   margin-top: 70px;
+  width: 100%;
 }
 
 .div-class-register {
-  top: 7048px;
-  left: -4163px;
+  align-items: center;
+  background-color: #eaf1ef;
+  border: 1px solid #b1c2be;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #EAF1EF;
-  width: 425px;
   height: 544px;
-  border: 1px solid #B1C2BE;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  justify-content: center;
+  left: -4163px;
+  top: 7048px;
+  width: 425px;
 }
 
 .title-app {
+  color: #505050f5;
   font-family: Dancing Script , sans-serif;
   font-size: 58px;
-  color: #505050f5;
   margin-bottom: 35px;
 }
 
 label {
+  font-size: large;
   margin: 10px;
-  font-size: large; 
 }
 
 .common_register__input-email, .common_register__input-password, .common_register__input-name {
-  width: 371px;
-  height: 25px;
-  padding: 10px;
-  margin: 10px;
   border: 1px solid black;
   border-radius: 8px;
   box-shadow: 2px 2px 4px #999;
-  font-size: large; 
+  font-size: large;
+  height: 25px;
+  margin: 10px;
+  padding: 10px;
+  width: 371px;
 }
 
 .common_register__button-register, .common_register__button-login {
-  width: 70%;
-  height: 50px;
-  padding: 10px;
-  margin: 10px;
-  border: none;
+  background-color: #036b52;
+  border: 1px solid black;
   border-radius: 8px;
-  background-color: #036B52;
+  box-shadow: 2px 2px 4px #999;
   color: white;
   cursor: pointer;
-  font-weight: bold;
   font-size: large;
-  border: 1px solid black;
-  box-shadow: 2px 2px 4px #999;
+  font-weight: 700;
+  height: 50px;
+  margin: 10px;
+  padding: 10px;
+  width: 70%;
 }
 
 .common_register__button-login {
   background-color: white;
-  color: #036B52;
+  color: #036b52;
 }

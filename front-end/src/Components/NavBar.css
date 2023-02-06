@@ -3,18 +3,18 @@ nav {
   background-color: #036b52;
   color: #f2fffc;
   display: flex;
-  height: 10vh;
-  font-family: 'Roboto', sans-serif;
+  font-family: Roboto , sans-serif;
   font-size: larger;
+  height: 10vh;
   justify-content: space-between;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   width: 100%;
 }
 
 
 nav a {
-  font-weight: bold;
+  font-weight: 700;
   text-decoration: none;
 }
 
@@ -45,6 +45,7 @@ a:visited {
   display: flex;
   justify-content: center;
   width: 50%;
+
   /* border: 1px solid red; */
 }
 
@@ -57,7 +58,7 @@ a:visited {
   background-color: #056cf9;
   border: none;
   color: #f2fffc;
-  font-family: 'Roboto', sans-serif;
+  font-family: Roboto , sans-serif;
   font-size: large;
   width: 30%;
 }
