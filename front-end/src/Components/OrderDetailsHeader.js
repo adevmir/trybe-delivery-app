@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { formatDate } from '../utils';
-import './OrderDetailsHeader.css'
+import './OrderDetailsHeader.css';
 
 export default function OrderDetailsHeader({ id,
   status, seller, sellDate, orderRole, deliveryOrder,
