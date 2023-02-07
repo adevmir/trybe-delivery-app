@@ -10,16 +10,21 @@ function SellerSales() {
 
   const newDate = (date) => new Date(date);
 
+  const statusSelect = (statusS) => {
+    if (statusS === 'Em Trânsito') return 'EmTrânsito';
+    return statusS;
+  };
+
   return (
     <div>
       <NavBar />
       <div className="orders">
-        { console.log(sales) || sales?.map((order, index) => (
+        { sales?.map((order, index) => (
           <button
             type="button"
             key={ index }
             onClick={ () => history.push(`/seller/orders/${order.id}`) }
-            className="card-order"
+            className="card-order-seller"
           >
             <div className="order">
               <p className="order-text">Pedido</p>
@@ -32,7 +37,7 @@ function SellerSales() {
             </div>
             <div
               data-testid={ `seller_orders__element-delivery-status-${order.id}` }
-              className={ `order-status-${order.status}` }
+              className={ `order-status-${statusSelect(order.status)}` }
             >
               { order.status }
             </div>

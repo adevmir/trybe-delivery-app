@@ -50,6 +50,22 @@
   width: 150px;
 }
 
+.details-status-EmTrânsito {
+  align-self: flex-start;
+  background: #71a5ee;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin: 10px;
+  text-align: center;
+  width: 200px;
+}
+
 .details-status-Entregue {
   align-self: flex-start;
   background: #2fc18c;

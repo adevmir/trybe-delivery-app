@@ -5,7 +5,27 @@
   margin-bottom: 50px;
 }
 
-.card-order {
+.card-order-costumer {
+  align-content: stretch;
+  align-items: stretch;
+  background: #eaf1ef;
+  border: 1px solid #b1c2be;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  color: #001813;
+  display: flex;
+  flex-flow: row wrap;
+  font-size: large;
+  height: 100px;
+  justify-content: flex-start;
+  margin-left: 50px;
+  margin-top: 50px;
+  padding-bottom: 0;
+  padding-left: 0;
+  width: 500px;
+}
+
+.card-order-seller {
   align-content: stretch;
   align-items: stretch;
   background: #eaf1ef;
@@ -67,6 +87,22 @@
 .order-status-Preparando {
   align-self: flex-start;
   background: #6c0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 80px;
+  justify-content: center;
+  margin: 10px;
+  text-align: center;
+  width: 200px;
+}
+
+.order-status-EmTrânsito {
+  align-self: flex-start;
+  background: #71a5ee;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
