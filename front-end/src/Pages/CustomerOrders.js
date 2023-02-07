@@ -36,8 +36,7 @@ function CustomersSales() {
               </div>
               <div
                 data-testid={ `customer_orders__element-delivery-status-${order.id}` }
-                className="order-status"
-                id={ `order-status-${order.status}` }
+                className={ `order-status-${order.status}` }
               >
                 { order.status }
               </div>

@@ -1,77 +1,95 @@
 .details-header {
-  text-align: center;
   background: white;
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+  text-align: center;
   width: 100%;
-  margin: 0px;
 }
 
 .details-text {
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
+  font-family: Roboto , sans-serif;
   font-size: larger;
+  font-weight: 700;
 }
 
 .details-seller-name {
-  font-family: 'Roboto', sans-serif;
+  font-family: Roboto , sans-serif;
   font-size: larger;
 }
 
-.details-status {
-  justify-content: center;
+.details-status-Pendente {
   align-self: flex-start;
-  text-align: center;
+  background: #ccb800;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
+  font-family: Roboto , sans-serif;
   font-size: larger;
+  font-weight: 700;
   height: 40px;
-  width: 150px;
-  border-radius: 10px;
+  justify-content: center;
   margin: 10px;
+  text-align: center;
+  width: 150px;
 }
 
-#details-status-Pendente {
-  background: #CCB800;
+.details-status-Preparando {
+  align-self: flex-start;
+  background: #66cc00;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin: 10px;
+  text-align: center;
+  width: 150px;
 }
 
-#details-status-Preparando {
-  background: #66CC00;
-}
-
-#details-status-Entregue {
-  background: #2FC18C;;
+.details-status-Entregue {
+  align-self: flex-start;
+  background: #2fc18c;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin: 10px;
+  text-align: center;
+  width: 150px;
 }
 
 .details-button {
-  justify-content: center;
-  text-align: center;
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  color: aliceblue;
-  height: 40px;
-  width: 260px;
-  border-radius: 10px;
-  margin-top: 10px;
   background-color: #036b52;
+  border-radius: 10px;
+  color: aliceblue;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin-top: 10px;
+  text-align: center;
+  width: 260px;
 }
 
 .details-seller-button {
-  justify-content: center;
-  text-align: center;
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  color: aliceblue;
-  height: 40px;
-  width: 200px;
-  border-radius: 10px;
-  margin-top: 10px;
   background-color: #036b52;
+  border-radius: 10px;
+  color: aliceblue;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin-top: 10px;
+  text-align: center;
+  width: 200px;
 }

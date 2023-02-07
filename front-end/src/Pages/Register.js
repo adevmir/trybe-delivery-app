@@ -19,7 +19,7 @@ function Register() {
               placeholder="Insira seu nome"
               data-testid="common_register__input-name"
               onChange={ (event) => setName(event.target.value) }
-              className="common_register__input-name"
+              className="common_register__input"
             />
           </label>
           <label htmlFor="email">
@@ -29,7 +29,7 @@ function Register() {
               placeholder="Insira seu e-mail"
               data-testid="common_register__input-email"
               onChange={ (event) => setEmail(event.target.value) }
-              className="common_register__input-email"
+              className="common_register__input"
             />
           </label>
           <label htmlFor="password">
@@ -39,7 +39,7 @@ function Register() {
               placeholder="Insira sua senha"
               data-testid="common_register__input-password"
               onChange={ (event) => setPassword(event.target.value) }
-              className="common_register__input-password"
+              className="common_register__input"
             />
           </label>
           <button
