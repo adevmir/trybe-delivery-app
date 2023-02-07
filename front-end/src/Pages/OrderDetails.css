@@ -15,24 +15,24 @@
   flex-flow: column wrap;
   font-size: large;
   justify-content: space-evenly;
-  margin-top: 20px;
   margin-left: 50px;
+  margin-top: 20px;
   width: 1200px;
 }
 
 .details-total {
-  display: flex;
-  justify-content: center;
-  align-self: flex-end;
   align-items: center;
-  text-align: center;
-  font-family: Roboto , sans-serif;
-  font-weight: 700;
-  font-size: larger;
-  height: 40px;
-  width: 260px;
-  border-radius: 10px;
-  margin: 10px;
-  color: aliceblue;
+  align-self: flex-end;
   background-color: #036b52;
+  border-radius: 10px;
+  color: aliceblue;
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin: 10px;
+  text-align: center;
+  width: 260px;
 }
