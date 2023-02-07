@@ -16,8 +16,6 @@ export default function OrderDetails() {
   const total = useMemo(() => cart
     ?.reduce((acc, el) => acc + (el.quantity * el.price), 0), [cart]);
 
-  console.log('orderDetails', ordersDetails);
-
   return (
     <>
       <NavBar />

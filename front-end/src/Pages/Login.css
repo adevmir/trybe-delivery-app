@@ -78,3 +78,7 @@ label {
   color: #036b52;
 }
 
+button:disabled {
+  background: #ccc;
+}
+

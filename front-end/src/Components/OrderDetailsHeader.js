@@ -6,11 +6,15 @@ export default function OrderDetailsHeader({ id,
   status, seller, sellDate, orderRole, deliveryOrder,
   isSeller, isCustomer, pending, setSalesStatus, onYourWay, saleStatus }) {
   const testid = '_order_details__element-order-';
-  console.log('status customer', status);
 
   if (saleStatus === undefined) {
     setSalesStatus(status);
   }
+
+  const statusSelect = (statusS) => {
+    if (statusS === 'Em Trânsito') return 'EmTrânsito';
+    return statusS;
+  };
 
   return (
     <div className="details-header">
@@ -46,8 +50,7 @@ export default function OrderDetailsHeader({ id,
             data-testid={
               `${orderRole + testid}details-label-delivery-status${id}`
             }
-            className="details-status"
-            id={ `details-status-${status}` }
+            className={ `details-status-${statusSelect(status)}` }
           >
             {saleStatus}
           </p>
@@ -71,8 +74,7 @@ export default function OrderDetailsHeader({ id,
             data-testid={
               `${orderRole + testid}details-label-delivery-status${id}`
             }
-            className="details-status"
-            id={ `details-status-${status}` }
+            className={ `details-status-${statusSelect(status)}` }
           >
             {status}
           </p>

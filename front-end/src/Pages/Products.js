@@ -52,7 +52,7 @@ function Products() {
 
   useEffect(() => {
     getToken();
-  }, []);
+  });
 
   return (
     <div>

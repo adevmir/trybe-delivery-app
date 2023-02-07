@@ -52,7 +52,6 @@ export default function useSellerSales() {
   }, [id, jwt]);
 
   useEffect(() => {
-    console.log('saleStatus', saleStatus);
     if (saleStatus === undefined) return setSalesStatus(saleById?.status);
     if (saleStatus === 'Pendente') {
       setDeliveryOrder(true);

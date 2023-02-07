@@ -185,7 +185,7 @@ function Admin() {
               <td>
                 <button
                   type="button"
-                  data-testid={ `admin_manage__element-user-table-remove--${index + 1}` }
+                  data-testid={ `admin_manage__element-user-table-remove-${index + 1}` }
                   onClick={ () => removeUser(user.id, index) }
                   className="admin_manage__button"
                 >

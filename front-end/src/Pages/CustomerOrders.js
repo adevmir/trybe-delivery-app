@@ -8,9 +8,12 @@ function CustomersSales() {
   const history = useHistory();
   const { sales } = useSales();
 
-  console.log('sales no customer orders:', sales);
-
   const newDate = (date) => new Date(date);
+
+  const statusSelect = (statusS) => {
+    if (statusS === 'Em Trânsito') return 'EmTrânsito';
+    return statusS;
+  };
 
   return (
     <div>
@@ -23,7 +26,7 @@ function CustomersSales() {
               type="button"
               key={ index }
               onClick={ () => history.push(`/customer/orders/${order.id}`) }
-              className="card-order"
+              className="card-order-costumer"
             >
               <div className="order">
                 <p className="order-text">Pedido</p>
@@ -36,8 +39,7 @@ function CustomersSales() {
               </div>
               <div
                 data-testid={ `customer_orders__element-delivery-status-${order.id}` }
-                className="order-status"
-                id={ `order-status-${order.status}` }
+                className={ `order-status-${statusSelect(order.status)}` }
               >
                 { order.status }
               </div>
