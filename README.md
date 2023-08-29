@@ -1,4 +1,4 @@
-## Bem vindo ao repositório Delivery-App! 🍻
+## Bem vindo ao repositório delivery-app! 🍻
 
 ### Este foi um projeto desenvolvido em grupo na Trybe, O App de delivery é um site que possui 3 fluxos diferentes:
 
