@@ -1,0 +1,67 @@
+.form-class-register {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  margin-top: 70px;
+  width: 100%;
+}
+
+.div-class-register {
+  align-items: center;
+  background-color: #eaf1ef;
+  border: 1px solid #b1c2be;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 544px;
+  justify-content: center;
+  left: -4163px;
+  top: 7048px;
+  width: 425px;
+}
+
+.title-app {
+  color: #505050f5;
+  font-family: Dancing Script , sans-serif;
+  font-size: 58px;
+  margin-bottom: 35px;
+}
+
+label {
+  font-size: large;
+  margin: 10px;
+}
+
+.common_register__input {
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px #999;
+  font-size: large;
+  height: 25px;
+  margin: 10px;
+  padding: 10px;
+  width: 371px;
+}
+
+.common_register__button-register, .common_register__button-login {
+  background-color: #036b52;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px #999;
+  color: white;
+  cursor: pointer;
+  font-size: large;
+  font-weight: 700;
+  height: 50px;
+  margin: 10px;
+  padding: 10px;
+  width: 70%;
+}
+
+.common_register__button-login {
+  background-color: white;
+  color: #036b52;
+}

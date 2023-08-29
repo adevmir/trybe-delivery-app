@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "329d9a8e-16af-4222-b557-51c00938f2b3",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3001/register",
+    "url": "localhost:3001/customer/checkout",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-01-25T17:57:53.945Z",
+    "modified": "2023-01-27T01:54:22.071Z",
+    "headers": [
+      {
+        "name": "Authorization",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo1LCJuYW1lIjoiYW5kZXJzb24gY29ycmVhIiwiZW1haWwiOiJhbmRlcnNvbkBlbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIifSwiaWF0IjoxNjc0Nzc2NDYyLCJleHAiOjE2NzQ4NjI4NjJ9.RNKQAJzzXbCuKfb02k9zjKVvlE-rbMHKhIQr2utG2cw"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"sellerId\": 2,\n  \"products\": [\n    {\n      \"id\": 2,\n      \"quantity\": 3\n    }\n  ],\n  \"totalPrice\": 24.00,\n  \"deliveryAddress\": \"Rua dos bobos\",\n  \"deliveryNumber\": \"0\"\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]

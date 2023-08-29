@@ -1,0 +1,111 @@
+.details-header {
+  background: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 100%;
+}
+
+.details-text {
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+}
+
+.details-seller-name {
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+}
+
+.details-status-Pendente {
+  align-self: flex-start;
+  background: #ccb800;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin: 10px;
+  text-align: center;
+  width: 150px;
+}
+
+.details-status-Preparando {
+  align-self: flex-start;
+  background: #6c0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin: 10px;
+  text-align: center;
+  width: 150px;
+}
+
+.details-status-EmTrânsito {
+  align-self: flex-start;
+  background: #71a5ee;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin: 10px;
+  text-align: center;
+  width: 200px;
+}
+
+.details-status-Entregue {
+  align-self: flex-start;
+  background: #2fc18c;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin: 10px;
+  text-align: center;
+  width: 150px;
+}
+
+.details-button {
+  background-color: #036b52;
+  border-radius: 10px;
+  color: aliceblue;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin-top: 10px;
+  text-align: center;
+  width: 260px;
+}
+
+.details-seller-button {
+  background-color: #036b52;
+  border-radius: 10px;
+  color: aliceblue;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin-top: 10px;
+  text-align: center;
+  width: 200px;
+}

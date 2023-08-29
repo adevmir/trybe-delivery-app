@@ -1,0 +1,64 @@
+nav {
+  align-items: center;
+  background-color: #036b52;
+  color: #f2fffc;
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  height: 10vh;
+  justify-content: space-between;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+
+nav a {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #f2fffc;
+}
+
+.selected, .selected a:visited {
+  background-color: #2fc18c;
+  color: #001813;
+}
+
+.navbar-links, .navbar-items {
+  display: flex;
+  height: 100%;
+}
+
+.navbar-links {
+  width: 40%;
+}
+
+.navbar-items {
+  width: 30%;
+}
+
+.navbar-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+
+  /* border: 1px solid red; */
+}
+
+.navbar-items .navbar-container {
+  background-color: #421981;
+  width: 70%;
+}
+
+.navbar-items button {
+  background-color: #056cf9;
+  border: none;
+  color: #f2fffc;
+  font-family: Roboto , sans-serif;
+  font-size: large;
+  width: 30%;
+}

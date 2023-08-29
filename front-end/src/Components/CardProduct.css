@@ -1,0 +1,68 @@
+.card-product {
+  background: #eaf1ef;
+  border: 1px solid #b1c2be;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 385px;
+  margin-top: 50px;
+  width: 300px;
+}
+
+.card-price {
+  align-items: center;
+  background: rgba(242, 255, 252, 0.75);
+  border-radius: 10px;
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: 120%;
+  font-weight: 700;
+  height: 50px;
+  justify-content: center;
+  margin: 8px;
+  position: absolute;
+  width: 120px;
+}
+
+.card-image img {
+  height: 100%;
+}
+
+.card-image {
+  background-color: white;
+  display: flex;
+  height: 280px;
+  justify-content: center;
+  width: 100%;
+}
+
+.counter input {
+  border: 1px solid #001813;
+  border-radius: 0;
+  box-sizing: border-box;
+  width: 50px;
+}
+
+.counter button {
+  background-color: #036b52;
+  border: none;
+  border-radius: 5px;
+  color: #f2fffc;
+  font-family: Roboto , sans-serif;
+  font-size: large;
+  font-weight: 700;
+  width: 30%;
+}
+
+.card-title-and-quantity {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.counter {
+  display: flex;
+  justify-content: space-around;
+  min-width: 120px;
+}

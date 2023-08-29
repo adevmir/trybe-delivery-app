@@ -1,0 +1,55 @@
+.order-details-header {
+  font-family: Roboto , sans-serif;
+  font-size: medium;
+}
+
+.order-details-id {
+  background-color: #2fc18c;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  text-align: center;
+}
+
+.order-details-name {
+  background-color: aliceblue;
+  display: flex;
+  padding-left: 10px;
+  text-align: start;
+  width: auto;
+}
+
+.order-details-quantity {
+  background-color: #036b52;
+  color: aliceblue;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  text-align: center;
+  width: 30px;
+}
+
+.order-details-price {
+  background-color: #421981;
+  color: aliceblue;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  text-align: center;
+  width: 110px;
+}
+
+.order-details-sub-total {
+  background-color: #056cf9;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  color: aliceblue;
+  font-family: Roboto , sans-serif;
+  font-size: larger;
+  font-weight: 700;
+  justify-self: start;
+  text-align: center;
+  width: 120px;
+}
