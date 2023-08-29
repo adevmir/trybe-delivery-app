@@ -31,7 +31,6 @@ Como esse era um projeto em grupo, nos dividimos nas tarefas, eu fiquei respons�
 * MySql2
 * Sequelize
 * Jsonwebtoken
-* Md5
 
 **Front-end**
 * ESLint
@@ -39,7 +38,6 @@ Como esse era um projeto em grupo, nos dividimos nas tarefas, eu fiquei respons�
 * React.js
 * React-Router-Dom
 * Axios
-* Sass
 
 # Preparação antes de iniciar o projeto
 * ⚠️Garanta que sua máquina tenha o `node` instalado na versão 16, caso não esteja você pode usar o [`nvm`](https://github.com/nvm-sh/nvm#installing-and-updating) para fazer o gerenciamento das versões.
